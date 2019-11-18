@@ -11,5 +11,8 @@ public:
 
 	CrazyDriver(string name);
 
+	void setDesatento();
+
+	int getDesatento() const;
 };
 

@@ -3,16 +3,8 @@
 int Carro::idcar = 'a';
 
 Carro::Carro(string mar, double maxe, int maxv, string mod)
-	:marca(mar), modelo(mod), id(idcar++), maxenergia(maxe), maxvelocidade(maxv),
-	emergencia(false), parado(true), danificado(false), velocidade(0), energia(maxe){}
+	:marca(mar), modelo(mod), id(idcar++), maxenergia(maxe), maxvelocidade(maxv){}
 
-char Carro::getID() const {
-	return id;
-}
-
-string Carro::getMarca() const {
-	return marca;
-}
 
 string Carro::getAsString() const {
 	ostringstream oss;
@@ -21,12 +13,16 @@ string Carro::getAsString() const {
 	return oss.str();
 }
 
-void Carro::manivela(int val) {
-	if ((energia + val) >= maxenergia)
+bool Carro::manivela(int val) {
+	if (parado && (energia + val) >= maxenergia) {
 		energia += val;
+		return true;
+	}
+	else
+		return false;
 }
 
-void Carro::mudaEmergencia() {
+void Carro::setEmergencia() {
 	//!emergencia;
 	if (emergencia == false)
 		emergencia = true;
@@ -34,7 +30,7 @@ void Carro::mudaEmergencia() {
 		emergencia = false;
 }
 
-void Carro::mudaEstado() {
+void Carro::setEstado() {
 	//!parado;
 	if (parado == false)
 		parado = true;
@@ -42,11 +38,15 @@ void Carro::mudaEstado() {
 		parado = false;
 }
 
-void Carro::acelerador() {
-
+void Carro::acelerador(int vel) {
+	if (velocidadeAtual < maxvelocidade) {
+		this->velocidadeAtual += vel;
+	}
 }
 
 void Carro::travao() {
-
+	acelerador(-1);
 }
+
+Carro::~Carro(){}
 

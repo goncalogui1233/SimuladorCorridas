@@ -11,28 +11,38 @@ class Carro {
 	const char id;
 	const int maxvelocidade;
 	const double maxenergia;
-	int velocidade;
-	double energia;
-	bool parado, emergencia;
-	bool danificado;
+	int velocidadeAtual = 0;
+	double energia = 0;
+	bool parado = true, emergencia = false;
+	bool danificado = false;
 
 public:
 
 	Carro(string mar, double maxe, int maxv, string mod = "Modelo Base");
 
-	char getID() const;
+	inline char getID() const {
+		return id;
+	}
 
-	string getMarca() const;
+	inline bool getDanificado() const {
+		return danificado;
+	}
+
+	string getMarca() const {
+		return marca;
+	}
 
 	string getAsString()const;
 
-	void manivela(int val);
+	void setEstado();
 
-	void mudaEmergencia();
+	bool manivela(int val);
 
-	void mudaEstado();
+	void setEmergencia();
 
-	void acelerador();
+	void setEstado();
+
+	void acelerador(int vel = 1);
 
 	void travao();
 
