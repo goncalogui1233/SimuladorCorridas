@@ -25,5 +25,7 @@ public:
 
 	string listagem() const;
 
+	void passarTempo(int s);
+
 	~Jogo();
 };
