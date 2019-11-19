@@ -108,8 +108,11 @@ void Interaction::opcoesModo1() {
 }
 
 void Interaction::opcoesModo2() {
-	if (c[0] == "help")
+	if (c[0] == "help") {
 		listaComandosModo2();
+		cout << "Pressione uma tecla para continuar";
+		(void)getchar();
+	}
 	else if (c[0] == "campeonato")
 		cout << "carregaP d Aco";
 	else if (c[0] == "listacarros")
