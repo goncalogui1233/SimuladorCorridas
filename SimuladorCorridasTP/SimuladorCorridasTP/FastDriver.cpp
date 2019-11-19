@@ -5,3 +5,5 @@ FastDriver::FastDriver(string name)
 
 FastDriver::FastDriver(const FastDriver &aux)
 	:Piloto(aux), ansioso(aux.ansioso){}
+
+FastDriver::~FastDriver(){}

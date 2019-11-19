@@ -1,6 +1,8 @@
 #include "CrazyDriver.h"
 #include <random>
 
+using namespace std;
+
 CrazyDriver::CrazyDriver(string name)
 	:Piloto(name), desatento(1){}
 
@@ -17,3 +19,7 @@ void CrazyDriver::setDesatento() {
 int CrazyDriver::getDesatento() const {
 	return desatento;
 }
+
+//bool CrazyDriver::probAcidente() {
+//	return 0.05 > ((float)rand() / RAND_MAX);
+//}

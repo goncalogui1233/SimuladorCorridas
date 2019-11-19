@@ -10,6 +10,8 @@ public:
 
 	FastDriver(string name);
 
+	~FastDriver();
+
 	FastDriver(const FastDriver& aux);
 
 

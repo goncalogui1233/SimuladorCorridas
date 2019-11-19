@@ -1,10 +1,18 @@
 #include "Carro.h"
 
 int Carro::idcar = 'a';
+//using namespace Carro;
+using namespace std;
 
 Carro::Carro(string mar, double maxe, int maxv, string mod)
 	:marca(mar), modelo(mod), id(idcar++), maxenergia(maxe), maxvelocidade(maxv){}
 
+// Destrutor
+Carro::~Carro(){}
+
+void Carro::setDanificado(bool estragado) {
+	this->danificado = estragado;
+}
 Carro::Carro(const Carro& aux) 
 :id(aux.id), maxvelocidade(aux.maxvelocidade), marca(aux.marca), modelo(aux.modelo), maxenergia(aux.maxenergia){}
 
@@ -15,13 +23,12 @@ string Carro::getAsString() const {
 	return oss.str();
 }
 
-bool Carro::manivela(int val) {
-	if (parado && (energia + val) >= maxenergia) {
-		energia += val;
+bool Carro::manivela(int quantEnergia) {
+	if (parado && (energia + quantEnergia) < maxenergia) {
+		energia += quantEnergia;
 		return true;
 	}
-	else
-		return false;
+	return false;
 }
 
 void Carro::setEmergencia() {
@@ -40,15 +47,13 @@ void Carro::setEstado() {
 		parado = false;
 }
 
-void Carro::acelerador(int vel) {
+void Carro::acelerar(int val) {
 	if (velocidadeAtual < maxvelocidade) {
-		this->velocidadeAtual += vel;
+		this->velocidadeAtual += val;
 	}
 }
 
-void Carro::travao() {
-	acelerador(-1);
+void Carro::travar() {
+	acelerar(-1);
 }
-
-Carro::~Carro(){}
 

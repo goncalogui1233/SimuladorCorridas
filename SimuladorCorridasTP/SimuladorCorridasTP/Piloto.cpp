@@ -23,12 +23,12 @@ string Piloto::getNome() const {
 
 void Piloto::acelera() {
 	if (car != nullptr)
-		car->acelerador();
+		car->acelerar();
 }
 
 void Piloto::trava() {
 	if (car != nullptr)
-		car->travao();
+		car->travar();
 }
 
 char Piloto::getIDCar() const {

@@ -1,10 +1,13 @@
-#pragma once
+
 #include <vector>
+
 class Carro;
+
 
 using namespace std;
 
-class Garagem{
+class Garagem
+{
 	vector<Carro*> garage;
 
 public:
@@ -16,3 +19,7 @@ public:
 	*/
 
 };
+
+
+
+
