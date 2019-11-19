@@ -2,6 +2,16 @@
 #include <sstream>
 #include <iostream>
 
+//construtor por cópia
+DGV::DGV(const DGV& aux) {
+	for (int i = 0; i < aux.carros.size(); i++)
+		this->carros.push_back(new Carro(*aux.carros[i]));
+
+	//for(int i = 0; i < aux.pilotos.size(); i++)
+		//this->pilotos.push_back(new Piloto())
+}
+
+
 void DGV::carregaPilotosFich(string fich) {
 	ifstream f;
 	string tipo;
@@ -155,6 +165,14 @@ string DGV::listaCarros() const {
 		os << "Nome: " << carros[i]->getMarca() << " ID: " << carros[i]->getID() << "\n";
 
 	return os.str();
+}
+
+int DGV::getCarrosTam() const {
+	return carros.size();
+}
+
+int DGV::getPilotosTam() const {
+	return pilotos.size();
 }
 
 DGV::~DGV() {

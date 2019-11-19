@@ -12,6 +12,8 @@ public:
 
 	~FastDriver();
 
+	FastDriver(const FastDriver& aux);
+
 
 
 };

@@ -4,9 +4,10 @@
 using namespace std;
 
 CrazyDriver::CrazyDriver(string name)
-	:Piloto(name){}
+	:Piloto(name), desatento(1){}
 
-CrazyDriver::~CrazyDriver(){}
+CrazyDriver::CrazyDriver(const CrazyDriver& aux) 
+:Piloto(aux), desatento(aux.desatento){}
 
 void CrazyDriver::setDesatento() {
 	default_random_engine val;
@@ -15,7 +16,10 @@ void CrazyDriver::setDesatento() {
 	//desatento = rand() % 5 + 1;
 }
 
+int CrazyDriver::getDesatento() const {
+	return desatento;
+}
+
 //bool CrazyDriver::probAcidente() {
 //	return 0.05 > ((float)rand() / RAND_MAX);
 //}
-

@@ -6,7 +6,7 @@ using namespace std;
 
 class Jogo {
 	DGV* dgv;
-	//vector <Autodromo> autodromos;
+	vector <Autodromo*> autodromos;
 
 public:
 	Jogo();
@@ -24,6 +24,8 @@ public:
 	string retiraPilotoDeCarro(string pil);
 
 	string listagem() const;
+
+	void passarTempo(int s);
 
 	~Jogo();
 };

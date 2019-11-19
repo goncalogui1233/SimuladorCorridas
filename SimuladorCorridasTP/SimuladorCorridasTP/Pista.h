@@ -1,5 +1,4 @@
 #pragma once
-
 #include <vector>
 #include "Carro.h"
 
@@ -11,20 +10,19 @@ class Pista
 	int metros;
 	vector <Carro*> carros;
 
-	public:
-		Pista(int maxCar, int metros);
+public:
+	Pista(int maxCar, int metros);
 
-		~Pista();
+	~Pista();
 
-		// Inserir piloto em carro
-		bool inserirPilotoCarro();
+	// Inserir piloto em carro
+	bool inserirPilotoCarro();
 
-		void startCorrida();
+	void startCorrida();
 
-		void avancarTempo();
+	void avancarTempo();
 
-		// Se ligar sinal de emergencia, sai da pista, move to garagem
+	// Se ligar sinal de emergencia, sai da pista, move to garagem
 
 };
-
 

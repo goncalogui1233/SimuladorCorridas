@@ -7,12 +7,11 @@ Interaction::Interaction(Jogo* d) {
 }
 
 void Interaction::leituraComandos() {
-
 	while (1) {
 		c.clear();	//limpa o vetor que recebe os comandos
 		string com;
 		do {
-			//Consola::clrscr();
+			Consola::clrscr();
 
 			if (modo == 1)
 				cout << "Modo 1" << endl;
@@ -41,32 +40,56 @@ void Interaction::leituraComandos() {
 
 void Interaction::opcoesModo1() {
 
-	if (c[0] == "help")
+	if (c[0] == "help"){
 		helpModo1();
+		cout << "Pressione uma tecla para continuar";
+		(void)getchar();
+	}
 
-	else if (c[0] == "carregaP")
+	else if (c[0] == "carregaP"){
 		j->carregaPilotos("pilotos.txt");
+		cout << "Pressione uma tecla para continuar";
+		(void)getchar();
+	}
 
-	else if (c[0] == "carregaC")
+	else if (c[0] == "carregaC"){
 		j->carregaCarrosFich("carros.txt");
+		cout << "Pressione uma tecla para continuar";
+		(void)getchar();
+	}
 
 	else if (c[0] == "carregaA")
 		cout << "carregaP d Aco";
 
-	else if (c[0] == "cria")
+	else if (c[0] == "cria"){
 		cout << j->criaItensJogo(c);
+		cout << "Pressione uma tecla para continuar";
+		(void)getchar();
+	}
 
-	else if (c[0] == "apaga")
+	else if (c[0] == "apaga") {
 		cout << j->eliminaItemJogo(c);
+		cout << "Pressione uma tecla para continuar";
+		(void)getchar();
+	}
 
-	else if (c[0] == "entranocarro")
+	else if (c[0] == "entranocarro"){
 		cout << j->inserePilotoEmCarro(c[1], c[2]);
+		cout << "Pressione uma tecla para continuar";
+		(void)getchar();
+	}
 
-	else if (c[0] == "saidocarro")
+	else if (c[0] == "saidocarro"){
 		cout << j->retiraPilotoDeCarro(c[1]);
+		cout << "Pressione uma tecla para continuar";
+		(void)getchar();
+	}
 
-	else if (c[0] == "lista")
+	else if (c[0] == "lista") {
 		cout << j->listagem();
+		cout << "Pressione uma tecla para continuar";
+		(void)getchar();
+	}
 
 	else if (c[0] == "campeonato") {
 		modo = 2;

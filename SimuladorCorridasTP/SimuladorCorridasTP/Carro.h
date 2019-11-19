@@ -46,8 +46,12 @@ public:
 	* Senão devolve False
 	*/
 	bool manivela(int valCarregamento);
+	Carro(const Carro& aux);
 
-	string getMarca() const;
+
+	string getMarca() const {
+		return marca;
+	}
 
 	string getAsString()const;
 
@@ -76,5 +80,6 @@ public:
 	void travar();
 
 
+	~Carro();
 
 };

@@ -4,9 +4,8 @@ int Carro::idcar = 'a';
 //using namespace Carro;
 using namespace std;
 
-// Construtor 
-Carro::Carro(string mar, char idd, double maxe, int maxv, string mod) 
-	: marca(mar), modelo(mod), id(idd), maxenergia(maxe), maxvelocidade(maxv){}
+Carro::Carro(string mar, double maxe, int maxv, string mod)
+	:marca(mar), modelo(mod), id(idcar++), maxenergia(maxe), maxvelocidade(maxv){}
 
 // Destrutor
 Carro::~Carro(){}
@@ -14,10 +13,8 @@ Carro::~Carro(){}
 void Carro::setDanificado(bool estragado) {
 	this->danificado = estragado;
 }
-
-string Carro::getMarca() const {
-	return marca;
-}
+Carro::Carro(const Carro& aux) 
+:id(aux.id), maxvelocidade(aux.maxvelocidade), marca(aux.marca), modelo(aux.modelo), maxenergia(aux.maxenergia){}
 
 string Carro::getAsString() const {
 	ostringstream oss;

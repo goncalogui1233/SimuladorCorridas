@@ -14,6 +14,8 @@ public:
 
 	Piloto(string name);
 
+	Piloto(const Piloto& aux);
+
 	void acelera();
 
 	void trava();

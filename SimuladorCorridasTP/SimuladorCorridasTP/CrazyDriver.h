@@ -24,5 +24,7 @@ public:
 	*	Senão -> False
 	*/
 	//bool probAcidente();
+	
+	CrazyDriver(const CrazyDriver& aux);
 };
 
