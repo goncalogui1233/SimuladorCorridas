@@ -11,7 +11,7 @@ class Autodromo {
 	static vector<string> nomesAuto;
 	string nome;
 
-	Pista pista;
+	Pista *pista;
 	Garagem *garage;
 
 public:

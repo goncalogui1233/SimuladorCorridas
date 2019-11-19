@@ -26,8 +26,8 @@ string juntaNome(vector<string> vec, int id) { //faz junção dos nomes inseridos
 		i = 3;
 	else if (id == 2) //eliminar piloto
 		i = 2;
-	else if(id == 3)
-		i = 
+	else if (id == 3)
+		i = 4;
 	for (;i < vec.size(); i++)
 		nome += vec[i] + " ";
 
@@ -49,8 +49,8 @@ string Jogo::criaItensJogo(vector <string> vec) {
 	else if (vec[1] == "a") {
 		string nome = juntaNome(vec, 3);
 		autodromos.push_back(new Autodromo(stoi(vec[2]), stoi(vec[3]), nome));
+		return "Pista criada";
 	}
-
 
 	else
 		return "Nao foi possivel criar nenhum item, verifique a letraTipo e tente novamente\n";

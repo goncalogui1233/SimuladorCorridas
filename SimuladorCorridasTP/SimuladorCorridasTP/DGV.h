@@ -14,6 +14,8 @@ class DGV {
 
 public:
 
+	DGV(){}
+
 	DGV(const DGV& aux);
 
 	int getCarrosTam() const;

@@ -7,7 +7,7 @@ DGV::DGV(const DGV& aux) {
 	for (int i = 0; i < aux.carros.size(); i++)
 		this->carros.push_back(new Carro(*aux.carros[i]));
 
-	for(int i = 0; i < aux.pilotos.size(); i++)
+	//for(int i = 0; i < aux.pilotos.size(); i++)
 		//this->pilotos.push_back(new Piloto())
 }
 

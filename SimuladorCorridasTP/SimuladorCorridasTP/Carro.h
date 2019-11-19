@@ -42,12 +42,10 @@ public:
 
 	void setEmergencia();
 
-	void setEstado();
-
 	void acelerador(int vel = 1);
 
 	void travao();
 
-	~Carro(){}
+	~Carro();
 
 };
