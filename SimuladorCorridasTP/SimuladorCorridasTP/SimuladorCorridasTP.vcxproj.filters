@@ -27,9 +27,12 @@
     <ClCompile Include="Piloto.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+=======
+>>>>>>> 0a4ac6a29d384a3327faf3cc554fa9d07d0fee79
     <ClCompile Include="DGV.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -42,10 +45,20 @@
     <ClCompile Include="FastDriver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="InteractModoUm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Jogo.cpp">
+=======
+    <ClCompile Include="Jogo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Consola.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Interaction.cpp">
+>>>>>>> 0a4ac6a29d384a3327faf3cc554fa9d07d0fee79
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Pista.cpp">
@@ -54,6 +67,12 @@
     <ClCompile Include="Garagem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
+=======
+    <ClCompile Include="Campeonato.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+>>>>>>> 0a4ac6a29d384a3327faf3cc554fa9d07d0fee79
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Autodromo.h">
@@ -65,9 +84,12 @@
     <ClInclude Include="Piloto.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+=======
+>>>>>>> 0a4ac6a29d384a3327faf3cc554fa9d07d0fee79
     <ClInclude Include="CrazyDriver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -83,7 +105,14 @@
     <ClInclude Include="Jogo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="InteractModoUm.h">
+=======
+    <ClInclude Include="Consola.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Interaction.h">
+>>>>>>> 0a4ac6a29d384a3327faf3cc554fa9d07d0fee79
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Pista.h">
@@ -92,5 +121,11 @@
     <ClInclude Include="Garagem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
+=======
+    <ClInclude Include="Campeonato.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+>>>>>>> 0a4ac6a29d384a3327faf3cc554fa9d07d0fee79
   </ItemGroup>
 </Project>
