@@ -17,7 +17,7 @@ Autodromo::Autodromo(int maxcarros, int tamPista, string n) {
 			existe = false;
 	}
 	nome = no;
-	pista = new Pista(maxcarros, tamPista);
+	pista = new Pista (maxcarros, tamPista);
 	garage = new Garagem;
 	nomesAuto.push_back(no);
 }
