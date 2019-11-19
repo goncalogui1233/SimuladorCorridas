@@ -11,9 +11,11 @@ int gerarRandom();
 
 
 Piloto::Piloto(string name)
-	:nome(name){
-		car = nullptr;
-	}
+	:nome(name), car(nullptr){}
+
+Piloto::Piloto(const Piloto& aux) 
+	:nome(aux.nome), car(aux.car){}
+
 
 string Piloto::getNome() const {
 	return nome;

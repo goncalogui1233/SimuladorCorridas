@@ -5,6 +5,8 @@ int Carro::idcar = 'a';
 Carro::Carro(string mar, double maxe, int maxv, string mod)
 	:marca(mar), modelo(mod), id(idcar++), maxenergia(maxe), maxvelocidade(maxv){}
 
+Carro::Carro(const Carro& aux) 
+:id(aux.id), maxvelocidade(aux.maxvelocidade), marca(aux.marca), modelo(aux.modelo), maxenergia(aux.maxenergia){}
 
 string Carro::getAsString() const {
 	ostringstream oss;

@@ -4,6 +4,9 @@
 CrazyDriver::CrazyDriver(string name)
 	:Piloto(name), desatento(1){}
 
+CrazyDriver::CrazyDriver(const CrazyDriver& aux) 
+:Piloto(aux), desatento(aux.desatento){}
+
 void CrazyDriver::setDesatento() {
 	default_random_engine val;
 	uniform_int_distribution<int> aleatorio(1, 5);

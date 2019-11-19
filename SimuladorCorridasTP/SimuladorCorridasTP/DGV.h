@@ -14,6 +14,12 @@ class DGV {
 
 public:
 
+	DGV(const DGV& aux);
+
+	int getCarrosTam() const;
+
+	int getPilotosTam() const;
+
 	void carregaPilotosFich(string fich);
 
 	void carregaCarrosFich(string fich);

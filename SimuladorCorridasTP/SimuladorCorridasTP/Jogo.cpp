@@ -22,10 +22,12 @@ void Jogo::carregaCarrosFich(string fich) {
 string juntaNome(vector<string> vec, int id) { //faz junção dos nomes inseridos
 	string nome = "";
 	int i=0;
-	if (id == 1)
+	if (id == 1) //criar piloto
 		i = 3;
-	else if (id == 2)
+	else if (id == 2) //eliminar piloto
 		i = 2;
+	else if(id == 3)
+		i = 
 	for (;i < vec.size(); i++)
 		nome += vec[i] + " ";
 
@@ -43,6 +45,12 @@ string Jogo::criaItensJogo(vector <string> vec) {
 
 	else if (vec[1] == "c")
 		return dgv->insereCarro(vec);
+
+	else if (vec[1] == "a") {
+		string nome = juntaNome(vec, 3);
+		autodromos.push_back(new Autodromo(stoi(vec[2]), stoi(vec[3]), nome));
+	}
+
 
 	else
 		return "Nao foi possivel criar nenhum item, verifique a letraTipo e tente novamente\n";
@@ -62,8 +70,23 @@ string Jogo::eliminaItemJogo(vector <string> vec) {
 	}
 
 	else if (vec[1] == "c") {
-		return dgv->eliminaCarro(vec[2]);
 		transform(vec[2].begin(), vec[2].end(), vec[2].begin(), ::tolower);
+		return dgv->eliminaCarro(vec[2]);
+		
+	}
+
+	else if (vec[1] == "c") {
+		vector<Autodromo*>::iterator it;
+		string nome = juntaNome(vec, 3);
+
+		for (it = autodromos.begin(); it != autodromos.end(); )
+			if ((*it)->getNome() == nome) {
+				delete* it;
+				it = autodromos.erase(it);
+				return "Autodromo eliminado com sucesso";
+			}
+			else
+				it++;
 	}
 
 	else

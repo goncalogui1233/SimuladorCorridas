@@ -6,7 +6,7 @@ using namespace std;
 
 class Jogo {
 	DGV* dgv;
-	//vector <Autodromo> autodromos;
+	vector <Autodromo*> autodromos;
 
 public:
 	Jogo();

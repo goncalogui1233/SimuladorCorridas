@@ -20,6 +20,8 @@ public:
 
 	Carro(string mar, double maxe, int maxv, string mod = "Modelo Base");
 
+	Carro(const Carro& aux);
+
 	inline char getID() const {
 		return id;
 	}

@@ -11,6 +11,8 @@ public:
 
 	CrazyDriver(string name);
 
+	CrazyDriver(const CrazyDriver& aux);
+
 	void setDesatento();
 
 	int getDesatento() const;
