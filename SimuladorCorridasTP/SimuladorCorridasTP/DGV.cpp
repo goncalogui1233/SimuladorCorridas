@@ -50,11 +50,6 @@ void DGV::carregaCarrosFich(string fich) {
 	}
 }
 
-using namespace std;
-
-void DGV::insereCarro(Carro *aux) {
-	carros.push_back(aux);
-}
 
 string DGV::insereCarro(vector <string> vec) {
 	if (vec[2] != "" && vec[3] != "" && vec[4] != "") {
@@ -145,7 +140,7 @@ string DGV::retiraPilotoDeCarro(string pil) {
 }
 
 
-string DGV::listaPilotos() const {
+string DGV::listagem() const {
 	ostringstream os;
 	os << "Pilotos: \n";
 	for (unsigned int i = 0; i < pilotos.size(); i++)

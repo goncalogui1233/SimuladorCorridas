@@ -6,6 +6,8 @@
 #include <vector>
 #include <fstream>
 
+using namespace std;
+
 class DGV {
 	vector <Carro*> carros;
 	vector <Piloto*> pilotos;

@@ -3,6 +3,7 @@
 #include <string>
 #include <sstream>
 
+using namespace std;
 
 class Carro {
 	static int idcar;
@@ -26,7 +27,7 @@ public:
 	* the correct destructor for the object is invoked using the virtual function mechanism.
 	*
 	*/
-	~Carro() {}
+	~Carro();
 
 	// return faz sentido fazer no header para nao ter que ir por exemplo à pilha.. 
 	// É mais rápido 
@@ -78,8 +79,5 @@ public:
 	 *
 	 */
 	void travar();
-
-
-	~Carro();
 
 };
