@@ -1,8 +1,7 @@
 #include "Carro.h"
 
 int Carro::idcar = 'a';
-//using namespace Carro;
-using namespace std;
+
 
 Carro::Carro(string mar, double maxe, int maxv, string mod)
 	:marca(mar), modelo(mod), id(idcar++), maxenergia(maxe), maxvelocidade(maxv){}

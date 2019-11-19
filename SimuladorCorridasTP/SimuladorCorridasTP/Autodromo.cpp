@@ -1,7 +1,16 @@
 #include "Autodromo.h"
 #include <random>
 
-int gerarRandom();
+vector<string> Autodromo::nomesAuto;
+
+int geraRandom() {
+	random_device rd;
+	mt19937 mt(rd());
+	uniform_int_distribution<int> dist(1, 23);
+
+	return dist(mt);
+
+}
 
 Autodromo::Autodromo(int maxcarros, int tamPista, string n) {
 	string no = n;
@@ -10,7 +19,7 @@ Autodromo::Autodromo(int maxcarros, int tamPista, string n) {
 		for (int i = 0; i < nomesAuto.size(); i++)
 			if (nomesAuto[i] == no) {
 				no += 32;					//adiciona espaco
-				no += gerarRandom() + 97;	//coloca letra
+				no += geraRandom() + 97;	//coloca letra
 				alterado = true;
 			}
 		if (alterado == false)
@@ -32,12 +41,3 @@ Autodromo::~Autodromo() {
 }
 
 
-
-int gerarRandom() {
-	random_device rd;
-	mt19937 mt(rd());
-	uniform_int_distribution<int> dist(1, 23);
-
-	return dist(mt);
-
-}

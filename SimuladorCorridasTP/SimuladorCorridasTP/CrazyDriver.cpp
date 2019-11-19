@@ -16,10 +16,6 @@ void CrazyDriver::setDesatento() {
 	//desatento = rand() % 5 + 1;
 }
 
-int CrazyDriver::getDesatento() const {
-	return desatento;
-}
-
 //bool CrazyDriver::probAcidente() {
 //	return 0.05 > ((float)rand() / RAND_MAX);
 //}
