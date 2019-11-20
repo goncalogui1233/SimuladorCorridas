@@ -15,6 +15,7 @@ public:
 
 	void carregaCarrosFich(string fich);
 
+	// Cria tipos de Objetos (Carro, Piloto, Autodromo)
 	string criaItensJogo(vector <string> vec);
 
 	string eliminaItemJogo(vector <string> vec);

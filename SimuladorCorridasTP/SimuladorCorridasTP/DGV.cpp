@@ -22,10 +22,12 @@ void DGV::carregaPilotosFich(string fich) {
 		f >> tipo;
 		getline(f, nome);
 		cout << "Aqui";
-		if (tipo == "c")
+		if (tipo == "crazy")
 			pilotos.push_back(new CrazyDriver(nome));
-		else if(tipo == "f")
+		else if (tipo == "rapido")
 			pilotos.push_back(new FastDriver(nome));
+		else if (tipo == "surpresa")
+			pilotos.push_back(new SurpriseDriver(nome));
 	}
 
 	f.close();
@@ -33,27 +35,33 @@ void DGV::carregaPilotosFich(string fich) {
 
 void DGV::carregaCarrosFich(string fich) {
 	ifstream f;
-	int maxenergia, maxvelocidade;
+	int maxvelocidade;
+	double initCap, maxenergia;
 	string marca, modelo;
 	f.open(fich);
 
 	while (!f.eof()) {
 		modelo = "";
+		f >> initCap;
 		f >> maxenergia;
 		f >> maxvelocidade;
 		f >> marca;
 		f >> modelo;
-		if (modelo != "")
-			carros.push_back(new Carro(marca, maxenergia, maxvelocidade, modelo));
+		if (!modelo.empty())
+			carros.push_back(new Carro(initCap, maxenergia, maxvelocidade, marca, modelo));
 		else
-			carros.push_back(new Carro(marca, maxenergia, maxvelocidade));
+			carros.push_back(new Carro(initCap, maxenergia, maxvelocidade, marca));
 	}
+
+	f.close();
 }
 
 
 string DGV::insereCarro(vector <string> vec) {
-	if (vec[2] != "" && vec[3] != "" && vec[4] != "") {
-		carros.push_back(new Carro(vec[2], stod(vec[3]), stoi(vec[4]), vec[5]));
+
+	// 2 - Cap Inicial, 3 - Capacidade Max, 4 - velocidade Max, 5 - marca, 6 - modelo (se houver)
+	if (!vec[2].empty() && !vec[3].empty() && !vec[4].empty() && !vec[5].empty()) {
+		carros.push_back(new Carro(stod(vec[2]), stod(vec[3]), stoi(vec[4]), vec[5], vec[6]));
 		return "Carro inserido com sucesso\n";
 	}
 
@@ -142,13 +150,13 @@ string DGV::retiraPilotoDeCarro(string pil) {
 
 string DGV::listagem() const {
 	ostringstream os;
-	os << "Pilotos: \n";
+	os << "Pilotos: " << endl;
 	for (unsigned int i = 0; i < pilotos.size(); i++)
-		os << "Nome: " << pilotos[i]->getNome() <<"\n";
+		os << "Nome: " << pilotos[i]->getNome() << endl;
 
-	os << "Carros: \n";
+	os << "Carros: " << endl;
 	for (unsigned int i = 0; i < carros.size(); i++)
-		os << carros[i]->getAsString();
+		os << i << ": " << carros[i]->getAsString();
 
 	return os.str();
 }
@@ -157,7 +165,7 @@ string DGV::listaCarros() const {
 	ostringstream os;
 
 	for (unsigned int i = 0; i < carros.size(); i++) //unsigned pois não são necessários inteiros negativos!!
-		os << "Nome: " << carros[i]->getMarca() << " ID: " << carros[i]->getID() << "\n";
+		os << "Nome: " << carros[i]->getMarca() << " ID: " << carros[i]->getID() << endl;
 
 	return os.str();
 }

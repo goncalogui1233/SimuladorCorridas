@@ -12,6 +12,7 @@ class Carro {
 	const char id;
 	const int maxvelocidade;
 	const double maxenergia;
+	const double initenergia;
 	int velocidadeAtual = 0;
 	double energia = 0;
 	bool parado = true, emergencia = false;
@@ -19,7 +20,7 @@ class Carro {
 
 public:
 
-	Carro(string mar, double maxe, int maxv, string mod = "Modelo Base");
+	Carro(double initCap, double maxe, int maxv, string mar, string mod = "Modelo Base");
 
 	//Destrutor da Class
 	/*

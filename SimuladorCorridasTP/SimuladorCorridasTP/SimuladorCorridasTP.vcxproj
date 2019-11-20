@@ -20,17 +20,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Autodromo.cpp" />
-<<<<<<< HEAD
-    <ClCompile Include="Carro.cpp" />
-    <ClCompile Include="Garagem.cpp" />
-    <ClCompile Include="InteractModoUm.cpp" />
-=======
     <ClCompile Include="Campeonato.cpp" />
     <ClCompile Include="Carro.cpp" />
     <ClCompile Include="Consola.cpp" />
     <ClCompile Include="Garagem.cpp" />
     <ClCompile Include="Interaction.cpp" />
->>>>>>> 0a4ac6a29d384a3327faf3cc554fa9d07d0fee79
     <ClCompile Include="CrazyDriver.cpp" />
     <ClCompile Include="DGV.cpp" />
     <ClCompile Include="FastDriver.cpp" />
@@ -39,37 +33,21 @@
     <ClCompile Include="Piloto.cpp" />
     <ClCompile Include="Pista.cpp" />
     <ClCompile Include="SurpriseDriver.cpp" />
-<<<<<<< HEAD
-    <ClCompile Include="Utils.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Autodromo.h" />
-    <ClInclude Include="Carro.h" />
-=======
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Autodromo.h" />
     <ClInclude Include="Campeonato.h" />
     <ClInclude Include="Carro.h" />
     <ClInclude Include="Consola.h" />
->>>>>>> 0a4ac6a29d384a3327faf3cc554fa9d07d0fee79
     <ClInclude Include="CrazyDriver.h" />
     <ClInclude Include="DGV.h" />
     <ClInclude Include="FastDriver.h" />
     <ClInclude Include="Garagem.h" />
-<<<<<<< HEAD
-    <ClInclude Include="InteractModoUm.h" />
-=======
     <ClInclude Include="Interaction.h" />
->>>>>>> 0a4ac6a29d384a3327faf3cc554fa9d07d0fee79
     <ClInclude Include="Jogo.h" />
     <ClInclude Include="Piloto.h" />
     <ClInclude Include="Pista.h" />
     <ClInclude Include="SurpriseDriver.h" />
-<<<<<<< HEAD
-    <ClInclude Include="Utils.h" />
-=======
->>>>>>> 0a4ac6a29d384a3327faf3cc554fa9d07d0fee79
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -159,10 +137,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-<<<<<<< HEAD
-      <LanguageStandard>stdcpp14</LanguageStandard>
-=======
->>>>>>> 0a4ac6a29d384a3327faf3cc554fa9d07d0fee79
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

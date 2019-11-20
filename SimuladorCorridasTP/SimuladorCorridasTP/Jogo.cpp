@@ -28,6 +28,7 @@ string juntaNome(vector<string> vec, int id) { //faz junção dos nomes inseridos
 		i = 2;
 	else if (id == 3)
 		i = 4;
+
 	for (;i < vec.size(); i++)
 		nome += vec[i] + " ";
 
@@ -57,6 +58,7 @@ string Jogo::criaItensJogo(vector <string> vec) {
 	
 }
 
+// É a dgv que insere piloto no carro???
 string Jogo::inserePilotoEmCarro(string car, string pil) {
 	return dgv->inserePilotoEmCarro(car, pil);
 }

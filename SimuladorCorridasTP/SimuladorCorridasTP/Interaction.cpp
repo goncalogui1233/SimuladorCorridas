@@ -4,6 +4,8 @@
 Interaction::Interaction(Jogo* d) {
 	j = d;
 	modo = 1;
+
+	this->leituraComandos();
 }
 
 void Interaction::leituraComandos() {
@@ -41,20 +43,21 @@ void Interaction::leituraComandos() {
 void Interaction::opcoesModo1() {
 
 	if (c[0] == "help"){
+		Consola::clrscr();
 		helpModo1();
-		cout << "Pressione uma tecla para continuar";
+		cout << "Pressione uma tecla para continua...";
 		(void)getchar();
 	}
 
 	else if (c[0] == "carregaP"){
 		j->carregaPilotos("pilotos.txt");
-		cout << "Pressione uma tecla para continuar";
+		cout << "Pressione uma tecla para continua...";
 		(void)getchar();
 	}
 
 	else if (c[0] == "carregaC"){
 		j->carregaCarrosFich("carros.txt");
-		cout << "Pressione uma tecla para continuar";
+		cout << "Pressione uma tecla para continua...";
 		(void)getchar();
 	}
 
@@ -63,31 +66,31 @@ void Interaction::opcoesModo1() {
 
 	else if (c[0] == "cria"){
 		cout << j->criaItensJogo(c);
-		cout << "Pressione uma tecla para continuar";
+		cout << "Pressione uma tecla para continua...";
 		(void)getchar();
 	}
 
 	else if (c[0] == "apaga") {
 		cout << j->eliminaItemJogo(c);
-		cout << "Pressione uma tecla para continuar";
+		cout << "Pressione uma tecla para continua...";
 		(void)getchar();
 	}
 
 	else if (c[0] == "entranocarro"){
 		cout << j->inserePilotoEmCarro(c[1], c[2]);
-		cout << "Pressione uma tecla para continuar";
+		cout << "Pressione uma tecla para continua...";
 		(void)getchar();
 	}
 
 	else if (c[0] == "saidocarro"){
 		cout << j->retiraPilotoDeCarro(c[1]);
-		cout << "Pressione uma tecla para continuar";
+		cout << "Pressione uma tecla para continua...";
 		(void)getchar();
 	}
 
 	else if (c[0] == "lista") {
 		cout << j->listagem();
-		cout << "Pressione uma tecla para continuar";
+		cout << "Pressione uma tecla para continua...";
 		(void)getchar();
 	}
 
@@ -109,8 +112,9 @@ void Interaction::opcoesModo1() {
 
 void Interaction::opcoesModo2() {
 	if (c[0] == "help") {
+		Consola::clrscr();
 		listaComandosModo2();
-		cout << "Pressione uma tecla para continuar";
+		cout << "Pressione uma tecla para continua...";
 		(void)getchar();
 	}
 	else if (c[0] == "campeonato")

@@ -3,6 +3,7 @@
 #include "Piloto.h"
 #include "CrazyDriver.h"
 #include "FastDriver.h"
+#include "SurpriseDriver.h"
 #include <vector>
 #include <fstream>
 
