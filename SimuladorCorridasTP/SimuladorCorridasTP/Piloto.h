@@ -20,6 +20,8 @@ public:
 
 	void trava();
 
+	Carro* returnCarro();
+
 	string getNome() const;
 
 	char getIDCar() const;
@@ -29,6 +31,10 @@ public:
 	void atribuiCarro(Carro *c);
 
 	void retiraCarro();
+
+	string getAsString() const;
+
+	string getInfoCarro() const;
 
 	static Piloto* fabrica(string tipo, string nome);
 

@@ -8,3 +8,7 @@ Pista::~Pista() {
 	for (it = carros.begin(); it != carros.end(); it++)
 		delete *it;
 }
+
+void Pista::insereCarroNaPista(Carro* aux) {
+	carros.push_back(aux);
+}

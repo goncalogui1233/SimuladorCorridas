@@ -4,7 +4,7 @@
 
 //construtor por cópia
 DGV::DGV(const DGV& aux) {
-	for (int i = 0; i < aux.carros.size(); i++)
+	for (unsigned int i = 0; i < aux.carros.size(); i++)
 		this->carros.push_back(new Carro(*aux.carros[i]));
 
 	//for(int i = 0; i < aux.pilotos.size(); i++)
@@ -22,10 +22,12 @@ void DGV::carregaPilotosFich(string fich) {
 		f >> tipo;
 		getline(f, nome);
 		cout << "Aqui";
-		if (tipo == "c")
+		if (tipo == "crazy")
 			pilotos.push_back(new CrazyDriver(nome));
-		else if(tipo == "f")
+		else if (tipo == "fast")
 			pilotos.push_back(new FastDriver(nome));
+		else if (tipo == "surpresa")
+			pilotos.push_back(new SurpriseDriver(nome));
 	}
 
 	f.close();
@@ -43,7 +45,7 @@ void DGV::carregaCarrosFich(string fich) {
 		f >> maxvelocidade;
 		f >> marca;
 		f >> modelo;
-		if (modelo != "")
+		if (!modelo.empty())
 			carros.push_back(new Carro(marca, maxenergia, maxvelocidade, modelo));
 		else
 			carros.push_back(new Carro(marca, maxenergia, maxvelocidade));
@@ -52,7 +54,7 @@ void DGV::carregaCarrosFich(string fich) {
 
 
 string DGV::insereCarro(vector <string> vec) {
-	if (vec[2] != "" && vec[3] != "" && vec[4] != "") {
+	if (!vec[2].empty() && !vec[3].empty() && !vec[4].empty()) {
 		carros.push_back(new Carro(vec[2], stod(vec[3]), stoi(vec[4]), vec[5]));
 		return "Carro inserido com sucesso\n";
 	}
@@ -108,21 +110,26 @@ string DGV::inserePilotoEmCarro(string car, string pil) {
 	for (it = pilotos.begin(); it != pilotos.end(); it++) {
 		if ((*it)->getNome() == pil) {	//procura o piloto
 			if ((*it)->temCarroAtribuido() != true) {	//se encontrar, vê se já tem um carro atribuido
+
 				for (unsigned int i = 0; i < carros.size(); i++) {	//caso não tenha, percorre vetor carrod
+
 					if (carros[i]->getID() == car.at(0)) {	//procura carro com o id
-						(*it)->atribuiCarro(carros[i]);
-						
-						return "Carro atribuido a piloto com sucesso :)\n";
+						if (carros[i]->getDisponibilidade() == true) { //verifica se o carro está disponivel
+							(*it)->atribuiCarro(carros[i]);
+							carros[i]->setDisponibilidade();
+							return "Carro atribuido a piloto com sucesso :)\n";
+						}
+						else
+							return "Carro existe mas ja ocupado por um piloto\n"; //carro ocupado
 					}
 				}
-				return "Carro não encontrado, tente novamento!!!\n"; //não encontrou carro
+				return "Carro nao encontrado, tente novamento!!!\n"; //não encontrou carro
 			}
 			else
-				return "Piloto já está dentro de um carro!!!\n"; //piloto tem carro
+				return "Piloto ja esta dentro de um carro!!!\n"; //piloto tem carro
 		}
 	}
-
-		return "Piloto não encontrado, tente novamente!!!\n"; //piloto não encontrado
+	return "Piloto nao encontrado, tente novamente!!!\n"; //piloto não encontrado
 
 }
 
@@ -136,7 +143,15 @@ string DGV::retiraPilotoDeCarro(string pil) {
 		}
 	}
 
-	return "Piloto não encontrado";
+	return "Piloto nao encontrado";
+}
+
+Piloto* DGV::retornaPiloto(string nome) {  //função que retorna ponteiro de piloto para ser usado no campeonato
+	for (unsigned int i = 0; i < pilotos.size(); i++)
+		if (pilotos[i]->getNome() == nome && pilotos[i]->returnCarro() != nullptr)
+			return pilotos[i];
+
+	return nullptr;
 }
 
 
@@ -144,20 +159,11 @@ string DGV::listagem() const {
 	ostringstream os;
 	os << "Pilotos: \n";
 	for (unsigned int i = 0; i < pilotos.size(); i++)
-		os << "Nome: " << pilotos[i]->getNome() <<"\n";
+		os << pilotos[i]->getAsString() <<"\n";
 
 	os << "Carros: \n";
 	for (unsigned int i = 0; i < carros.size(); i++)
 		os << carros[i]->getAsString();
-
-	return os.str();
-}
-
-string DGV::listaCarros() const {
-	ostringstream os;
-
-	for (unsigned int i = 0; i < carros.size(); i++) //unsigned pois não são necessários inteiros negativos!!
-		os << "Nome: " << carros[i]->getMarca() << " ID: " << carros[i]->getID() << "\n";
 
 	return os.str();
 }

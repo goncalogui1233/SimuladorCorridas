@@ -26,6 +26,8 @@ class Interaction {
 
 	void listaComandosModo2() const;
 
+	void escolhePilotos();
+
 public:
 
 	Interaction(Jogo* d);

@@ -23,13 +23,11 @@ void Interaction::leituraComandos() {
 			if (com == "")
 				cout << "Não foi inserido nenhum comando, tente novamente" << endl;
 		} while (com == "");
-		istringstream ler_com(com);
 
-		for (unsigned int i = 0; i < com.size(); i++) { //separa as palavras por espaços e coloca-as num vetor
-			string a;
-			ler_com >> a;
-			c.push_back(a);
-		}
+		istringstream is(com);
+
+		for (string s; is >> s;) //divide string e coloca no vetor de strings
+			c.push_back(s);
 
 		if (modo == 1)
 			opcoesModo1();
@@ -74,13 +72,13 @@ void Interaction::opcoesModo1() {
 	}
 
 	else if (c[0] == "entranocarro"){
-		cout << j->inserePilotoEmCarro(c[1], c[2]);
+		cout << j->inserePilotoEmCarro(c);
 		cout << "Pressione uma tecla para continuar";
 		(void)getchar();
 	}
 
 	else if (c[0] == "saidocarro"){
-		cout << j->retiraPilotoDeCarro(c[1]);
+		cout << j->retiraPilotoDeCarro(c);
 		cout << "Pressione uma tecla para continuar";
 		(void)getchar();
 	}
@@ -93,6 +91,8 @@ void Interaction::opcoesModo1() {
 
 	else if (c[0] == "campeonato") {
 		modo = 2;
+		j->criaCampeonato();
+		escolhePilotos();
 		leituraComandos();
 	}
 	else if (c[0] == "savedgv")
@@ -108,26 +108,46 @@ void Interaction::opcoesModo1() {
 }
 
 void Interaction::opcoesModo2() {
-	if (c[0] == "help")
+	if (c[0] == "help") {
 		listaComandosModo2();
-	else if (c[0] == "campeonato")
-		cout << "carregaP d Aco";
-	else if (c[0] == "listacarros")
-		cout << "carregaP d Aco";
+		cout << "Pressione uma tecla para continuar";
+		(void)getchar();
+	}
+
+	else if (c[0] == "campeonato") {
+		cout << j->adicionarAutodromoCamp(c) << endl;
+		j->colocaCarrosEmPista();
+		cout << "Pressione uma tecla para continuar";
+		(void)getchar();
+	}
+
+	else if (c[0] == "listacarros") {
+		cout << j->listaCarrosCampeonato() << endl;
+		cout << "Pressione uma tecla para continuar";
+		(void)getchar();
+		 j->mostraPista();
+		(void)getchar();
+	}
+
 	else if (c[0] == "carregabat")
-		cout << "carregaP d Aco";
+		cout << "CarregaBateria";
 	else if (c[0] == "carregatudo")
-		cout << "carregaP d Aco";
+		cout << "CarregaTudo";
 	else if (c[0] == "corrida")
-		cout << "carregaP d Aco";
+		cout << "Corrida";
 	else if (c[0] == "acidente")
-		cout << "carregaP d Aco";
+		cout << "Acidente";
 	else if (c[0] == "stop")
-		cout << "carregaP d Aco";
+		cout << "Stop";
 	else if (c[0] == "destroi")
-		cout << "carregaP d Aco";
-	else if (c[0] == "passatempo")
-		cout << "carregaP d Aco";
+		cout << "Destroi";
+
+	else if (c[0] == "passatempo") {
+		j->passarTempo(stoi(c[1]));
+		cout << "Pressione uma tecla para continuar";
+		(void)getchar();
+	}
+
 	else if (c[0] == "log")
 		cout << "carregaP d Aco";
 	else if (c[0] == "exit") {
@@ -146,6 +166,7 @@ void Interaction::helpModo1() const {
 	cout << "- entranocarro <letraCarro> <nomePiloto>" << endl;
 	cout << "- saidocarro <letraCarro>" << endl;
 	cout << "- lista" << endl;
+	cout << "- campeonato " << endl;
 	cout << "- savedgv <nome>" << endl;
 	cout << "- loaddgv <nome>" << endl;
 	cout << "- deldgv <nome>" << endl;
@@ -163,4 +184,21 @@ void Interaction::listaComandosModo2() const {
 	cout << "- destroi <letraCarro>" << endl;
 	cout << "- passatempo <n>" << endl;
 	cout << "- log" << endl;
+}
+
+void Interaction::escolhePilotos() {
+	string nome;
+	while(nome != "fim"){
+		c.clear();
+		cout << "Escolha os pilotos que irão participar na corrida(apenas os que tem um carro associado)\nInsira 'fim' para passar ao menu campeonato" << endl;
+		getline(cin, nome);
+
+		istringstream iss(nome);
+
+		for (string s; iss >> s;) //divide string e coloca no vetor de strings
+			c.push_back(s);
+
+		cout << j->escolhePilotosCampeonato(c);
+	}
+	
 }

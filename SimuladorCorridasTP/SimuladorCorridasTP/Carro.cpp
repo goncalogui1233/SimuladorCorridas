@@ -17,9 +17,16 @@ Carro::Carro(const Carro& aux)
 
 string Carro::getAsString() const {
 	ostringstream oss;
-	oss << "Marca: " << marca << " Modelo: " << modelo << " Vel. Maxima: " << maxvelocidade << " Max. Energia: " << maxenergia;
-	oss << "\nDanificado: " << danificado << "Energia: " << energia << "\n";
+	oss << "Marca: " << marca <<" | ID: "<< id <<" | Modelo: " << modelo << " | Vel. Maxima: " << maxvelocidade << " | Max. Energia: " << maxenergia << endl;
+	oss << "Danificado: " << danificado << " | Energia: " << energia << endl << endl;
 	return oss.str();
+}
+
+void Carro::setDisponibilidade() {
+	if (disponivel == true)
+		disponivel = false;
+	else
+		disponivel = true;
 }
 
 bool Carro::manivela(int quantEnergia) {

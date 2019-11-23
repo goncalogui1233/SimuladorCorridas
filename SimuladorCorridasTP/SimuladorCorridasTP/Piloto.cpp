@@ -21,6 +21,10 @@ string Piloto::getNome() const {
 	return nome;
 }
 
+Carro* Piloto::returnCarro() {
+	return car;
+}
+
 void Piloto::acelera() {
 	if (car != nullptr)
 		car->acelerar();
@@ -51,11 +55,25 @@ void Piloto::retiraCarro() {
 	car = nullptr;
 }
 
+string Piloto::getAsString() const {
+	ostringstream os;
+	if (car != nullptr)
+		os << "Nome: " << nome << " ID Carro: " << car->getID() << endl;
+	else
+		os << "Nome: " << nome << " ID Carro: " << endl;
+
+	return os.str();
+}
+
+string Piloto::getInfoCarro() const {
+	return car->getAsString();
+}
+
 Piloto* Piloto::fabrica(string tipo, string nome) {
 	string n = nome;
 	bool existe = true, alterado = false;
 	while (existe == true) {
-		for (int i = 0; i < usados.size(); i++)
+		for (unsigned int i = 0; i < usados.size(); i++)
 			if (usados[i] == n) {
 				n += 32;					//adiciona espaco
 				n += gerarRandom() + 97;	//coloca letra

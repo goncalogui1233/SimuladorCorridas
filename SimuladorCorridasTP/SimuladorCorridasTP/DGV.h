@@ -3,6 +3,7 @@
 #include "Piloto.h"
 #include "CrazyDriver.h"
 #include "FastDriver.h"
+#include "SurpriseDriver.h"
 #include <vector>
 #include <fstream>
 
@@ -38,9 +39,9 @@ public:
 
 	string retiraPilotoDeCarro(string pil);
 
-	string listagem() const;
+	Piloto* retornaPiloto(string nome);
 
-	string listaCarros() const;
+	string listagem() const;
 
 	~DGV();
 

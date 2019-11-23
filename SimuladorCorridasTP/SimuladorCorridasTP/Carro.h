@@ -16,10 +16,12 @@ class Carro {
 	double energia = 0;
 	bool parado = true, emergencia = false;
 	bool danificado = false;
+	bool disponivel = true;
 
 public:
 
 	Carro(string mar, double maxe, int maxv, string mod = "Modelo Base");
+	Carro(const Carro& aux);
 
 	//Destrutor da Class
 	/*
@@ -39,6 +41,12 @@ public:
 		return danificado;
 	}
 
+	bool getDisponibilidade() {
+		return disponivel;
+	}
+
+	void setDisponibilidade();
+
 	void setDanificado(bool danificado);
 
 	/* Manivela de carregamento do carro (em mAh)
@@ -47,7 +55,7 @@ public:
 	* Senão devolve False
 	*/
 	bool manivela(int valCarregamento);
-	Carro(const Carro& aux);
+	
 
 
 	string getMarca() const {

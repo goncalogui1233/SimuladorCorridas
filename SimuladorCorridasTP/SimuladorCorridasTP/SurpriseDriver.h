@@ -1,5 +1,10 @@
 #pragma once
-class SurpriseDriver
-{
+#include "Piloto.h"
+
+class SurpriseDriver: public Piloto{
+
+public:
+	SurpriseDriver(string nome);
+
 };
 

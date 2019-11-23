@@ -4,12 +4,45 @@
 
 Jogo::Jogo() {
 	dgv = new DGV();
+	campeonato = nullptr;
 }
 
-//#	    #  ####  ###   ####		###
-//# # # #  #  #  #  #  #  #	   # ##
-//#  #  #  #  #  #  #  #  #	     ##
-//#     #  ####  ###   ####		####
+//Funções de apoio
+
+bool verificaNumeros(string str1, string str2) { //verifica se as posições que deveriam ter numeros realmente os têm
+	
+	if (str1.find_first_not_of("0123456789") == -1 && str2.find_first_not_of("0123456789") == -1) // 0 se falhar, 1 se estiver tudo bem
+		return true;
+
+	return false;
+}
+
+string juntaNome(vector<string> vec, int id) { //faz junção dos nomes inseridos
+	string nome = "";
+	unsigned int i = 0;
+	if (id == 1) //criar piloto
+		i = 3;
+	else if (id == 2) //eliminar piloto
+		i = 2;
+	else if (id == 4) //juntar nome no inserePilotoEmCarro
+		i = 2;
+	else if (id == 5) //junta nome no retiraPilotoDeCarro
+		i = 1;
+	else if (id == 6) //junta nome no escolhePilotosCampeonato
+		i = 0;
+
+	for (; i < vec.size(); i++)
+		nome += vec[i] + " ";
+
+	transform(nome.begin(), nome.end(), nome.begin(), ::tolower); //coloca o nome em letras minusculas
+
+	return nome;
+}
+
+//MODO 1
+
+//Funções realização comandos
+
 
 void Jogo::carregaPilotos(string fich) {
 	dgv->carregaPilotosFich(fich);
@@ -19,23 +52,6 @@ void Jogo::carregaCarrosFich(string fich) {
 	dgv->carregaCarrosFich(fich);
 }
 
-string juntaNome(vector<string> vec, int id) { //faz junção dos nomes inseridos
-	string nome = "";
-	int i=0;
-	if (id == 1) //criar piloto
-		i = 3;
-	else if (id == 2) //eliminar piloto
-		i = 2;
-	else if (id == 3)
-		i = 4;
-	for (;i < vec.size(); i++)
-		nome += vec[i] + " ";
-
-	transform(nome.begin(), nome.end(), nome.begin(), ::tolower);
-
-	return nome;
-}
-
 string Jogo::criaItensJogo(vector <string> vec) {
 	if (vec[1] == "p"){
 		string nome = juntaNome(vec, 1);
@@ -43,13 +59,20 @@ string Jogo::criaItensJogo(vector <string> vec) {
 		return dgv->inserePiloto(vec[2], nome);
 	}
 
-	else if (vec[1] == "c")
-		return dgv->insereCarro(vec);
+	else if (vec[1] == "c"){
+		if (verificaNumeros(vec[3], vec[4]) == true)
+			return dgv->insereCarro(vec);
+		else
+			return "Argumentos não válidos, tente novamente\n";
+	}
 
 	else if (vec[1] == "a") {
-		string nome = juntaNome(vec, 3);
-		autodromos.push_back(new Autodromo(stoi(vec[2]), stoi(vec[3]), nome));
-		return "Pista criada";
+		if (verificaNumeros(vec[2], vec[3]) == true) {
+			autodromos.push_back(new Autodromo(stoi(vec[2]), stoi(vec[3]), vec[4]));
+			return "Autodromo criado\n";
+		}
+		else
+			return "Argumentos não válidos, tente novamente\n";
 	}
 
 	else
@@ -57,8 +80,10 @@ string Jogo::criaItensJogo(vector <string> vec) {
 	
 }
 
-string Jogo::inserePilotoEmCarro(string car, string pil) {
-	return dgv->inserePilotoEmCarro(car, pil);
+string Jogo::inserePilotoEmCarro(vector<string>vec) {
+	string pil = juntaNome(vec, 4);
+
+	return dgv->inserePilotoEmCarro(vec[1], pil);
 }
 
 string Jogo::eliminaItemJogo(vector <string> vec) {
@@ -72,7 +97,6 @@ string Jogo::eliminaItemJogo(vector <string> vec) {
 	else if (vec[1] == "c") {
 		transform(vec[2].begin(), vec[2].end(), vec[2].begin(), ::tolower);
 		return dgv->eliminaCarro(vec[2]);
-		
 	}
 
 	else if (vec[1] == "c") {
@@ -87,20 +111,63 @@ string Jogo::eliminaItemJogo(vector <string> vec) {
 			}
 			else
 				it++;
+
+		return "Autodromo não encontrado, tente novamente";
 	}
 
-	else
-		return "Opcao nao encontrada, tente novamente";
+	return "Opcao nao encontrada, tente novamente";
 }
 
-string Jogo::retiraPilotoDeCarro(string pil) {
-	transform(pil.begin(), pil.end(), pil.begin(), ::tolower);
+string Jogo::retiraPilotoDeCarro(vector<string>vec) {
+	string pil = juntaNome(vec, 5);
 	return dgv->retiraPilotoDeCarro(pil);
 }
 
 string Jogo::listagem() const {
-	return dgv->listagem();
+	string aux = "";
+	aux += dgv->listagem();
+	
+	for (int i = 0; i < autodromos.size(); i++)
+		aux += autodromos[i]->getAsString();
+
+	return aux;
 }
+
+string Jogo::escolhePilotosCampeonato(vector<string> vec) {
+	string nome = juntaNome(vec, 6);
+
+	Piloto* p = dgv->retornaPiloto(nome);
+	if (p == nullptr)
+		return "Piloto não existe, tente novamente com outro nome";
+
+	else{
+		return campeonato->adicionaParticipantes(p);
+	}
+}
+
+//Modo2
+
+void Jogo::criaCampeonato() {
+	campeonato = new Campeonato();
+}
+
+string Jogo::adicionarAutodromoCamp(vector<string>vec) {
+	for (unsigned int i = 0; i < autodromos.size(); i++)
+		if (autodromos[i]->getNome() == vec[1]){
+			campeonato->adicionarAutodromos(autodromos[i]);
+			return "Autodromo adicionado";
+		}
+	return "Autodromo nao existe";
+}
+
+void Jogo::colocaCarrosEmPista() {
+	campeonato->insereCarrosEmPista();
+}
+
+string Jogo::listaCarrosCampeonato() {
+	return campeonato->listaCarrosCampeonato();
+}
+
 
 void Jogo::passarTempo(int s) {
 

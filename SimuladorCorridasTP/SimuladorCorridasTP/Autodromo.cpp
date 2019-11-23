@@ -27,17 +27,29 @@ Autodromo::Autodromo(int maxcarros, int tamPista, string n) {
 	}
 	nome = no;
 	pista = new Pista(maxcarros, tamPista);
-	garage = new Garagem;
 	nomesAuto.push_back(no);
+}
+
+void Autodromo::insereCarroNaPista(Carro* aux) {
+	pista->insereCarroNaPista(aux);
+}
+
+void Autodromo::insereCarroNaGaragem(Carro* aux) {
+	garagem.push_back(aux);
 }
 
 string Autodromo::getNome() const {
 	return nome;
 }
 
+string Autodromo::getAsString() const {
+	ostringstream os;
+	os << "Nome: " << nome << " Cap. Pista: " << pista->returnMaxCarros()<< endl;
+	return os.str();
+}
+
 Autodromo::~Autodromo() {
 	delete pista;
-	delete garage;
 }
 
 
