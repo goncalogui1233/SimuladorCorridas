@@ -45,6 +45,14 @@ public:
 		return disponivel;
 	}
 
+	string getMarca() const {
+		return marca;
+	}
+
+	int getVelocidadeAtual() const {
+		return velocidadeAtual;
+	}
+
 	void setDisponibilidade();
 
 	void setDanificado(bool danificado);
@@ -55,12 +63,6 @@ public:
 	* Senão devolve False
 	*/
 	bool manivela(int valCarregamento);
-	
-
-
-	string getMarca() const {
-		return marca;
-	}
 
 	string getAsString()const;
 

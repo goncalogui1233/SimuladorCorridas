@@ -16,7 +16,7 @@ public:
 
 	Piloto(const Piloto& aux);
 
-	void acelera();
+	void acelera(int val = 1);
 
 	void trava();
 
@@ -25,6 +25,10 @@ public:
 	string getNome() const;
 
 	char getIDCar() const;
+
+	int returnVelocidadeAtual() const {
+		return car->getVelocidadeAtual();
+	}
 
 	bool temCarroAtribuido() const;
 

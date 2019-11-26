@@ -16,7 +16,11 @@ class Interaction {
 
 	vector<string> c; //vetor que guarda os comandos
 
+	const int representacaoPista = 50; //calcular "andamento" das letras: metrosPista / representação
+
 	int modo;
+
+	void representarPista();
 
 	void opcoesModo1();
 

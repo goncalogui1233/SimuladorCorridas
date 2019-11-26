@@ -89,12 +89,13 @@ void Interaction::opcoesModo1() {
 		(void)getchar();
 	}
 
-	else if (c[0] == "campeonato") {
+	else if (c[0] == "campeonato") { //passa para o modo 2
 		modo = 2;
-		j->criaCampeonato();
+		j->criaCampeonato(); //cria um novo campeonato
 		escolhePilotos();
 		leituraComandos();
 	}
+
 	else if (c[0] == "savedgv")
 		cout << "Guarda DGV";
 
@@ -103,8 +104,11 @@ void Interaction::opcoesModo1() {
 
 	else if (c[0] == "deldgv")
 		cout << "Apaga DGV";
-	else
+	else {
 		cout << "Comando não existente, (help) mostra comandos" << endl;
+		cout << "Pressione uma tecla para continuar";
+		(void)getchar();
+	}
 }
 
 void Interaction::opcoesModo2() {
@@ -125,16 +129,22 @@ void Interaction::opcoesModo2() {
 		cout << j->listaCarrosCampeonato() << endl;
 		cout << "Pressione uma tecla para continuar";
 		(void)getchar();
-		 j->mostraPista();
-		(void)getchar();
+
 	}
 
 	else if (c[0] == "carregabat")
 		cout << "CarregaBateria";
 	else if (c[0] == "carregatudo")
 		cout << "CarregaTudo";
-	else if (c[0] == "corrida")
-		cout << "Corrida";
+
+	else if (c[0] == "corrida"){
+		j->iniciaCorrida(representacaoPista);
+		cout << "Pressione uma tecla para continuar";
+		(void)getchar();
+		representarPista();
+		(void)getchar();
+	}
+
 	else if (c[0] == "acidente")
 		cout << "Acidente";
 	else if (c[0] == "stop")
@@ -145,6 +155,8 @@ void Interaction::opcoesModo2() {
 	else if (c[0] == "passatempo") {
 		j->passarTempo(stoi(c[1]));
 		cout << "Pressione uma tecla para continuar";
+		(void)getchar();
+		representarPista();
 		(void)getchar();
 	}
 
@@ -188,7 +200,7 @@ void Interaction::listaComandosModo2() const {
 
 void Interaction::escolhePilotos() {
 	string nome;
-	while(nome != "fim"){
+	while (nome != "fim") {
 		c.clear();
 		cout << "Escolha os pilotos que irão participar na corrida(apenas os que tem um carro associado)\nInsira 'fim' para passar ao menu campeonato" << endl;
 		getline(cin, nome);
@@ -200,5 +212,28 @@ void Interaction::escolhePilotos() {
 
 		cout << j->escolhePilotosCampeonato(c);
 	}
-	
+}
+
+
+void Interaction::representarPista() {
+	char a = 96;
+	Consola::clrscr();
+	cout << "Pista de Corridas" << endl;
+
+	for (unsigned int i = 0; i < j->returnNumCarrosPista(); i++) {
+
+		Consola::gotoxy(0, (2 * i) + 2);
+		for (int j = 0; j < representacaoPista; j++) { //coloca os traços entre os ID's dos carros
+			cout << (char)45;
+		}
+		cout << "\n";
+		Consola::gotoxy(j->returnPosX(i), (2 * i) + 3);
+		cout << j->returnIDCarrosPista(i);
+		cout << "\n";
+	}
+
+	for (int i = 0; i < representacaoPista; i++) //necessário para fazer a última linha
+		cout << (char)45;
+	cout << "\n";
+
 }

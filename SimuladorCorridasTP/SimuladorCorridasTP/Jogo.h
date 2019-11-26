@@ -38,13 +38,21 @@ public:
 
 	string listaCarrosCampeonato();
 
+	int returnPosX(int i) const;
+
 	string adicionarAutodromoCamp(vector<string>vec);
 
 	void passarTempo(int s);
 
-	void mostraPista() {
+	void iniciaCorrida(int rep);
+
+	size_t returnNumCarrosPista() const;
+
+	char returnIDCarrosPista(int i) const;
+
+	/*void mostraPista() {
 		autodromos[0]->mostraPista();
-	}
+	}*/
 
 	~Jogo();
 };

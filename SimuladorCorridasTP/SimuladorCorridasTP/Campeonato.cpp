@@ -16,6 +16,11 @@ void Campeonato::adicionarAutodromos(Autodromo *aux) {
 	autodromos.push_back(aux);
 }
 
+void Campeonato::avancarTempo(int s) {
+	c->atualizaPosCorrida(participantes);
+	c->verificaSeMudouPos();
+}
+
 void Campeonato::insereCarrosEmPista() {
 	if (autodromos[0]->returnMaxCarros() >= participantes.size()) // se a capacidade da pista for maior ou igual aos participantes
 		for (unsigned int i = 0; i < participantes.size(); i++)
@@ -28,6 +33,14 @@ void Campeonato::insereCarrosEmPista() {
 		for (; j < participantes.size(); j++)
 			autodromos[0]->insereCarroNaGaragem(participantes[j]->returnCarro());
 	}
+}
+
+void Campeonato::criarCorrida(int rep) {
+	c = new Corrida(autodromos[0], participantes, rep);
+}
+
+void Campeonato::aceleraCarrosInit() {
+	c->aceleraCarrosInit(participantes);
 }
 
 string Campeonato::listaCarrosCampeonato() const {

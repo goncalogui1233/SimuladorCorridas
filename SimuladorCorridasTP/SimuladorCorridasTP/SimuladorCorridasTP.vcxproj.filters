@@ -57,6 +57,12 @@
     <ClCompile Include="Pontuacoes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Corrida.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Posicoes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Autodromo.h">
@@ -96,6 +102,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Pontuacoes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Corrida.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Posicoes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

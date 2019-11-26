@@ -25,9 +25,9 @@ Carro* Piloto::returnCarro() {
 	return car;
 }
 
-void Piloto::acelera() {
+void Piloto::acelera(int val) {
 	if (car != nullptr)
-		car->acelerar();
+		car->acelerar(val);
 }
 
 void Piloto::trava() {
