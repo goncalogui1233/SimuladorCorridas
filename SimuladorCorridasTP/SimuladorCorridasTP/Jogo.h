@@ -14,9 +14,11 @@ public:
 	Jogo();
 
 	//Modo 1
-	void carregaPilotos(string fich);
+	string carregaPilotos(string fich);
 
-	void carregaCarrosFich(string fich);
+	string carregaCarrosFich(string fich);
+
+	string carregaAutodromosFich(string fich);
 
 	string criaItensJogo(vector <string> vec);
 

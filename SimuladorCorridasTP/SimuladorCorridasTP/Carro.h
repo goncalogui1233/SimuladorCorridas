@@ -37,6 +37,10 @@ public:
 		return id;
 	}
 
+	bool returnParado() const {
+		return parado;
+	}
+
 	inline bool getDanificado() const {
 		return danificado;
 	}

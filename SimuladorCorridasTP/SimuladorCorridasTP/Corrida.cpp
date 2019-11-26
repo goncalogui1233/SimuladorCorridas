@@ -13,23 +13,18 @@ Corrida::Corrida(Autodromo* aux, vector<Piloto*> part, int rep)
 }
 
 void Corrida::atualizaPosCorrida(const vector<Piloto*>aux) {
-	cout << "V0" << endl;
-	for (int i = 0; i < aut->returnNumCarrosPista(); i++){ 
-		cout << "V1" << endl;
-		for (int j = 0; j < aux.size(); i++){		//percorre o vetor dos participantes, passado por argumento
-			cout << "V2" << endl;
+	int c = 0;
+	for (int i = 0; i < aut->returnNumCarrosPista(); i++){ //vetor dos carros que estão na pista
+		for (int j = 0; j < aux.size(); j++){		//percorre o vetor dos participantes, passado por argumento
 			if (aut->returnIdCarroPista(i) == aux[j]->getIDCar()){
 				for (int k = 0; k < classificacao.size(); k++){ //percorre o vetor das classificacoes
-					cout << "V3" << endl;
-					if (classificacao[k]->returnCharCarro() == aut[i].returnIdCarroPista(i)){
+					if (classificacao[k]->returnCharCarro() == aut->returnIdCarroPista(i)){
 						classificacao[k]->setPosicaoPista(aux[j]->returnVelocidadeAtual());
 						break;
 					}
 				}
 			}
-			break;
 		}
-		break;
 	}
 }
 
@@ -51,13 +46,12 @@ void Corrida::verificaSeMudouPos() {
 		while (anterior < atual) { //enquanto os "metros" anteriores forem menores ou iguais aos atuais
 			if ((anterior % dis) == 0) { //se a divisao der resto zero
 				classificacao[i]->MexePosEcra();	//hora de mudar a posição
-				break;
+				anterior++;
 			}
 			else
 				anterior++; //senão incrementa
 		}
 	}
-		
 }
 
 string Corrida::mostraPosicoes() const {

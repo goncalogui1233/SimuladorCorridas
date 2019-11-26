@@ -44,12 +44,31 @@ string juntaNome(vector<string> vec, int id) { //faz junção dos nomes inseridos
 //Funções realização comandos
 
 
-void Jogo::carregaPilotos(string fich) {
-	dgv->carregaPilotosFich(fich);
+string Jogo::carregaPilotos(string fich) {
+	return dgv->carregaPilotosFich(fich);
 }
 
-void Jogo::carregaCarrosFich(string fich) {
-	dgv->carregaCarrosFich(fich);
+string Jogo::carregaCarrosFich(string fich) {
+	return dgv->carregaCarrosFich(fich);
+}
+
+string Jogo::carregaAutodromosFich(string fich) {
+	ifstream f;
+	int maxcarros, tampista;
+	string nome;
+	f.open(fich);
+	if (!f)
+		return "Erro na abertura do ficheiro\n";
+	
+	while (!f.eof()) {
+		f >> maxcarros;
+		f >> tampista;
+		f >> nome;
+		autodromos.push_back(new Autodromo(maxcarros, tampista, nome));
+	}
+
+	f.close();
+	return "Ficheiro Lido com Sucesso\n";
 }
 
 string Jogo::criaItensJogo(vector <string> vec) {
@@ -152,16 +171,20 @@ void Jogo::criaCampeonato() {
 }
 
 string Jogo::adicionarAutodromoCamp(vector<string>vec) {
-	if (vec[1] == "")
+	if (vec.size() == 1)
 		return "Vazio";
 	
-	for (unsigned int i = 0; i < autodromos.size(); i++) {
-		if (autodromos[i]->getNome() == vec[1]) {
-			campeonato->adicionarAutodromos(autodromos[i]);
-			return "Autodromo adicionado";
+	if (campeonato->returnSeExisteCorrida() == false) {
+		for (unsigned int i = 0; i < autodromos.size(); i++) {
+			if (autodromos[i]->getNome() == vec[1]) {
+				campeonato->adicionarAutodromos(autodromos[i]);
+				return "Autodromos adicionados\n";
+			}
 		}
+		return "Autodromo nao existe\n";
 	}
-	return "Autodromo nao existe";
+	else
+		return "Ja existe uma corrida a decorrer, nao e possivel adicionar autodromos\n";
 }
 
 void Jogo::colocaCarrosEmPista() {
@@ -191,8 +214,9 @@ char Jogo::returnIDCarrosPista(int i) const {
 
 
 void Jogo::passarTempo(int s) {
-	for(int i = 0; i < s; i++)
-		campeonato->avancarTempo(s);
+	for(int i = 0; i < s; i++){
+		campeonato->avancarTempo();
+	}
 }
 
 Jogo::~Jogo() {

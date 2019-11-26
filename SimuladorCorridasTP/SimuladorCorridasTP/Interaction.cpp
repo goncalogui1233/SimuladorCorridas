@@ -45,19 +45,23 @@ void Interaction::opcoesModo1() {
 	}
 
 	else if (c[0] == "carregaP"){
-		j->carregaPilotos("pilotos.txt");
+		cout << j->carregaPilotos("pilotos.txt");
 		cout << "Pressione uma tecla para continuar";
 		(void)getchar();
 	}
 
 	else if (c[0] == "carregaC"){
-		j->carregaCarrosFich("carros.txt");
+		cout << j->carregaCarrosFich("carros.txt");
 		cout << "Pressione uma tecla para continuar";
 		(void)getchar();
 	}
 
-	else if (c[0] == "carregaA")
-		cout << "carregaP d Aco";
+	else if (c[0] == "carregaA") {
+		j->carregaAutodromosFich(c[1]);
+		cout << "Pressione uma tecla para continuar";
+		(void)getchar();
+	}
+		
 
 	else if (c[0] == "cria"){
 		cout << j->criaItensJogo(c);
@@ -120,7 +124,7 @@ void Interaction::opcoesModo2() {
 
 	else if (c[0] == "campeonato") {
 		cout << j->adicionarAutodromoCamp(c) << endl;
-		j->colocaCarrosEmPista();
+		
 		cout << "Pressione uma tecla para continuar";
 		(void)getchar();
 	}
@@ -138,6 +142,7 @@ void Interaction::opcoesModo2() {
 		cout << "CarregaTudo";
 
 	else if (c[0] == "corrida"){
+		j->colocaCarrosEmPista();
 		j->iniciaCorrida(representacaoPista);
 		cout << "Pressione uma tecla para continuar";
 		(void)getchar();
@@ -201,6 +206,7 @@ void Interaction::listaComandosModo2() const {
 void Interaction::escolhePilotos() {
 	string nome;
 	while (nome != "fim") {
+		Consola::clrscr();
 		c.clear();
 		cout << "Escolha os pilotos que irão participar na corrida(apenas os que tem um carro associado)\nInsira 'fim' para passar ao menu campeonato" << endl;
 		getline(cin, nome);
@@ -211,6 +217,8 @@ void Interaction::escolhePilotos() {
 			c.push_back(s);
 
 		cout << j->escolhePilotosCampeonato(c);
+		cout << "Prima uma tecla para continuar" << endl;
+		(void)getchar();
 	}
 }
 

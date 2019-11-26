@@ -36,6 +36,8 @@ public:
 		return c->returnPosX(i);
 	}
 
+	bool returnSeExisteCorrida() const;
+
 	string adicionaParticipantes(Piloto* aux);
 
 	void adicionarAutodromos(Autodromo *aux);
@@ -44,7 +46,7 @@ public:
 
 	void aceleraCarrosInit();
 
-	void avancarTempo(int s);
+	void avancarTempo();
 
 	void insereCarrosEmPista();
 

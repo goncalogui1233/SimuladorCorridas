@@ -12,26 +12,33 @@ string Campeonato::adicionaParticipantes(Piloto* aux) {
 	return "Piloto inserido na corrida\n";
 }
 
+bool Campeonato::returnSeExisteCorrida() const {
+	if (c == nullptr)
+		return false;
+
+	return true;
+}
+
 void Campeonato::adicionarAutodromos(Autodromo *aux) {
 	autodromos.push_back(aux);
 }
 
-void Campeonato::avancarTempo(int s) {
-	c->atualizaPosCorrida(participantes);
+void Campeonato::avancarTempo() {
+	c->atualizaPosCorrida(participantes);;
 	c->verificaSeMudouPos();
 }
 
 void Campeonato::insereCarrosEmPista() {
-	if (autodromos[0]->returnMaxCarros() >= participantes.size()) // se a capacidade da pista for maior ou igual aos participantes
+	if (autodromos[autodromoAtual]->returnMaxCarros() >= participantes.size()) // se a capacidade da pista for maior ou igual aos participantes
 		for (unsigned int i = 0; i < participantes.size(); i++)
-			autodromos[0]->insereCarroNaPista(participantes[i]->returnCarro());
+			autodromos[autodromoAtual]->insereCarroNaPista(participantes[i]->returnCarro());
 	else{												//caso a pista não consiga ter os carros todos, coloca os outros na garagem
 		unsigned int j = 0;
-		for (; j < autodromos[0]->returnMaxCarros(); j++)
-			autodromos[0]->insereCarroNaPista(participantes[j]->returnCarro());
+		for (; j < autodromos[autodromoAtual]->returnMaxCarros(); j++)
+			autodromos[autodromoAtual]->insereCarroNaPista(participantes[j]->returnCarro());
 
 		for (; j < participantes.size(); j++)
-			autodromos[0]->insereCarroNaGaragem(participantes[j]->returnCarro());
+			autodromos[autodromoAtual]->insereCarroNaGaragem(participantes[j]->returnCarro());
 	}
 }
 

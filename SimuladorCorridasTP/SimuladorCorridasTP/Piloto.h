@@ -26,6 +26,10 @@ public:
 
 	char getIDCar() const;
 
+	bool returnCarroParado() const {
+		return car->returnParado();
+	}
+
 	int returnVelocidadeAtual() const {
 		return car->getVelocidadeAtual();
 	}

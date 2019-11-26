@@ -12,16 +12,23 @@ DGV::DGV(const DGV& aux) {
 }
 
 
-void DGV::carregaPilotosFich(string fich) {
+string DGV::carregaPilotosFich(string fich) {
 	ifstream f;
 	string tipo;
 	string nome;
+	string s;
 	f.open(fich);
+
+	if (!f)
+		return "Erro a abrir o ficheiro\n";
 	
 	while (!f.eof()) {
-		f >> tipo;
-		getline(f, nome);
-		cout << "Aqui";
+		getline(f, s);
+		istringstream is(s);
+		is >> tipo >> ws;
+		getline(is, nome);
+		nome += " ";
+
 		if (tipo == "crazy")
 			pilotos.push_back(new CrazyDriver(nome));
 		else if (tipo == "fast")
@@ -31,13 +38,17 @@ void DGV::carregaPilotosFich(string fich) {
 	}
 
 	f.close();
+	return "Ficheiro lido com sucesso\n";
 }
 
-void DGV::carregaCarrosFich(string fich) {
+string  DGV::carregaCarrosFich(string fich) {
 	ifstream f;
 	int maxenergia, maxvelocidade;
 	string marca, modelo;
 	f.open(fich);
+
+	if (!f)
+		return "Erro a abrir o ficheiro\n";
 
 	while (!f.eof()) {
 		modelo = "";
@@ -50,6 +61,10 @@ void DGV::carregaCarrosFich(string fich) {
 		else
 			carros.push_back(new Carro(marca, maxenergia, maxvelocidade));
 	}
+
+	f.close();
+
+	return "Ficheiro Lido com sucesso";
 }
 
 
@@ -137,7 +152,7 @@ string DGV::retiraPilotoDeCarro(string pil) {
 	vector <Piloto*>::iterator it;
 
 	for (it = pilotos.begin(); it != pilotos.end(); it++) {
-		if ((*it)->getNome() == pil) {
+		if ((*it)->getNome() == pil && (*it)->returnCarroParado() == true) {
 			(*it)->retiraCarro();
 			return "Piloto Retirado do Carro";
 		}
