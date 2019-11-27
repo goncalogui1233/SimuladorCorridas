@@ -23,9 +23,9 @@ public:
 
 	int getPilotosTam() const;
 
-	void carregaPilotosFich(string fich);
+	string carregaPilotosFich(string fich);
 
-	void carregaCarrosFich(string fich);
+	string carregaCarrosFich(string fich);
 
 	string insereCarro(vector <string> vec);
 
@@ -39,9 +39,9 @@ public:
 
 	string retiraPilotoDeCarro(string pil);
 
-	string listagem() const;
+	Piloto* retornaPiloto(string nome);
 
-	string listaCarros() const;
+	string listagem() const;
 
 	~DGV();
 

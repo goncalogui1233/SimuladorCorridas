@@ -51,10 +51,16 @@
     <ClCompile Include="Pista.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Garagem.cpp">
+    <ClCompile Include="Campeonato.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Campeonato.cpp">
+    <ClCompile Include="Pontuacoes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Corrida.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Posicoes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -92,10 +98,16 @@
     <ClInclude Include="Pista.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Garagem.h">
+    <ClInclude Include="Campeonato.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Campeonato.h">
+    <ClInclude Include="Pontuacoes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Corrida.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Posicoes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

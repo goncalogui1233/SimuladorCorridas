@@ -16,19 +16,33 @@ public:
 
 	Piloto(const Piloto& aux);
 
-	void acelera();
+	void acelera(int val = 1);
 
 	void trava();
+
+	Carro* returnCarro();
 
 	string getNome() const;
 
 	char getIDCar() const;
+
+	bool returnCarroParado() const {
+		return car->returnParado();
+	}
+
+	int returnVelocidadeAtual() const {
+		return car->getVelocidadeAtual();
+	}
 
 	bool temCarroAtribuido() const;
 
 	void atribuiCarro(Carro *c);
 
 	void retiraCarro();
+
+	string getAsString() const;
+
+	string getInfoCarro() const;
 
 	static Piloto* fabrica(string tipo, string nome);
 
