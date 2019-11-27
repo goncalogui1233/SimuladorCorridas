@@ -17,10 +17,10 @@ string DGV::carregaPilotosFich(string fich) {
 	string tipo;
 	string nome;
 	string s;
-	f.open(fich);
+	f.open("asd.txt");
 
 	if (!f)
-		return "Erro a abrir o ficheiro\n";
+		return "Erro a abrir o ficheiro, Confirme o nome do ficheiro\n";
 	
 	while (!f.eof()) {
 		getline(f, s);
@@ -38,7 +38,7 @@ string DGV::carregaPilotosFich(string fich) {
 	}
 
 	f.close();
-	return "Ficheiro lido com sucesso\n";
+	return "Ficheiro lido com sucesso!\n";
 }
 
 string  DGV::carregaCarrosFich(string fich) {
@@ -49,24 +49,31 @@ string  DGV::carregaCarrosFich(string fich) {
 	f.open(fich);
 
 	if (!f)
-		return "Erro a abrir o ficheiro\n";
+		return "Erro a abrir o ficheiro, Confirme o nome do ficheiro\n";
 
 	while (!f.eof()) {
-		modelo = "";
-		f >> initCap;
-		f >> maxenergia;
-		f >> maxvelocidade;
-		f >> marca;
-		f >> modelo;
-		if (!modelo.empty())
-			carros.push_back(new Carro(initCap, maxenergia, maxvelocidade, marca, modelo));
-		else
-			carros.push_back(new Carro(initCap, maxenergia, maxvelocidade, marca));
+		try {
+			modelo = "";
+			f >> initCap >> maxenergia >> maxvelocidade >> marca >> modelo;
+
+			if (initCap <= 0 || maxenergia <= 0 || maxvelocidade <= 0 || marca.empty()) {
+				throw exception("Erro a ler o ficheiro, Confirme os dados\n");
+			}
+
+			if (!modelo.empty())
+				carros.push_back(new Carro(initCap, maxenergia, maxvelocidade, marca, modelo));
+			else
+				carros.push_back(new Carro(initCap, maxenergia, maxvelocidade, marca));
+		}
+		catch (exception &e) {
+			f.close();
+			return e.what();
+		}
 	}
 
 	f.close();
 
-	return "Ficheiro Lido com sucesso";
+	return "Ficheiro Lido com sucesso!\n";
 }
 
 
@@ -176,32 +183,40 @@ Piloto* DGV::retornaPiloto(string nome) {  //função que retorna ponteiro de pilo
 
 string DGV::listagem() const {
 	ostringstream os;
-	os << "Pilotos: " << endl;
-	for (unsigned int i = 0; i < pilotos.size(); i++)
-		os << pilotos[i]->getAsString() << endl;
 
-	os << "Carros: " << endl;
-	for (unsigned int i = 0; i < carros.size(); i++)
-		os << i << ": " << carros[i]->getAsString();
+	if (pilotos.size() != 0) {
+		os << "Pilotos: " << endl;
+		for (unsigned int i = 0; i < pilotos.size(); i++)
+			os << pilotos[i]->getAsString() << endl;
+	}
+	else
+		os << "Nao exitem pilotos" << endl;
 
+	if (pilotos.size() != 0) {
+			os << "Carros: " << endl;
+			for (unsigned int i = 0; i < carros.size(); i++)
+				os << i << ": " << carros[i]->getAsString();
+		}
+		else
+			os << "Nao exitem carros" << endl;
 	return os.str();
 }
 
-string DGV::listaCarros() const {
-	ostringstream os;
-
-	for (unsigned int i = 0; i < carros.size(); i++) //unsigned pois não são necessários inteiros negativos!!
-		os << "Nome: " << carros[i]->getMarca() << " ID: " << carros[i]->getID() << endl;
-
-	return os.str();
-}
+//string DGV::listaCarros() const {
+//	ostringstream os;
+//
+//	for (unsigned int i = 0; i < carros.size(); i++) //unsigned pois não são necessários inteiros negativos!!
+//		os << "Nome: " << carros[i]->getMarca() << " ID: " << carros[i]->getID() << endl;
+//
+//	return os.str();
+//}
 
 int DGV::getCarrosTam() const {
-	return carros.size();
+	return (int) carros.size();
 }
 
 int DGV::getPilotosTam() const {
-	return pilotos.size();
+	return (int) pilotos.size();
 }
 
 DGV::~DGV() {

@@ -20,11 +20,11 @@ void Interaction::leituraComandos() {
 			else
 				cout << "Modo 2" << endl;
 
-			cout << "Insira um comando: (help lista todos os comandos)" << endl;
+			cout << "Insira um comando: ";
 			getline(cin, com);
-			if (com == "")
-				cout << "Não foi inserido nenhum comando, tente novamente" << endl;
-		} while (com == "");
+			if (com.empty())
+				cout << "Nao foi inserido nenhum comando, tente novamente" << endl;
+		} while (com.empty());
 
 		istringstream is(com);
 
@@ -64,7 +64,6 @@ void Interaction::opcoesModo1() {
 		cout << "Pressione uma tecla para continuar";
 		(void)getchar();
 	}
-		
 
 	else if (c[0] == "cria"){
 		cout << j->criaItensJogo(c);
@@ -113,7 +112,7 @@ void Interaction::opcoesModo1() {
 		cout << "Apaga DGV";
 	else {
 		cout << "Comando não existente, (help) mostra comandos" << endl;
-		cout << "Pressione uma tecla para continuar";
+		cout << "Pressione uma tecla para continuar...";
 		(void)getchar();
 	}
 }
@@ -221,7 +220,7 @@ void Interaction::escolhePilotos() {
 			c.push_back(s);
 
 		cout << j->escolhePilotosCampeonato(c);
-		cout << "Prima uma tecla para continuar" << endl;
+		cout << "Prima uma tecla para continuar... " << endl;
 		(void)getchar();
 	}
 }

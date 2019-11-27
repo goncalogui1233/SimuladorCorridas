@@ -9,9 +9,9 @@ Jogo::Jogo() {
 
 //Funções de apoio
 
-bool verificaNumeros(string str1, string str2) { //verifica se as posições que deveriam ter numeros realmente os têm
+bool verificaNumeros(string str) { //verifica se as posições que deveriam ter numeros realmente os têm
 	
-	if (str1.find_first_not_of("0123456789") == -1 && str2.find_first_not_of("0123456789") == -1) // 0 se falhar, 1 se estiver tudo bem
+	if (str.find_first_not_of("0123456789") == -1) // 0 se falhar, 1 se estiver tudo bem
 		return true;
 
 	return false;
@@ -78,20 +78,23 @@ string Jogo::criaItensJogo(vector <string> vec) {
 		return dgv->inserePiloto(vec[2], nome);
 	}
 
-	else if (vec[1] == "c"){
-		if (verificaNumeros(vec[3], vec[4]) == true)
-			return dgv->insereCarro(vec);
+	else if (vec[1] == "c") {
+		if (vec.size() >= 5) {
+			if (verificaNumeros(vec[2]) && verificaNumeros(vec[3]) && verificaNumeros(vec[4]))
+				return dgv->insereCarro(vec);
+		}
 		else
-			return "Argumentos não válidos, tente novamente\n";
+			return "Argumentos nao validos, tente novamente\n";
 	}
 
 	else if (vec[1] == "a") {
-		if (verificaNumeros(vec[2], vec[3]) == true) {
-			autodromos.push_back(new Autodromo(stoi(vec[2]), stoi(vec[3]), vec[4]));
-			return "Autodromo criado\n";
+		if (vec.size() >= 3) {
+			if (verificaNumeros(vec[2]) && verificaNumeros(vec[3])) {
+				autodromos.push_back(new Autodromo(stoi(vec[2]), stoi(vec[3]), vec[4]));
+				return "Autodromo criado\n";
+			}
 		}
-		else
-			return "Argumentos não válidos, tente novamente\n";
+		return "Argumentos nao validos, tente novamente\n";
 	}
 
 	else

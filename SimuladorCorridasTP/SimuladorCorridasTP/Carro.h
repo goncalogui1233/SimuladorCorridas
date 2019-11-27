@@ -68,11 +68,6 @@ public:
 	*/
 	bool manivela(int valCarregamento);
 
-
-	string getMarca() const {
-		return marca;
-	}
-
 	string getAsString()const;
 
 
