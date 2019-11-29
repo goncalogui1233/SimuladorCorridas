@@ -3,6 +3,7 @@
 #include "Piloto.h"
 #include "CrazyDriver.h"
 #include "FastDriver.h"
+#include "SurpriseDriver.h"
 #include <vector>
 #include <fstream>
 
@@ -22,9 +23,9 @@ public:
 
 	int getPilotosTam() const;
 
-	void carregaPilotosFich(string fich);
+	string carregaPilotosFich(string fich);
 
-	void carregaCarrosFich(string fich);
+	string carregaCarrosFich(string fich);
 
 	string insereCarro(vector <string> vec);
 
@@ -36,11 +37,11 @@ public:
 
 	string inserePilotoEmCarro(string car, string pil);
 
-	string retiraPilotoDeCarro(string pil);
+	string retiraPilotoDeCarro(const char car);
+
+	Piloto* retornaPiloto(string nome);
 
 	string listagem() const;
-
-	string listaCarros() const;
 
 	~DGV();
 

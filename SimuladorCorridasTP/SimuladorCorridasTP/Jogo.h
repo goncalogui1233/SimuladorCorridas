@@ -1,31 +1,61 @@
 #pragma once
 #include "DGV.h"
 #include "Autodromo.h"
+#include "Campeonato.h"
 
 using namespace std;
 
 class Jogo {
 	DGV* dgv;
 	vector <Autodromo*> autodromos;
+	Campeonato *campeonato;
 
 public:
 	Jogo();
 
-	void carregaPilotos(string fich);
+	//Modo 1
+	string carregaPilotos(string fich);
 
-	void carregaCarrosFich(string fich);
+	string carregaCarrosFich(string fich);
 
+	string carregaAutodromosFich(string fich);
+
+	// Cria tipos de Objetos (Carro, Piloto, Autodromo)
 	string criaItensJogo(vector <string> vec);
 
 	string eliminaItemJogo(vector <string> vec);
 
-	string inserePilotoEmCarro(string car, string pil);
+	string inserePilotoEmCarro(vector<string>vec);
 
-	string retiraPilotoDeCarro(string pil);
+	string retiraPilotoDeCarro(vector<string>vec);
 
 	string listagem() const;
 
+	string escolhePilotosCampeonato(vector<string> vec);
+
+	//Modo2
+
+	void criaCampeonato();
+
+	void colocaCarrosEmPista();
+
+	string listaCarrosCampeonato();
+
+	int returnPosX(int i) const;
+
+	string adicionarAutodromoCamp(vector<string>vec);
+
 	void passarTempo(int s);
+
+	void iniciaCorrida(int rep);
+
+	size_t returnNumCarrosPista() const;
+
+	char returnIDCarrosPista(int i) const;
+
+	/*void mostraPista() {
+		autodromos[0]->mostraPista();
+	}*/
 
 	~Jogo();
 };

@@ -12,14 +12,16 @@ class Carro {
 	const char id;
 	const int maxvelocidade;
 	const double maxenergia;
+	const double initenergia;
 	int velocidadeAtual = 0;
 	double energia = 0;
 	bool parado = true, emergencia = false;
 	bool danificado = false;
+	bool disponivel = true;
 
 public:
-
-	Carro(string mar, double maxe, int maxv, string mod = "Modelo Base");
+	Carro(double initCap, double maxe, int maxv, string mar, string mod = "Modelo Base");
+	Carro(const Carro& aux);
 
 	//Destrutor da Class
 	/*
@@ -35,9 +37,27 @@ public:
 		return id;
 	}
 
+	bool returnParado() const {
+		return parado;
+	}
+
 	inline bool getDanificado() const {
 		return danificado;
 	}
+
+	bool getDisponibilidade() {
+		return disponivel;
+	}
+
+	string getMarca() const {
+		return marca;
+	}
+
+	int getVelocidadeAtual() const {
+		return velocidadeAtual;
+	}
+
+	void setDisponibilidade();
 
 	void setDanificado(bool danificado);
 
@@ -47,12 +67,6 @@ public:
 	* Senão devolve False
 	*/
 	bool manivela(int valCarregamento);
-	Carro(const Carro& aux);
-
-
-	string getMarca() const {
-		return marca;
-	}
 
 	string getAsString()const;
 
