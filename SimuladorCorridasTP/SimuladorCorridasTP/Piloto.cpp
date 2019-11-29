@@ -52,6 +52,7 @@ void Piloto::atribuiCarro(Carro* c) {
 }
 
 void Piloto::retiraCarro() {
+	car->setDisponibilidade();
 	car = nullptr;
 }
 
@@ -83,15 +84,15 @@ Piloto* Piloto::fabrica(string tipo, string nome) {
 			existe = false;
 	}
 
-	if (tipo == "C") {
+	if (tipo == "CRAZY") {
 		usados.push_back(n);
 		return new CrazyDriver(n);
 	}
-	else if (tipo == "F") {
+	else if (tipo == "RAPIDO") {
 		usados.push_back(n);
 		return new FastDriver(nome);
 	}
-	else if (tipo == "S") {
+	else if (tipo == "SURPRESA") {
 		//return new SurpriseDriver();
 		return nullptr;
 	}

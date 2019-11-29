@@ -1,2 +1,2 @@
-   300 300 150 Mazda M5
-asdas    500 asd 500 250 Toyota
+300 300 150 Mazda M5
+500 500 250 Toyota

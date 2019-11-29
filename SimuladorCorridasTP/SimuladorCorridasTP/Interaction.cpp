@@ -43,55 +43,68 @@ void Interaction::opcoesModo1() {
 	if (c[0] == "help"){
 		Consola::clrscr();
 		helpModo1();
-		cout << "Pressione uma tecla para continuar...";
+		cout << "Pressione uma tecla para continuar... ";
 		(void)getchar();
 	}
 
 	else if (c[0] == "carregaP"){
-		cout << j->carregaPilotos("pilotos.txt");
-		cout << "Pressione uma tecla para continuar...";
+		if (c.size() == 2) {
+			cout << j->carregaPilotos("pilotos.txt");
+		}
+		else
+			cout << "Argumentos nao validos, tente novamente" << endl;
+		cout << "Pressione uma tecla para continuar... ";
 		(void)getchar();
 	}
 
 	else if (c[0] == "carregaC"){
-		cout << j->carregaCarrosFich("carros.txt");
-		cout << "Pressione uma tecla para continuar...";
+		if (c.size() == 2) {
+			cout << j->carregaCarrosFich("carros.txt");
+		}
+		else
+			cout << "Argumentos nao validos, tente novamente" << endl;
+		cout << "Pressione uma tecla para continuar... ";
 		(void)getchar();
 	}
 
 	else if (c[0] == "carregaA") {
-		j->carregaAutodromosFich(c[1]);
-		cout << "Pressione uma tecla para continuar";
+		if (c.size() == 2) {
+			cout << j->carregaAutodromosFich(c[1]);
+		}
+		else
+			cout << "Argumentos nao validos, tente novamente" << endl;
+
+		cout << "Pressione uma tecla para continuar... ";
 		(void)getchar();
 	}
 
 	else if (c[0] == "cria"){
 		cout << j->criaItensJogo(c);
-		cout << "Pressione uma tecla para continuar...";
+		cout << "Pressione uma tecla para continuar... ";
 		(void)getchar();
 	}
 
 	else if (c[0] == "apaga") {
 		cout << j->eliminaItemJogo(c);
-		cout << "Pressione uma tecla para continuar...";
+		cout << "Pressione uma tecla para continuar... ";
 		(void)getchar();
 	}
 
 	else if (c[0] == "entranocarro"){
 		cout << j->inserePilotoEmCarro(c);
-		cout << "Pressione uma tecla para continuar...";
+		cout << "Pressione uma tecla para continuar... ";
 		(void)getchar();
 	}
 
 	else if (c[0] == "saidocarro"){
 		cout << j->retiraPilotoDeCarro(c);
-		cout << "Pressione uma tecla para continuar...";
+		cout << "Pressione uma tecla para continuar... ";
 		(void)getchar();
 	}
 
 	else if (c[0] == "lista") {
 		cout << j->listagem();
-		cout << "Pressione uma tecla para continua...";
+		cout << "Pressione uma tecla para continua... ";
 		(void)getchar();
 	}
 
@@ -111,8 +124,8 @@ void Interaction::opcoesModo1() {
 	else if (c[0] == "deldgv")
 		cout << "Apaga DGV";
 	else {
-		cout << "Comando não existente, (help) mostra comandos" << endl;
-		cout << "Pressione uma tecla para continuar...";
+		cout << "Comando nao existente, (help) mostra comandos" << endl;
+		cout << "Pressione uma tecla para continuar... ";
 		(void)getchar();
 	}
 }
@@ -121,20 +134,20 @@ void Interaction::opcoesModo2() {
 	if (c[0] == "help") {
 		Consola::clrscr();
 		listaComandosModo2();
-		cout << "Pressione uma tecla para continuar";
+		cout << "Pressione uma tecla para continuar... ";
 		(void)getchar();
 	}
 
 	else if (c[0] == "campeonato") {
 		cout << j->adicionarAutodromoCamp(c) << endl;
 		
-		cout << "Pressione uma tecla para continuar";
+		cout << "Pressione uma tecla para continuar... ";
 		(void)getchar();
 	}
 
 	else if (c[0] == "listacarros") {
 		cout << j->listaCarrosCampeonato() << endl;
-		cout << "Pressione uma tecla para continuar";
+		cout << "Pressione uma tecla para continuar... ";
 		(void)getchar();
 
 	}
@@ -147,7 +160,7 @@ void Interaction::opcoesModo2() {
 	else if (c[0] == "corrida"){
 		j->colocaCarrosEmPista();
 		j->iniciaCorrida(representacaoPista);
-		cout << "Pressione uma tecla para continuar";
+		cout << "Pressione uma tecla para continuar... ";
 		(void)getchar();
 		representarPista();
 		(void)getchar();
@@ -162,7 +175,7 @@ void Interaction::opcoesModo2() {
 
 	else if (c[0] == "passatempo") {
 		j->passarTempo(stoi(c[1]));
-		cout << "Pressione uma tecla para continuar";
+		cout << "Pressione uma tecla para continuar... ";
 		(void)getchar();
 		representarPista();
 		(void)getchar();

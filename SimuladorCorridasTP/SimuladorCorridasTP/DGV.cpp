@@ -17,7 +17,7 @@ string DGV::carregaPilotosFich(string fich) {
 	string tipo;
 	string nome;
 	string s;
-	f.open("asd.txt");
+	f.open(fich);
 
 	if (!f)
 		return "Erro a abrir o ficheiro, Confirme o nome do ficheiro\n";
@@ -85,7 +85,7 @@ string DGV::insereCarro(vector <string> vec) {
 		return "Carro inserido com sucesso\n";
 	}
 
-	return "Não foi possível inserir carro, verifique os parametros\n";
+	return "Nao foi possivel inserir carro, verifique os parametros\n";
 }
 
 string DGV::inserePiloto(string tipo, string nome) {
@@ -95,7 +95,7 @@ string DGV::inserePiloto(string tipo, string nome) {
 		return "Piloto inserido com sucesso\n";
 	}
 
-	return "Não foi possível inserir o piloto, tente novamente\n";
+	return "Nao foi possivel inserir o piloto, verifique os parametros\n";
 }
 
 string DGV::eliminaCarro(string ident) {
@@ -103,15 +103,16 @@ string DGV::eliminaCarro(string ident) {
 
 	for (it = carros.begin(); it != carros.end();) {
 		if ((*it)->getID() == ident.at(0)){
+			retiraPilotoDeCarro(ident.at(0));
 			delete* it;
 			it = carros.erase(it);
-			return "Carro eliminado com sucesso";
+			return "Carro eliminado com sucesso\n";
 		}
 		else
 			it++;
 	}
 
-	return "Carro não encontrado, tente novamente";
+	return "Carro nao encontrado, tente novamente\n";
 }
 
 string DGV::eliminaPiloto(string ident) {
@@ -119,15 +120,16 @@ string DGV::eliminaPiloto(string ident) {
 
 	for (it = pilotos.begin(); it != pilotos.end();) {
 		if ((*it)->getNome() == ident){
+			retiraPilotoDeCarro((*it)->getIDCar());
 			delete *it;
 			it = pilotos.erase(it);
-			return "Piloto eliminado com sucesso";
+			return "Piloto eliminado com sucesso\n";
 		}
 		else
 			it++;
 	}
 
-	return "Piloto não encontrado, tente novamente";
+	return "Piloto não encontrado, tente novamente\n";
 }
 
 string DGV::inserePilotoEmCarro(string car, string pil) {
@@ -149,7 +151,7 @@ string DGV::inserePilotoEmCarro(string car, string pil) {
 							return "Carro existe mas ja ocupado por um piloto\n"; //carro ocupado
 					}
 				}
-				return "Carro nao encontrado, tente novamento!!!\n"; //não encontrou carro
+				return "Carro nao encontrado, tente novamente!!!\n"; //não encontrou carro
 			}
 			else
 				return "Piloto ja esta dentro de um carro!!!\n"; //piloto tem carro
@@ -159,17 +161,17 @@ string DGV::inserePilotoEmCarro(string car, string pil) {
 
 }
 
-string DGV::retiraPilotoDeCarro(string pil) {
+string DGV::retiraPilotoDeCarro(const char car) {
 	vector <Piloto*>::iterator it;
 
 	for (it = pilotos.begin(); it != pilotos.end(); it++) {
-		if ((*it)->getNome() == pil && (*it)->returnCarroParado() == true) {
+		if ((*it)->getIDCar() == car && (*it)->returnCarroParado() == true) {
 			(*it)->retiraCarro();
-			return "Piloto Retirado do Carro";
+			return "Piloto Retirado do Carro\n";
 		}
 	}
 
-	return "Piloto nao encontrado";
+	return "Piloto nao encontrado\n";
 }
 
 Piloto* DGV::retornaPiloto(string nome) {  //função que retorna ponteiro de piloto para ser usado no campeonato
@@ -190,15 +192,15 @@ string DGV::listagem() const {
 			os << pilotos[i]->getAsString() << endl;
 	}
 	else
-		os << "Nao exitem pilotos" << endl;
+		os << "Nao existem pilotos" << endl;
 
-	if (pilotos.size() != 0) {
-			os << "Carros: " << endl;
+	if (carros.size() != 0) {
+			os << endl << "Carros: " << endl;
 			for (unsigned int i = 0; i < carros.size(); i++)
 				os << i << ": " << carros[i]->getAsString();
 		}
 		else
-			os << "Nao exitem carros" << endl;
+			os << "Nao existem carros" << endl;
 	return os.str();
 }
 
