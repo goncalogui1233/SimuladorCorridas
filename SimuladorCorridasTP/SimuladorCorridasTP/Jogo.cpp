@@ -190,7 +190,7 @@ string Jogo::escolhePilotosCampeonato(vector<string> vec) {
 
 	Piloto* p = dgv->retornaPiloto(nome);
 	if (p == nullptr)
-		return "Piloto nao existe, tente novamente com outro nome";
+		return "Piloto nao existe, ou nao esta em nenhum carro\n";
 
 	else{
 		return campeonato->adicionaParticipantes(p);
@@ -205,7 +205,7 @@ void Jogo::criaCampeonato() {
 
 string Jogo::adicionarAutodromoCamp(vector<string>vec) {
 	if (vec.size() == 1)
-		return "Vazio";
+		return "Argumentos nao validos, tente novamente\n";
 	
 	if (campeonato->returnSeExisteCorrida() == false) {
 		for (unsigned int i = 0; i < autodromos.size(); i++) {
@@ -247,9 +247,9 @@ char Jogo::returnIDCarrosPista(int i) const {
 
 
 void Jogo::passarTempo(int s) {
-	for(int i = 0; i < s; i++){
+	
 		campeonato->avancarTempo();
-	}
+
 }
 
 Jogo::~Jogo() {
