@@ -12,7 +12,7 @@ Corrida::Corrida(Autodromo* aux, vector<Piloto*> part, int rep)
 	}
 }
 
-void Corrida::atualizaPosCorrida(const vector<Piloto*>aux) {
+void Corrida::atualizaPosCorrida(const vector<Piloto*> aux) {
 	int c = 0;
 	for (int i = 0; i < aut->returnNumCarrosPista(); i++){ //vetor dos carros que estão na pista
 		for (int j = 0; j < aux.size(); j++){		//percorre o vetor dos participantes, passado por argumento
