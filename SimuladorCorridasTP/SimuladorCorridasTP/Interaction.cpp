@@ -51,7 +51,7 @@ void Interaction::opcoesModo1() {
 
 	else if (c[0] == "carregaP") {
 		if (c.size() == 2) {
-			cout << j->carregaPilotos("pilotos.txt");
+			cout << j->carregaPilotos(c[1]);
 		}
 		else
 			cout << "Argumentos nao validos, tente novamente" << endl;
@@ -61,7 +61,7 @@ void Interaction::opcoesModo1() {
 
 	else if (c[0] == "carregaC") {
 		if (c.size() == 2) {
-			cout << j->carregaCarrosFich("carros.txt");
+			cout << j->carregaCarrosFich(c[1]);
 		}
 		else
 			cout << "Argumentos nao validos, tente novamente" << endl;
@@ -187,7 +187,7 @@ void Interaction::opcoesModo2() {
 			for (unsigned int i = 0; i < stoi(c[1]); i++) {
 				representarPista();
 				j->passarTempo(1);
-				Sleep(2000); // 3 segundos
+				Sleep(2000); // 2 segundos
 			}
 		}
 		else 
@@ -250,7 +250,6 @@ void Interaction::escolhePilotos() {
 
 		if (nome == "fim")
 			break;
-
 
 		istringstream iss(nome);
 

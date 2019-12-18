@@ -9,6 +9,10 @@ CrazyDriver::CrazyDriver(string name)
 CrazyDriver::CrazyDriver(const CrazyDriver& aux) 
 :Piloto(aux), desatento(aux.desatento){}
 
+Piloto * CrazyDriver::clone() const {
+	return new CrazyDriver(*this);
+}
+
 void CrazyDriver::setDesatento() {
 	default_random_engine val;
 	uniform_int_distribution<int> aleatorio(1, 5);
@@ -19,3 +23,5 @@ void CrazyDriver::setDesatento() {
 //bool CrazyDriver::probAcidente() {
 //	return 0.05 > ((float)rand() / RAND_MAX);
 //}
+
+CrazyDriver::~CrazyDriver() {}

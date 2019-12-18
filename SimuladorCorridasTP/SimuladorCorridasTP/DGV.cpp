@@ -7,8 +7,10 @@ DGV::DGV(const DGV& aux) {
 	for (unsigned int i = 0; i < aux.carros.size(); i++)
 		this->carros.push_back(new Carro(*aux.carros[i]));
 
-	//for(int i = 0; i < aux.pilotos.size(); i++)
-		//this->pilotos.push_back(new Piloto())
+	for (int i = 0; i < aux.pilotos.size(); i++) {
+		this->pilotos.push_back(aux.pilotos[i]->clone());
+		
+	}
 }
 
 
@@ -223,11 +225,17 @@ int DGV::getPilotosTam() const {
 
 DGV::~DGV() {
 	//liberta memoria vector pilotos
-	vector <Piloto*>::iterator it;
+	/*vector <Piloto*>::iterator it;
 	for (it = pilotos.begin(); it != pilotos.end(); it++)
 		delete *it;
 
 	vector <Carro*>::iterator itC;
 	for (auto itC = carros.begin(); itC != carros.end(); itC++)
-		delete* itC;
+		delete* itC;*/
+
+	for (auto p : pilotos)
+		delete p;
+
+	for (auto c : carros)
+		delete c;
 }

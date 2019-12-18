@@ -11,6 +11,8 @@ public:
 
 	~CrazyDriver();
 
+	Piloto* clone() const override;
+
 	void setDesatento();
 
 	int getDesatento() const {

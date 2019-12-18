@@ -38,6 +38,7 @@ void Piloto::trava() {
 char Piloto::getIDCar() const {
 	if(car != nullptr)
 		return car->getID();
+	return -1;
 }
 
 bool Piloto::temCarroAtribuido() const{
@@ -71,13 +72,13 @@ string Piloto::getInfoCarro() const {
 }
 
 Piloto* Piloto::fabrica(string tipo, string nome) {
-	string n = nome;
+	string name = nome;
 	bool existe = true, alterado = false;
 	while (existe == true) {
 		for (unsigned int i = 0; i < usados.size(); i++)
-			if (usados[i] == n) {
-				n += 32;					//adiciona espaco
-				n += gerarRandom() + 97;	//coloca letra
+			if (usados[i] == name) {
+				name += 32;					//adiciona espaco
+				name += gerarRandom() + 97;	//coloca letra
 				alterado = true;
 			}
 		if(alterado == false)
@@ -85,12 +86,12 @@ Piloto* Piloto::fabrica(string tipo, string nome) {
 	}
 
 	if (tipo == "CRAZY") {
-		usados.push_back(n);
-		return new CrazyDriver(n);
+		usados.push_back(name);
+		return new CrazyDriver(name);
 	}
 	else if (tipo == "RAPIDO") {
-		usados.push_back(n);
-		return new FastDriver(nome);
+		usados.push_back(name);
+		return new FastDriver(name);
 	}
 	else if (tipo == "SURPRESA") {
 		//return new SurpriseDriver();
@@ -107,7 +108,6 @@ int gerarRandom() {
 	uniform_int_distribution<int> dist(1, 23);
 
 	return dist(mt);
-
 }
 
-
+Piloto::~Piloto() {}

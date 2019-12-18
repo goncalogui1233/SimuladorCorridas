@@ -6,6 +6,7 @@
 using namespace std;
 
 class Piloto {
+	//nome usados
 	static vector<string> usados;
 	const string nome; //unico, a classe altera caso ja exista
 	Carro *car;
@@ -15,6 +16,8 @@ public:
 	Piloto(string name);
 
 	Piloto(const Piloto& aux);
+
+	virtual Piloto* clone() const = 0;
 
 	void acelera(int val = 1);
 
@@ -46,4 +49,6 @@ public:
 
 	static Piloto* fabrica(string tipo, string nome);
 
+	// Pure virtual destructor
+	virtual ~Piloto() = 0;
 };
