@@ -15,7 +15,7 @@ class DGV {
 
 public:
 
-	DGV(){}
+	DGV() {}
 
 	DGV(const DGV& aux);
 
@@ -37,7 +37,7 @@ public:
 
 	string inserePilotoEmCarro(string car, string pil);
 
-	string retiraPilotoDeCarro(string pil);
+	string retiraPilotoDeCarro(const char car);
 
 	Piloto* retornaPiloto(string nome);
 

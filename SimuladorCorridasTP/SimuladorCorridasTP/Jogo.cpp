@@ -9,9 +9,9 @@ Jogo::Jogo() {
 
 //Funções de apoio
 
-bool verificaNumeros(string str1, string str2) { //verifica se as posições que deveriam ter numeros realmente os têm
-	
-	if (str1.find_first_not_of("0123456789") == -1 && str2.find_first_not_of("0123456789") == -1) // 0 se falhar, 1 se estiver tudo bem
+bool verificaNumeros(string str) { //verifica se as posições que deveriam ter numeros realmente os têm
+
+	if (str.find_first_not_of("0123456789") == -1) // 0 se falhar, 1 se estiver tudo bem
 		return true;
 
 	return false;
@@ -59,12 +59,25 @@ string Jogo::carregaAutodromosFich(string fich) {
 	f.open(fich);
 	if (!f)
 		return "Erro na abertura do ficheiro\n";
-	
+
 	while (!f.eof()) {
-		f >> maxcarros;
-		f >> tampista;
-		f >> nome;
-		autodromos.push_back(new Autodromo(maxcarros, tampista, nome));
+		try {
+
+
+			f >> maxcarros;
+			f >> tampista;
+			f >> nome;
+
+			if (maxcarros <= 0 || tampista <= 0 || nome.empty()) {
+				throw exception("Erro a ler o ficheiro, Confirme os dados\n");
+			}
+
+			autodromos.push_back(new Autodromo(maxcarros, tampista, nome));
+		}
+		catch (exception & e) {
+			f.close();
+			return e.what();
+		}
 	}
 
 	f.close();
@@ -72,82 +85,102 @@ string Jogo::carregaAutodromosFich(string fich) {
 }
 
 string Jogo::criaItensJogo(vector <string> vec) {
-	if (vec[1] == "p"){
+	if (vec[1] == "p") {
 		string nome = juntaNome(vec, 1);
 		transform(vec[2].begin(), vec[2].end(), vec[2].begin(), ::toupper); //letra identificadora do piloto passa a maiuscula
 		return dgv->inserePiloto(vec[2], nome);
 	}
 
-	else if (vec[1] == "c"){
-		if (verificaNumeros(vec[3], vec[4]) == true)
-			return dgv->insereCarro(vec);
+	else if (vec[1] == "c") {
+		if (vec.size() >= 5 && vec.size() < 8) {
+			if (verificaNumeros(vec[2]) && verificaNumeros(vec[3]) && verificaNumeros(vec[4]))
+				return dgv->insereCarro(vec);
+		}
 		else
-			return "Argumentos não válidos, tente novamente\n";
+			return "Argumentos nao validos, tente novamente\n";
 	}
 
 	else if (vec[1] == "a") {
-		if (verificaNumeros(vec[2], vec[3]) == true) {
-			autodromos.push_back(new Autodromo(stoi(vec[2]), stoi(vec[3]), vec[4]));
-			return "Autodromo criado\n";
+		if (vec.size() >= 3 && vec.size() < 6) {
+			if (verificaNumeros(vec[2]) && verificaNumeros(vec[3])) {
+				autodromos.push_back(new Autodromo(stoi(vec[2]), stoi(vec[3]), vec[4]));
+				return "Autodromo criado\n";
+			}
 		}
-		else
-			return "Argumentos não válidos, tente novamente\n";
+		return "Argumentos nao validos, tente novamente\n";
 	}
 
 	else
 		return "Nao foi possivel criar nenhum item, verifique a letraTipo e tente novamente\n";
-	
+
 }
 
 string Jogo::inserePilotoEmCarro(vector<string>vec) {
-	string pil = juntaNome(vec, 4);
+	if (vec.size() >= 3) {
+		string pil = juntaNome(vec, 4);
 
-	return dgv->inserePilotoEmCarro(vec[1], pil);
+		return dgv->inserePilotoEmCarro(vec[1], pil);
+	}
+	return "Argumentos nao validos, tente novamente\n";
 }
 
 string Jogo::eliminaItemJogo(vector <string> vec) {
+
+	// 3 parametros no minimo - command letraTipo (identificador) + que 1 no piloto 
+	if (vec.size() < 3)
+		return "Argumentos nao validos, tente novamente\n";
+
 	transform(vec[1].begin(), vec[1].end(), vec[1].begin(), ::tolower); //1-onde comecar , 2 - onde terminar, 3-onde guardar nova string, 4-o que fazer
 
-	if (vec[1] == "p") {
+	if (vec.size() >= 3 && vec[1] == "p") {
 		string nome = juntaNome(vec, 2);
 		return dgv->eliminaPiloto(nome);
 	}
 
-	else if (vec[1] == "c") {
-		transform(vec[2].begin(), vec[2].end(), vec[2].begin(), ::tolower);
-		return dgv->eliminaCarro(vec[2]);
+	else if (vec.size() == 3 && vec[1] == "c") {
+		if (vec.at(2).size() == 1) {
+			transform(vec[2].begin(), vec[2].end(), vec[2].begin(), ::tolower);
+			return dgv->eliminaCarro(vec[2]);
+		}
+		return "Argumentos nao validos, verifique o nome do carro\n";
 	}
 
-	else if (vec[1] == "c") {
+	else if (vec.size() == 3 && vec[1] == "a") {
 		vector<Autodromo*>::iterator it;
-		string nome = juntaNome(vec, 3);
 
 		for (it = autodromos.begin(); it != autodromos.end(); )
-			if ((*it)->getNome() == nome) {
+			if ((*it)->getNome() == vec[2]) {
 				delete* it;
 				it = autodromos.erase(it);
-				return "Autodromo eliminado com sucesso";
+				return "Autodromo eliminado com sucesso\n";
 			}
 			else
 				it++;
 
-		return "Autodromo não encontrado, tente novamente";
+		return "Autodromo nao encontrado, tente novamente\n";
 	}
 
-	return "Opcao nao encontrada, tente novamente";
+	return "Opcao nao encontrada, tente novamente\n";
 }
 
 string Jogo::retiraPilotoDeCarro(vector<string>vec) {
-	string pil = juntaNome(vec, 5);
-	return dgv->retiraPilotoDeCarro(pil);
+	if (vec.size() == 2 && vec[1].size() == 1)
+		return dgv->retiraPilotoDeCarro(vec.at(0).at(1));
+	return "Argumentos nao validos, tente novamente\n";
 }
 
 string Jogo::listagem() const {
 	string aux = "";
 	aux += dgv->listagem();
-	
-	for (int i = 0; i < autodromos.size(); i++)
-		aux += autodromos[i]->getAsString();
+
+	if (autodromos.size() != 0) {
+		aux += "Autodromos: \n";
+		for (int i = 0; i < autodromos.size(); i++)
+			aux += autodromos[i]->getAsString();
+	}
+	else
+		aux += "Nao existem autodromos\n";
+
 
 	return aux;
 }
@@ -157,9 +190,9 @@ string Jogo::escolhePilotosCampeonato(vector<string> vec) {
 
 	Piloto* p = dgv->retornaPiloto(nome);
 	if (p == nullptr)
-		return "Piloto nao existe, tente novamente com outro nome";
+		return "Piloto nao existe, ou nao esta em nenhum carro\n";
 
-	else{
+	else {
 		return campeonato->adicionaParticipantes(p);
 	}
 }
@@ -170,10 +203,10 @@ void Jogo::criaCampeonato() {
 	campeonato = new Campeonato();
 }
 
-string Jogo::adicionarAutodromoCamp(vector<string>vec) {
+string Jogo::adicionarAutodromoCamp(vector<string> vec) {
 	if (vec.size() == 1)
-		return "Vazio";
-	
+		return "Argumentos nao validos, tente novamente\n";
+
 	if (campeonato->returnSeExisteCorrida() == false) {
 		for (unsigned int i = 0; i < autodromos.size(); i++) {
 			if (autodromos[i]->getNome() == vec[1]) {
@@ -214,11 +247,18 @@ char Jogo::returnIDCarrosPista(int i) const {
 
 
 void Jogo::passarTempo(int s) {
-	for(int i = 0; i < s; i++){
-		campeonato->avancarTempo();
-	}
+
+	campeonato->avancarTempo();
+
 }
 
 Jogo::~Jogo() {
+
+	for (auto aut : autodromos) {
+		delete aut;
+	}
+
+	delete campeonato;
+
 	delete dgv;
 }

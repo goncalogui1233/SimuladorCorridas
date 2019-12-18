@@ -6,4 +6,9 @@ FastDriver::FastDriver(string name)
 FastDriver::FastDriver(const FastDriver &aux)
 	:Piloto(aux), ansioso(aux.ansioso){}
 
-FastDriver::~FastDriver(){}
+
+Piloto* FastDriver::clone() const {
+	return new FastDriver(*this);
+}
+
+FastDriver::~FastDriver() {}

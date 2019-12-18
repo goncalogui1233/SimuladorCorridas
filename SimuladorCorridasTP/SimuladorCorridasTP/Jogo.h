@@ -8,7 +8,7 @@ using namespace std;
 class Jogo {
 	DGV* dgv;
 	vector <Autodromo*> autodromos;
-	Campeonato *campeonato;
+	Campeonato* campeonato;
 
 public:
 	Jogo();
@@ -20,6 +20,7 @@ public:
 
 	string carregaAutodromosFich(string fich);
 
+	// Cria tipos de Objetos (Carro, Piloto, Autodromo)
 	string criaItensJogo(vector <string> vec);
 
 	string eliminaItemJogo(vector <string> vec);

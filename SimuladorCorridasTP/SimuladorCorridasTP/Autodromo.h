@@ -10,7 +10,7 @@ class Autodromo {
 	// Nome do Autodromo unico, validado pela class
 	static vector<string> nomesAuto;
 	string nome;
-	Pista *pista;
+	Pista* pista;
 	vector<Carro*> garagem; //garagem do autodromo
 
 public:

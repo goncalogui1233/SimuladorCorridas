@@ -3,7 +3,7 @@
 #include "Posicoes.h"
 #include "Piloto.h"
 
-class Corrida{
+class Corrida {
 	const int repPista;
 	int contaPosicao;
 	Autodromo* aut;
@@ -13,7 +13,7 @@ public:
 
 	Corrida(Autodromo* aux, vector<Piloto*> part, int rep);
 
-	void atualizaPosCorrida(const vector<Piloto*>aux);
+	void atualizaPosCorrida(const vector<Piloto*> aux);
 
 	void aceleraCarrosInit(vector<Piloto*> aux);
 

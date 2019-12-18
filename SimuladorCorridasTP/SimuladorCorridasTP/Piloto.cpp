@@ -11,10 +11,10 @@ int gerarRandom();
 
 
 Piloto::Piloto(string name)
-	:nome(name), car(nullptr){}
+	:nome(name), car(nullptr) {}
 
-Piloto::Piloto(const Piloto& aux) 
-	:nome(aux.nome), car(aux.car){}
+Piloto::Piloto(const Piloto& aux)
+	: nome(aux.nome), car(aux.car) {}
 
 
 string Piloto::getNome() const {
@@ -36,11 +36,12 @@ void Piloto::trava() {
 }
 
 char Piloto::getIDCar() const {
-	if(car != nullptr)
+	if (car != nullptr)
 		return car->getID();
+	return -1;
 }
 
-bool Piloto::temCarroAtribuido() const{
+bool Piloto::temCarroAtribuido() const {
 	if (car != nullptr)
 		return true;
 
@@ -52,6 +53,7 @@ void Piloto::atribuiCarro(Carro* c) {
 }
 
 void Piloto::retiraCarro() {
+	car->setDisponibilidade();
 	car = nullptr;
 }
 
@@ -70,28 +72,28 @@ string Piloto::getInfoCarro() const {
 }
 
 Piloto* Piloto::fabrica(string tipo, string nome) {
-	string n = nome;
+	string name = nome;
 	bool existe = true, alterado = false;
 	while (existe == true) {
 		for (unsigned int i = 0; i < usados.size(); i++)
-			if (usados[i] == n) {
-				n += 32;					//adiciona espaco
-				n += gerarRandom() + 97;	//coloca letra
+			if (usados[i] == name) {
+				name += 32;					//adiciona espaco
+				name += gerarRandom() + 97;	//coloca letra
 				alterado = true;
 			}
-		if(alterado == false)
+		if (alterado == false)
 			existe = false;
 	}
 
-	if (tipo == "C") {
-		usados.push_back(n);
-		return new CrazyDriver(n);
+	if (tipo == "CRAZY") {
+		usados.push_back(name);
+		return new CrazyDriver(name);
 	}
-	else if (tipo == "F") {
-		usados.push_back(n);
-		return new FastDriver(nome);
+	else if (tipo == "RAPIDO") {
+		usados.push_back(name);
+		return new FastDriver(name);
 	}
-	else if (tipo == "S") {
+	else if (tipo == "SURPRESA") {
 		//return new SurpriseDriver();
 		return nullptr;
 	}
@@ -106,7 +108,8 @@ int gerarRandom() {
 	uniform_int_distribution<int> dist(1, 23);
 
 	return dist(mt);
-
 }
 
-
+Piloto::~Piloto() {
+	car = nullptr;
+}

@@ -19,12 +19,12 @@ bool Campeonato::returnSeExisteCorrida() const {
 	return true;
 }
 
-void Campeonato::adicionarAutodromos(Autodromo *aux) {
-	autodromos.push_back(aux);
+void Campeonato::adicionarAutodromos(Autodromo *autodromo) {
+	autodromos.push_back(autodromo);
 }
 
 void Campeonato::avancarTempo() {
-	c->atualizaPosCorrida(participantes);;
+	c->atualizaPosCorrida(participantes);
 	c->verificaSeMudouPos();
 }
 

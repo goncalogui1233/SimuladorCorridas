@@ -3,7 +3,7 @@
 
 using namespace std;
 
-class Pontuacoes{
+class Pontuacoes {
 
 	string nome;
 	int pontuacao;
@@ -14,7 +14,7 @@ public:
 
 	string getAsString() const;
 
-	int getPontuacao() const{
+	int getPontuacao() const {
 		return pontuacao;
 	}
 

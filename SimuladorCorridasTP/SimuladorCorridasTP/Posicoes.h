@@ -4,7 +4,7 @@
 
 using namespace std;
 
-class Posicoes{
+class Posicoes {
 	string nome;
 	char idCar;
 	int posicao; //lugar na classificacao
