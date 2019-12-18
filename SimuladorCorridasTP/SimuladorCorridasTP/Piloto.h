@@ -9,7 +9,7 @@ class Piloto {
 	//nome usados
 	static vector<string> usados;
 	const string nome; //unico, a classe altera caso ja exista
-	Carro *car;
+	Carro* car;
 
 public:
 
@@ -29,17 +29,17 @@ public:
 
 	char getIDCar() const;
 
-	bool returnCarroParado() const {
+	bool getCarroParado() const {
 		return car->returnParado();
 	}
 
-	int returnVelocidadeAtual() const {
+	int getVelocidadeAtual() const {
 		return car->getVelocidadeAtual();
 	}
 
 	bool temCarroAtribuido() const;
 
-	void atribuiCarro(Carro *c);
+	void atribuiCarro(Carro* c);
 
 	void retiraCarro();
 

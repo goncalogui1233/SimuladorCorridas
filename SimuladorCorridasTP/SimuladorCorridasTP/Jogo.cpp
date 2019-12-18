@@ -10,7 +10,7 @@ Jogo::Jogo() {
 //Funções de apoio
 
 bool verificaNumeros(string str) { //verifica se as posições que deveriam ter numeros realmente os têm
-	
+
 	if (str.find_first_not_of("0123456789") == -1) // 0 se falhar, 1 se estiver tudo bem
 		return true;
 
@@ -59,7 +59,7 @@ string Jogo::carregaAutodromosFich(string fich) {
 	f.open(fich);
 	if (!f)
 		return "Erro na abertura do ficheiro\n";
-	
+
 	while (!f.eof()) {
 		try {
 
@@ -85,7 +85,7 @@ string Jogo::carregaAutodromosFich(string fich) {
 }
 
 string Jogo::criaItensJogo(vector <string> vec) {
-	if (vec[1] == "p"){
+	if (vec[1] == "p") {
 		string nome = juntaNome(vec, 1);
 		transform(vec[2].begin(), vec[2].end(), vec[2].begin(), ::toupper); //letra identificadora do piloto passa a maiuscula
 		return dgv->inserePiloto(vec[2], nome);
@@ -112,7 +112,7 @@ string Jogo::criaItensJogo(vector <string> vec) {
 
 	else
 		return "Nao foi possivel criar nenhum item, verifique a letraTipo e tente novamente\n";
-	
+
 }
 
 string Jogo::inserePilotoEmCarro(vector<string>vec) {
@@ -172,7 +172,7 @@ string Jogo::retiraPilotoDeCarro(vector<string>vec) {
 string Jogo::listagem() const {
 	string aux = "";
 	aux += dgv->listagem();
-	
+
 	if (autodromos.size() != 0) {
 		aux += "Autodromos: \n";
 		for (int i = 0; i < autodromos.size(); i++)
@@ -180,7 +180,7 @@ string Jogo::listagem() const {
 	}
 	else
 		aux += "Nao existem autodromos\n";
-	
+
 
 	return aux;
 }
@@ -192,7 +192,7 @@ string Jogo::escolhePilotosCampeonato(vector<string> vec) {
 	if (p == nullptr)
 		return "Piloto nao existe, ou nao esta em nenhum carro\n";
 
-	else{
+	else {
 		return campeonato->adicionaParticipantes(p);
 	}
 }
@@ -203,10 +203,10 @@ void Jogo::criaCampeonato() {
 	campeonato = new Campeonato();
 }
 
-string Jogo::adicionarAutodromoCamp(vector<string>vec) {
+string Jogo::adicionarAutodromoCamp(vector<string> vec) {
 	if (vec.size() == 1)
 		return "Argumentos nao validos, tente novamente\n";
-	
+
 	if (campeonato->returnSeExisteCorrida() == false) {
 		for (unsigned int i = 0; i < autodromos.size(); i++) {
 			if (autodromos[i]->getNome() == vec[1]) {
@@ -247,11 +247,18 @@ char Jogo::returnIDCarrosPista(int i) const {
 
 
 void Jogo::passarTempo(int s) {
-	
-		campeonato->avancarTempo();
+
+	campeonato->avancarTempo();
 
 }
 
 Jogo::~Jogo() {
+
+	for (auto aut : autodromos) {
+		delete aut;
+	}
+
+	delete campeonato;
+
 	delete dgv;
 }

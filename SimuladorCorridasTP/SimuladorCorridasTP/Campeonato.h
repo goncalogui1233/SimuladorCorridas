@@ -7,7 +7,7 @@
 
 using namespace std;
 
-class Campeonato{
+class Campeonato {
 	static int autodromoAtual;
 	vector<Autodromo*> autodromos;
 	vector<Piloto*> participantes;
@@ -16,7 +16,7 @@ class Campeonato{
 
 public:
 
-	Campeonato(){
+	Campeonato() {
 		c = nullptr;
 	}
 
@@ -40,7 +40,7 @@ public:
 
 	string adicionaParticipantes(Piloto* aux);
 
-	void adicionarAutodromos(Autodromo *aux);
+	void adicionarAutodromos(Autodromo* aux);
 
 	void criarCorrida(int rep);
 

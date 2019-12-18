@@ -2,7 +2,7 @@
 #include "Piloto.h"
 #include <string>
 
-class CrazyDriver : public Piloto{
+class CrazyDriver : public Piloto {
 	int desatento; //1 a 5 seg - aleatorio
 
 public:
@@ -20,13 +20,13 @@ public:
 	}
 
 	/*	Probabilidade de ter um acidente
-	*	
+	*
 	*	Condutor ter 5% de ter um acidente
 	*	Se probabilidade for 5% -> True
 	*	Senão -> False
 	*/
 	//bool probAcidente();
-	
+
 	CrazyDriver(const CrazyDriver& aux);
 };
 

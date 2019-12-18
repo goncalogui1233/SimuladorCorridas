@@ -8,7 +8,7 @@ using namespace std;
 class Jogo {
 	DGV* dgv;
 	vector <Autodromo*> autodromos;
-	Campeonato *campeonato;
+	Campeonato* campeonato;
 
 public:
 	Jogo();

@@ -34,6 +34,8 @@ class Interaction {
 
 public:
 
+	int end = 0;
+
 	Interaction(Jogo* d);
 
 	void leituraComandos();

@@ -3,7 +3,7 @@
 
 using namespace std;
 
-class FastDriver: public Piloto {
+class FastDriver : public Piloto {
 	const int ansioso;
 
 public:

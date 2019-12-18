@@ -11,10 +11,10 @@ int gerarRandom();
 
 
 Piloto::Piloto(string name)
-	:nome(name), car(nullptr){}
+	:nome(name), car(nullptr) {}
 
-Piloto::Piloto(const Piloto& aux) 
-	:nome(aux.nome), car(aux.car){}
+Piloto::Piloto(const Piloto& aux)
+	: nome(aux.nome), car(aux.car) {}
 
 
 string Piloto::getNome() const {
@@ -36,12 +36,12 @@ void Piloto::trava() {
 }
 
 char Piloto::getIDCar() const {
-	if(car != nullptr)
+	if (car != nullptr)
 		return car->getID();
 	return -1;
 }
 
-bool Piloto::temCarroAtribuido() const{
+bool Piloto::temCarroAtribuido() const {
 	if (car != nullptr)
 		return true;
 
@@ -81,7 +81,7 @@ Piloto* Piloto::fabrica(string tipo, string nome) {
 				name += gerarRandom() + 97;	//coloca letra
 				alterado = true;
 			}
-		if(alterado == false)
+		if (alterado == false)
 			existe = false;
 	}
 
@@ -110,4 +110,6 @@ int gerarRandom() {
 	return dist(mt);
 }
 
-Piloto::~Piloto() {}
+Piloto::~Piloto() {
+	car = nullptr;
+}

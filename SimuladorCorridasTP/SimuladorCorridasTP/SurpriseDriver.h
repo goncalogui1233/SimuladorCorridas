@@ -2,7 +2,7 @@
 
 #include "Piloto.h"
 
-class SurpriseDriver: public Piloto
+class SurpriseDriver : public Piloto
 {
 
 public:

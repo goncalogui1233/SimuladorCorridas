@@ -19,7 +19,7 @@ void Corrida::atualizaPosCorrida(const vector<Piloto*> aux) {
 			if (aut->returnIdCarroPista(i) == aux[j]->getIDCar()){
 				for (int k = 0; k < classificacao.size(); k++){ //percorre o vetor das classificacoes
 					if (classificacao[k]->returnCharCarro() == aut->returnIdCarroPista(i)){
-						classificacao[k]->setPosicaoPista(aux[j]->returnVelocidadeAtual());
+						classificacao[k]->setPosicaoPista(aux[j]->getVelocidadeAtual());
 						break;
 					}
 				}

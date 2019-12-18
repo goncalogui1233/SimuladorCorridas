@@ -9,7 +9,7 @@ Interaction::Interaction(Jogo* d) {
 }
 
 void Interaction::leituraComandos() {
-	while (1) {
+	while (!end) {
 		c.clear();	//limpa o vetor que recebe os comandos
 		string com;
 		do {
@@ -125,6 +125,11 @@ void Interaction::opcoesModo1() {
 
 	else if (c[0] == "deldgv")
 		cout << "Apaga DGV";
+
+	else if (c[0] == "sair") {
+		cout << "A sair...";
+		end = 1;
+	}
 	else {
 		cout << "Comando nao existente, (help) mostra comandos" << endl;
 		cout << "Pressione uma tecla para continuar... ";
@@ -181,7 +186,7 @@ void Interaction::opcoesModo2() {
 		cout << "Destroi";
 
 	else if (c[0] == "passatempo") {
-		
+
 		if (c.size() == 2) {
 
 			for (unsigned int i = 0; i < stoi(c[1]); i++) {
@@ -190,7 +195,7 @@ void Interaction::opcoesModo2() {
 				Sleep(2000); // 2 segundos
 			}
 		}
-		else 
+		else
 			cout << "Argumentos nao validos, tente novamente" << endl;
 
 		cout << "Pressione uma tecla para continuar... ";

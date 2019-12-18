@@ -6,8 +6,8 @@
 
 using namespace std;
 
-class Pista{
-	
+class Pista {
+
 	int maxCar;
 	int metros;
 	vector <Carro*> carros;

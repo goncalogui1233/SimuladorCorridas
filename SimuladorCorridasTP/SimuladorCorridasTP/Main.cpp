@@ -9,4 +9,5 @@ int main() {
 
 	Interaction it(&jog);
 
+	return 0;
 }
