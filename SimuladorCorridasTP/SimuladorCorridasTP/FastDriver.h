@@ -14,6 +14,8 @@ public:
 
 	FastDriver(const FastDriver& aux);
 
+	void passaTempo();
+
 	Piloto* clone() const override;
 
 };

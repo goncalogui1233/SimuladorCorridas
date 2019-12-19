@@ -37,6 +37,10 @@ public:
 		return car->getVelocidadeAtual();
 	}
 
+	bool manivela(int mAh);
+
+	void carregaMaxBateria();
+
 	bool temCarroAtribuido() const;
 
 	void atribuiCarro(Carro* c);
@@ -46,6 +50,8 @@ public:
 	string getAsString() const;
 
 	string getInfoCarro() const;
+
+	virtual void passaTempo() = 0;
 
 	static Piloto* fabrica(string tipo, string nome);
 

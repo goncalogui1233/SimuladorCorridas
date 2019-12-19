@@ -158,11 +158,17 @@ void Interaction::opcoesModo2() {
 
 	}
 
-	else if (c[0] == "carregabat")
-		cout << "CarregaBateria";
-	else if (c[0] == "carregatudo")
-		cout << "CarregaTudo";
+	else if (c[0] == "carregabat") {
+		cout << j->carregaBateriaCarro(c[1], c[2]) << endl;
+		cout << "Pressione uma tecla para continuar... ";
+		(void)getchar();
+	}
 
+	else if (c[0] == "carregatudo") {
+		cout << j->carregaBateriasCarros() << endl;
+		cout << "Pressione uma tecla para continuar... ";
+		(void)getchar();
+	}
 	else if (c[0] == "corrida") {
 		j->colocaCarrosEmPista();
 
@@ -182,8 +188,11 @@ void Interaction::opcoesModo2() {
 		cout << "Acidente";
 	else if (c[0] == "stop")
 		cout << "Stop";
-	else if (c[0] == "destroi")
-		cout << "Destroi";
+	else if (c[0] == "destroi"){
+		cout << j->destroiCarro(c[1]) << endl;
+		cout << "Pressione uma tecla para continuar... ";
+		(void)getchar();
+	}
 
 	else if (c[0] == "passatempo") {
 

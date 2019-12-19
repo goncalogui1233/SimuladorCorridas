@@ -19,6 +19,8 @@ public:
 		return desatento;
 	}
 
+	void passaTempo();
+
 	/*	Probabilidade de ter um acidente
 	*
 	*	Condutor ter 5% de ter um acidente

@@ -11,7 +11,7 @@ class Autodromo {
 	static vector<string> nomesAuto;
 	string nome;
 	Pista* pista;
-	vector<Carro*> garagem; //garagem do autodromo
+	vector<Piloto*> garagem; //garagem do autodromo
 
 public:
 
@@ -27,17 +27,23 @@ public:
 		return pista->returnTamPista();
 	}
 
-	size_t returnNumCarrosPista() const {
-		return pista->returnNumCarrosPista();
+	size_t returnNumPilotosPista() const {
+		return pista->returnNumPilotosPista();
 	}
 
-	char returnIdCarroPista(int i) const {
-		return pista->returnIdCar(i);
+	string returnNomePiloto(int i)const {
+		return pista->returnNomePiloto(i);
 	}
 
-	void insereCarroNaPista(Carro* aux);
+	char returnIDCarro(int i)const {
+		return pista->returnIDCarro(i);
+	}
 
-	void insereCarroNaGaragem(Carro* aux);
+	void inserePilotoNaPista(Piloto* aux);
+
+	void inserePilotoNaGaragem(Piloto* aux);
+
+	void retiraPilotoDaPista(char id);
 
 	/*void mostraPista() {
 		pista->representarPista();

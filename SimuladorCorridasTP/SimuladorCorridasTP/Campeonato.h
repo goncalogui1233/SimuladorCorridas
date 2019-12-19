@@ -8,7 +8,7 @@
 using namespace std;
 
 class Campeonato {
-	static int autodromoAtual;
+	int autodromoAtual;
 	vector<Autodromo*> autodromos;
 	vector<Piloto*> participantes;
 	vector<Pontuacoes> tabelaGeral;
@@ -18,6 +18,7 @@ public:
 
 	Campeonato() {
 		c = nullptr;
+		autodromoAtual = 0;
 	}
 
 	/*void mostraPista() const {
@@ -25,16 +26,20 @@ public:
 	}*/
 
 	size_t returnNumCarrosPista() const {
-		return autodromos[autodromoAtual]->returnNumCarrosPista();
+		return autodromos[autodromoAtual]->returnNumPilotosPista();
 	}
 
 	char returnIDCarroPista(int i) const {
-		return autodromos[autodromoAtual]->returnIdCarroPista(i);
+		return autodromos[autodromoAtual]->returnIDCarro(i);
 	}
 
 	int returnPosX(int i) const {
 		return c->returnPosX(i);
 	}
+
+	string carregaCarro(char id, int mAh);
+
+	string carregaTodosCarros();
 
 	bool returnSeExisteCorrida() const;
 
@@ -44,11 +49,13 @@ public:
 
 	void criarCorrida(int rep);
 
+	void retiraPilotoCorrida(char id);
+
 	void aceleraCarrosInit();
 
 	void avancarTempo();
 
-	void insereCarrosEmPista();
+	void inserePilotosEmPista();
 
 	string listaCarrosCampeonato() const;
 

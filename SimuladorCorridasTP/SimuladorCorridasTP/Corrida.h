@@ -11,7 +11,7 @@ class Corrida {
 
 public:
 
-	Corrida(Autodromo* aux, vector<Piloto*> part, int rep);
+	Corrida(Autodromo* aux, int rep);
 
 	void atualizaPosCorrida(const vector<Piloto*> aux);
 

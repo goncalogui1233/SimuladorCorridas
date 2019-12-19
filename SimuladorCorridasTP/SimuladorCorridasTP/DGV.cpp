@@ -106,7 +106,7 @@ string DGV::eliminaCarro(string ident) {
 
 	for (it = carros.begin(); it != carros.end();) {
 		if ((*it)->getID() == ident.at(0)) {
-			retiraPilotoDeCarro(ident.at(0));
+			string aux = retiraPilotoDeCarro(ident.at(0)); //colocou-se a enviar para string para evitar WARNING
 			delete* it;
 			it = carros.erase(it);
 			return "Carro eliminado com sucesso\n";

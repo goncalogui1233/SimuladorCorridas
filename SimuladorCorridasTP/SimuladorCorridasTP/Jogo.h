@@ -45,6 +45,12 @@ public:
 
 	string adicionarAutodromoCamp(vector<string>vec);
 
+	string carregaBateriaCarro(string id, string mAh);
+
+	string destroiCarro(string id);
+
+	string carregaBateriasCarros();
+
 	void passarTempo(int s);
 
 	void iniciaCorrida(int rep);

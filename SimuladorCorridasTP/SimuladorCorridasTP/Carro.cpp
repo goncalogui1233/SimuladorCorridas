@@ -28,9 +28,9 @@ void Carro::setDisponibilidade() {
 		disponivel = true;
 }
 
-bool Carro::manivela(int quantEnergia) {
-	if (parado && (energia + quantEnergia) < maxenergia) {
-		energia += quantEnergia;
+bool Carro::manivela(double valCarregamento) {
+	if (parado && (energia + valCarregamento) < maxenergia) {
+		energia += valCarregamento;
 		return true;
 	}
 	return false;

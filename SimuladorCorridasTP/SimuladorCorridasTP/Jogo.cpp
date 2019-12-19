@@ -207,23 +207,24 @@ string Jogo::adicionarAutodromoCamp(vector<string> vec) {
 	if (vec.size() == 1)
 		return "Argumentos nao validos, tente novamente\n";
 
-	if (campeonato->returnSeExisteCorrida() == false) {
-		for (unsigned int i = 0; i < autodromos.size(); i++) {
-			if (autodromos[i]->getNome() == vec[1]) {
-				campeonato->adicionarAutodromos(autodromos[i]);
-				return "Autodromos adicionados\n";
+	if (campeonato->returnSeExisteCorrida() == false) { //caso ainda não exista nenhum campeonato a decorrer
+		for(unsigned int j = 1; j < vec.size(); j++){
+			for (unsigned int i = 0; i < autodromos.size(); i++) {
+				if (autodromos[i]->getNome() == vec[j]) {
+					campeonato->adicionarAutodromos(autodromos[i]);
+				}
 			}
 		}
-		return "Autodromo nao existe\n";
 	}
 	else
 		return "Ja existe uma corrida a decorrer, nao e possivel adicionar autodromos\n";
 }
 
 void Jogo::colocaCarrosEmPista() {
-	campeonato->insereCarrosEmPista();
+	campeonato->inserePilotosEmPista();
 }
 
+//posição X para representar pista
 int Jogo::returnPosX(int i) const {
 	return campeonato->returnPosX(i);
 }
@@ -237,19 +238,36 @@ string Jogo::listaCarrosCampeonato() {
 	return campeonato->listaCarrosCampeonato();
 }
 
+string Jogo::carregaBateriaCarro(string id, string mAh) {
+	if (verificaNumeros(mAh) == true) {
+		return campeonato->carregaCarro(id.at(0), stoi(mAh));
+	}
+}
+
+string Jogo::carregaBateriasCarros() {
+	return campeonato->carregaTodosCarros();
+}
+
+string Jogo::destroiCarro(string id) {
+	char idd = id.at(0);
+	//passar piloto para a garagem caso esteja em corrida
+	campeonato->retiraPilotoCorrida(idd);
+	string lixo = dgv->retiraPilotoDeCarro(idd); //colocou-se em string para evitar WARNING
+	return dgv->eliminaCarro(id);
+}
+
 size_t Jogo::returnNumCarrosPista() const {
 	return campeonato->returnNumCarrosPista();
 }
 
+//para representação pista
 char Jogo::returnIDCarrosPista(int i) const {
 	return campeonato->returnIDCarroPista(i);
 }
 
 
 void Jogo::passarTempo(int s) {
-
 	campeonato->avancarTempo();
-
 }
 
 Jogo::~Jogo() {

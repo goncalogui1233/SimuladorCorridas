@@ -1,17 +1,16 @@
 #include "Corrida.h"
 
-Corrida::Corrida(Autodromo* aux, vector<Piloto*> part, int rep)
+Corrida::Corrida(Autodromo* aux, int rep)
 	:repPista(rep){
 	contaPosicao = 1;
 	aut = aux;
-	for (int i = 0; i < aut->returnNumCarrosPista(); i++) { //percorre vetor dos carros na pista
-		for (int j = 0; j < part.size(); j++) {	//percorre vetor dos pilotos participantes na corrida, passado por argumento
-			if (aut->returnIdCarroPista(i) == part[j]->getIDCar())
-				classificacao.push_back(new Posicoes(part[j]->getNome(), part[j]->getIDCar(), contaPosicao++));
-		}
+	for (int i = 0; i < aut->returnNumPilotosPista(); i++) { //percorre vetor dos pilotos na pista
+				//classificacao.push_back(new Posicoes(aut[i].returnNomePiloto(i), aut[i].returnIDCarro(i), contaPosicao++));
+		classificacao.push_back(new Posicoes(aut->returnNomePiloto(i), aut->returnIDCarro(i), contaPosicao++));
 	}
 }
 
+/*
 void Corrida::atualizaPosCorrida(const vector<Piloto*> aux) {
 	int c = 0;
 	for (int i = 0; i < aut->returnNumCarrosPista(); i++){ //vetor dos carros que estão na pista
@@ -27,7 +26,8 @@ void Corrida::atualizaPosCorrida(const vector<Piloto*> aux) {
 		}
 	}
 }
-
+*/
+/*
 void Corrida::aceleraCarrosInit(vector<Piloto*> aux) {
 	for (int i = 0; i < aut->returnNumCarrosPista(); i++)
 		for (int j = 0; j < aux.size(); j++)
@@ -35,7 +35,7 @@ void Corrida::aceleraCarrosInit(vector<Piloto*> aux) {
 				aux[j]->acelera();
 				break;
 			}
-}
+}*/
 
 void Corrida::verificaSeMudouPos() {
 	int dis = aut->returnTamPista() / repPista;

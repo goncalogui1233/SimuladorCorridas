@@ -66,7 +66,15 @@ public:
 	* Se conseguir carregar, devolve true
 	* Senão devolve False
 	*/
-	bool manivela(int valCarregamento);
+	bool manivela(double valCarregamento);
+
+	double getMaxCarregamento()const {
+		return maxenergia;
+	}
+
+	double getEnergiaAtual() const {
+		return energia;
+	}
 
 	string getAsString()const;
 
