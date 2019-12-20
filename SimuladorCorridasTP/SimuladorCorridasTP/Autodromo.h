@@ -45,6 +45,8 @@ public:
 
 	void retiraPilotoDaPista(char id);
 
+	Piloto* returnPilotoPista(int pos);
+
 	/*void mostraPista() {
 		pista->representarPista();
 	}*/

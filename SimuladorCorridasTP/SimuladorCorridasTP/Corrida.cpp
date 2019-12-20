@@ -1,8 +1,11 @@
 #include "Corrida.h"
 
+//funções principais
+
 Corrida::Corrida(Autodromo* aux, int rep)
 	:repPista(rep){
 	contaPosicao = 1;
+	tempoCorrida = 0;
 	aut = aux;
 	for (int i = 0; i < aut->returnNumPilotosPista(); i++) { //percorre vetor dos pilotos na pista
 				//classificacao.push_back(new Posicoes(aut[i].returnNomePiloto(i), aut[i].returnIDCarro(i), contaPosicao++));
@@ -37,6 +40,25 @@ void Corrida::aceleraCarrosInit(vector<Piloto*> aux) {
 			}
 }*/
 
+void Corrida::passaTempo() {
+	int pos = 0;
+	int maxPilotos = aut->returnNumPilotosPista();
+	if (tempoCorrida == 0) {
+
+	}
+	else{
+		while (pos <= maxPilotos) {
+			Piloto* aux = aut->returnPilotoPista(pos);
+			if (aux->tipoPiloto() == "Crazy") {
+				int posicao = returnPosicaoEmPista(aux->getNome());
+				aux->passaTempoCrazy(posicao, classificacao.size());
+			}
+			else if (aux->tipoPiloto() == "Fast")
+				aux->passaTempoFast();
+		}
+	}
+}
+
 void Corrida::verificaSeMudouPos() {
 	int dis = aut->returnTamPista() / repPista;
 
@@ -62,3 +84,16 @@ string Corrida::mostraPosicoes() const {
 
 	return os.str();
 }
+
+//funções auxiliares
+//retorna posição em pista... 
+int Corrida::returnPosicaoEmPista(string nomePil) {
+	for (int i = 0; i < classificacao.size(); i++)
+		if (classificacao[i]->returnNome() == nomePil) 
+			return classificacao[i]->returnPosClassificacao();
+}
+
+//função usada para ordenar vetor classificações
+bool compare(const Posicoes& p1, const Posicoes& p2) {
+	return p1.returnPosAtual() > p2.returnPosAtual();
+} //sort(vector.begin(), vector.end(), compare) -> necessario #include <algorithm>

@@ -6,7 +6,7 @@
 using namespace std;
 
 class Carro {
-	static int idcar;
+	static int idcar; //id que é atribuido aos carros
 	const string marca;
 	string modelo;
 	const char id;
@@ -59,7 +59,7 @@ public:
 
 	void setDisponibilidade();
 
-	void setDanificado(bool danificado);
+	void setDanificado();
 
 	/* Manivela de carregamento do carro (em mAh)
 	* Não pode ultrapassar a quantidade Max de energia. 
@@ -76,6 +76,8 @@ public:
 		return energia;
 	}
 
+	void drenaEnergia();
+
 	string getAsString()const;
 
 
@@ -87,6 +89,13 @@ public:
 	 *
 	 */
 	void setEstado();
+
+	/* Descelerar
+	 *
+	 *  Perde velocidade caso nao acelere
+	 *
+	 */
+	void desacelerar();
 
 	/* Acelerar
 	 *

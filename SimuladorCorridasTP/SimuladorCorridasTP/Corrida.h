@@ -8,6 +8,9 @@ class Corrida {
 	int contaPosicao;
 	Autodromo* aut;
 	vector<Posicoes*> classificacao;
+	int tempoCorrida;
+
+	int returnPosicaoEmPista(string nomePil);
 
 public:
 
@@ -16,6 +19,8 @@ public:
 	void atualizaPosCorrida(const vector<Piloto*> aux);
 
 	void aceleraCarrosInit(vector<Piloto*> aux);
+
+	void passaTempo();
 
 	int returnPosX(int i) const {
 		return classificacao[i]->returnPosX();

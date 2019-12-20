@@ -256,8 +256,12 @@ string Jogo::destroiCarro(string id) {
 	return dgv->eliminaCarro(id);
 }
 
-size_t Jogo::returnNumCarrosPista() const {
+size_t Jogo::returnNumPilotosPista() const {
 	return campeonato->returnNumCarrosPista();
+}
+
+void Jogo::apagaCampeonato() {
+	delete campeonato;
 }
 
 //para representação pista

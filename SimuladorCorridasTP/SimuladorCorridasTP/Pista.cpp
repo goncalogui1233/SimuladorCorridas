@@ -15,12 +15,14 @@ void Pista::inserePilotoNaPista(Piloto* aux) {
 
 Piloto* Pista::retiraPiloto(char id) {
 	vector<Piloto*>::iterator it;
-	for(it = pilotosPista.begin(); it != pilotosPista.end();)
-		if((*it)->getIDCar() == id){
+	for (it = pilotosPista.begin(); it != pilotosPista.end();)
+		if ((*it)->getIDCar() == id) {
 			Piloto* aux = (*it);
 			it = pilotosPista.erase(it);
 			return aux;
 		}
 		else
-			it++
+			it++;
+
+	return nullptr;
 }

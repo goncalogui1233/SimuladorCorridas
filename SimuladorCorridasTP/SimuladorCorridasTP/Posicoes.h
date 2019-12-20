@@ -8,12 +8,16 @@ class Posicoes {
 	string nome;
 	char idCar;
 	int posicao; //lugar na classificacao
-	int posAnterior;// metros anteriores de posPista
+	int posAnterior; //metros anteriores de posPista
 	int posPista; //metros na pista
 	int posx;
 
 public:
 	Posicoes(string n, char id, int p);
+
+	string returnNome() const {
+		return nome;
+	}
 
 	int returnPosX() const {
 		return posx;
@@ -25,6 +29,10 @@ public:
 
 	int returnPosAtual() const {
 		return posPista;
+	}
+
+	int returnPosClassificacao() const {
+		return posicao;
 	}
 
 	void MexePosEcra();

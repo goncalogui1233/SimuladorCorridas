@@ -37,9 +37,14 @@ public:
 		return pilotosPista[i]->getIDCar();
 	}
 
+	Piloto* returnPilotoPista(int pos){
+		return pilotosPista[pos];
+	}
+
 	void inserePilotoNaPista(Piloto* aux);
 
 	Piloto* retiraPiloto(char id);
+
 
 	// Se ligar sinal de emergencia, sai da pista, move to garagem
 

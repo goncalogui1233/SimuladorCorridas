@@ -55,9 +55,11 @@ public:
 
 	void iniciaCorrida(int rep);
 
-	size_t returnNumCarrosPista() const;
+	size_t returnNumPilotosPista() const;
 
 	char returnIDCarrosPista(int i) const;
+
+	void apagaCampeonato();
 
 	/*void mostraPista() {
 		autodromos[0]->mostraPista();

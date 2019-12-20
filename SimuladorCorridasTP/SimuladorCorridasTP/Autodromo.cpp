@@ -43,6 +43,10 @@ void Autodromo::retiraPilotoDaPista(char id) {
 	garagem.push_back(aux);
 }
 
+Piloto* Autodromo::returnPilotoPista(int pos) {
+	pista->returnPilotoPista(pos);
+}
+
 string Autodromo::getNome() const {
 	return nome;
 }

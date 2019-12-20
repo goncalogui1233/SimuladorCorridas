@@ -14,7 +14,11 @@ public:
 
 	FastDriver(const FastDriver& aux);
 
-	void passaTempo();
+	string tipoPiloto() const override {
+		return "Fast";
+	}
+
+	void passaTempoFast() override;
 
 	Piloto* clone() const override;
 

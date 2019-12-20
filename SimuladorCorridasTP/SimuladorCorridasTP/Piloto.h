@@ -19,9 +19,13 @@ public:
 
 	virtual Piloto* clone() const = 0;
 
+	void desacelerar();
+
 	void acelera(int val = 1);
 
 	void trava();
+
+	void danificaCarro();
 
 	Carro* returnCarro();
 
@@ -47,11 +51,17 @@ public:
 
 	void retiraCarro();
 
+	void drenaEnergia();
+
 	string getAsString() const;
 
 	string getInfoCarro() const;
 
-	virtual void passaTempo() = 0;
+	virtual void passaTempoCrazy(int posPista, int numCorredores) {};
+
+	virtual void passaTempoFast() {};
+
+	virtual string tipoPiloto() const = 0;
 
 	static Piloto* fabrica(string tipo, string nome);
 

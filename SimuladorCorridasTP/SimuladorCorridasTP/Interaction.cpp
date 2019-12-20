@@ -172,8 +172,8 @@ void Interaction::opcoesModo2() {
 	else if (c[0] == "corrida") {
 		j->colocaCarrosEmPista();
 
-		if (j->returnNumCarrosPista() >= 2) {
-			j->iniciaCorrida(representacaoPista);
+		if (j->returnNumPilotosPista() >= 2) {
+		 	j->iniciaCorrida(representacaoPista);
 			representarPista();
 		}
 		else {
@@ -214,6 +214,7 @@ void Interaction::opcoesModo2() {
 	else if (c[0] == "log")
 		cout << "carregaP d Aco";
 	else if (c[0] == "exit") {
+		j->apagaCampeonato();
 		modo = 1;
 		leituraComandos();
 	}
@@ -282,7 +283,7 @@ void Interaction::representarPista() {
 	Consola::clrscr();
 	cout << "Pista de Corridas" << endl;
 
-	for (unsigned int i = 0; i < j->returnNumCarrosPista(); i++) {
+	for (unsigned int i = 0; i < j->returnNumPilotosPista(); i++) {
 
 		Consola::gotoxy(0, (2 * i) + 2);
 		for (int j = 0; j < representacaoPista; j++) { //coloca os traços entre os ID's dos carros
