@@ -21,6 +21,10 @@ void Campeonato::adicionarAutodromos(Autodromo *autodromo) {
 	autodromos.push_back(autodromo);
 }
 
+void Campeonato::adicionarFraseLog(string f) {
+	logRegisto += f + "\n";
+}
+
 void Campeonato::avancarTempo() {
 	c->atualizaPosCorrida(participantes);
 	c->verificaSeMudouPos();

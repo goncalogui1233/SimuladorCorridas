@@ -41,6 +41,27 @@ public:
 		return car->getVelocidadeAtual();
 	}
 
+	double getCapacidadeMax() const {
+		if (car != nullptr)
+			return car->getMaxCarregamento();
+	}
+
+	double getEnergiaAtual() const {
+		if (car != nullptr)
+			return car->getEnergiaAtual();
+	}
+
+	bool getEmergencia() const {
+		if (car != nullptr) {
+			return car->getEmergencia();
+		}
+	}
+
+	bool getDanificado() const {
+		if (car != nullptr)
+			return car->getDanificado();
+	}
+
 	bool manivela(int mAh);
 
 	void carregaMaxBateria();
@@ -53,13 +74,19 @@ public:
 
 	void drenaEnergia();
 
+	void ativarBotaoEmergencia();
+
 	string getAsString() const;
 
 	string getInfoCarro() const;
 
-	virtual void passaTempoCrazy(int posPista, int numCorredores) {};
+	/*
+	*Recebe posição piloto na pista
+	*Recebe numero de corredores
+	*Recebe o tempo de corrida
+	*/
 
-	virtual void passaTempoFast() {};
+	virtual void passaTempo(int posPista, int numCorredores, int tempo) = 0; //recebe posicao
 
 	virtual string tipoPiloto() const = 0;
 

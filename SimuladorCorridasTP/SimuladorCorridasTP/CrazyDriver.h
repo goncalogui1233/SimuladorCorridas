@@ -5,6 +5,7 @@
 class CrazyDriver : public Piloto {
 	int desatento; //1 a 5 seg - aleatorio
 	int ultimaPos; //ultima posicao na pista
+	int tempoPressAcelerador = 0;
 
 public:
 
@@ -24,7 +25,7 @@ public:
 		return desatento;
 	}
 
-	void passaTempoCrazy(int posPista, int numCorredores) override;
+	void passaTempo(int posPista, int numCorredores, int tempo) override;
 
 	/*	Probabilidade de ter um acidente
 	*

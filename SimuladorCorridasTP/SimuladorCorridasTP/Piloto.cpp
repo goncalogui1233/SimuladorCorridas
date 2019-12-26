@@ -45,6 +45,12 @@ void Piloto::danificaCarro() {
 		car->setDanificado();
 }
 
+void Piloto::ativarBotaoEmergencia() {
+	if (car != nullptr) {
+		car->setEmergencia();
+	}
+}
+
 bool Piloto::manivela(int mAh) {
 	if (car != nullptr) {
 		return car->manivela(mAh);

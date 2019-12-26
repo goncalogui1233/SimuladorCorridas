@@ -4,11 +4,13 @@
 #include "Piloto.h"
 #include "Corrida.h"
 #include <algorithm>
+#include <string>
 
 using namespace std;
 
 class Campeonato {
 	int autodromoAtual;
+	string logRegisto;
 	vector<Autodromo*> autodromos;
 	vector<Piloto*> participantes;
 	vector<Pontuacoes> tabelaGeral;
@@ -37,6 +39,10 @@ public:
 		return c->returnPosX(i);
 	}
 
+	string returnFraseLog() const {
+		return logRegisto;
+	}
+
 	string carregaCarro(char id, int mAh);
 
 	string carregaTodosCarros();
@@ -54,6 +60,8 @@ public:
 	void aceleraCarrosInit();
 
 	void avancarTempo();
+
+	void adicionarFraseLog(string f);
 
 	void inserePilotosEmPista();
 

@@ -7,8 +7,7 @@ Corrida::Corrida(Autodromo* aux, int rep)
 	contaPosicao = 1;
 	tempoCorrida = 0;
 	aut = aux;
-	for (int i = 0; i < aut->returnNumPilotosPista(); i++) { //percorre vetor dos pilotos na pista
-				//classificacao.push_back(new Posicoes(aut[i].returnNomePiloto(i), aut[i].returnIDCarro(i), contaPosicao++));
+	for (int i = 0; i < aut->returnNumPilotosPista(); i++) { //percorre vetor dos pilotos na pista para criar a tabela de classificações
 		classificacao.push_back(new Posicoes(aut->returnNomePiloto(i), aut->returnIDCarro(i), contaPosicao++));
 	}
 }
@@ -40,23 +39,31 @@ void Corrida::aceleraCarrosInit(vector<Piloto*> aux) {
 			}
 }*/
 
-void Corrida::passaTempo() {
+void Corrida::passaTempo() { //passar isto para a pista :)
+	string auxLog = "";
 	int pos = 0;
 	int maxPilotos = aut->returnNumPilotosPista();
 	if (tempoCorrida == 0) {
-
+		//pilotos arrancam...
 	}
 	else{
 		while (pos <= maxPilotos) {
 			Piloto* aux = aut->returnPilotoPista(pos);
-			if (aux->tipoPiloto() == "Crazy") {
-				int posicao = returnPosicaoEmPista(aux->getNome());
-				aux->passaTempoCrazy(posicao, classificacao.size());
-			}
-			else if (aux->tipoPiloto() == "Fast")
-				aux->passaTempoFast();
+			int posicao = returnPosicaoEmPista(aux->getNome());
+			aux->passaTempo(posicao, maxPilotos, tempoCorrida);
+			if (aux->getEmergencia() == true)
+				//retira piloto da pista e coloca-o na garagem
+				return;
+
+			if(aux->getDanificado() ==  true)
+				//
+				
+
+
 		}
 	}
+
+	tempoCorrida++;
 }
 
 void Corrida::verificaSeMudouPos() {

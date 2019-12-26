@@ -45,8 +45,12 @@ public:
 		return danificado;
 	}
 
-	bool getDisponibilidade() {
+	bool getDisponibilidade() const{
 		return disponivel;
+	}
+
+	bool getEmergencia() const {
+		return emergencia;
 	}
 
 	string getMarca() const {
