@@ -21,13 +21,25 @@ void Campeonato::adicionarAutodromos(Autodromo *autodromo) {
 	autodromos.push_back(autodromo);
 }
 
-void Campeonato::adicionarFraseLog(string f) {
-	logRegisto += f + "\n";
-}
+bool Campeonato::avancarTempo() {
+	bool term = c->passaTempo();
 
-void Campeonato::avancarTempo() {
-	c->atualizaPosCorrida(participantes);
-	c->verificaSeMudouPos();
+	if (term == true) { //caso a corrida tenha terminado
+		int conta = 0;
+		int ptMax = 10;
+		while(conta != 2){
+			if(verificarSeExiste(c->getNomePodio(conta), (ptMax / conta)) == false)
+				tabelaGeral.push_back(new Pontuacoes(c->getNomePodio(conta), 10));
+			conta++;
+		}
+		autodromoAtual++; //passa para o novo autodromo
+		c = nullptr; //apaga a corrida
+		logRegisto += "Terminou esta corrida\n\n\n";
+		return true;
+	}
+	logRegisto = c->getInfoToLog();
+
+	return false;
 }
 
 string Campeonato::carregaCarro(char id, int mAh) {
@@ -68,12 +80,21 @@ void Campeonato::inserePilotosEmPista() {
 	}
 }
 
-void Campeonato::criarCorrida(int rep) {
-	c = new Corrida(autodromos[0], rep);
-}
+string Campeonato::criarCorrida(int rep) {
+	if (c == nullptr)
+		if(autodromoAtual <= autodromos.size())
+			c = new Corrida(autodromos[autodromoAtual], rep);
+		else { //caso não haja mais autodromos, dispara a classificação do campeonato
+			ostringstream os;
+			os << "O campeonato terminou, as classificacoes sao as seguintes: \n";
 
-void Campeonato::aceleraCarrosInit() {
-	c->aceleraCarrosInit(participantes);
+			for (int i = 0; i < tabelaGeral.size(); i++)
+				os << tabelaGeral[i]->getAsString();
+
+			return os.str();
+		}
+
+	return "";
 }
 
 string Campeonato::listaCarrosCampeonato() const {
@@ -82,4 +103,17 @@ string Campeonato::listaCarrosCampeonato() const {
 		os << "Piloto: " << participantes[i]->getNome() << "Carro: " << participantes[i]->getInfoCarro();
 	
 	return os.str();
+}
+
+//funções auxiliares
+
+//verifica se um determinado piloto já existe e, caso exista, atualiza os seus pontos.
+bool Campeonato::verificarSeExiste(string nome, int pontos) {
+	for(int i = 0; i < tabelaGeral.size(); i++)
+		if (tabelaGeral[i]->getNome() == nome) {
+			tabelaGeral[i]->setPontuacao(pontos);
+			return true;
+		}
+
+	return false;
 }

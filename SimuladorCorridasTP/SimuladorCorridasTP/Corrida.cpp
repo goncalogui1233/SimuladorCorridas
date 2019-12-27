@@ -39,48 +39,47 @@ void Corrida::aceleraCarrosInit(vector<Piloto*> aux) {
 			}
 }*/
 
-void Corrida::passaTempo() { //passar isto para a pista :)
-	string auxLog = "";
+bool Corrida::passaTempo() { //falta atualizar as posições no vetor classificaçoes
 	int pos = 0;
 	int maxPilotos = aut->returnNumPilotosPista();
-	if (tempoCorrida == 0) {
-		//pilotos arrancam...
-	}
-	else{
-		while (pos <= maxPilotos) {
-			Piloto* aux = aut->returnPilotoPista(pos);
-			int posicao = returnPosicaoEmPista(aux->getNome());
-			aux->passaTempo(posicao, maxPilotos, tempoCorrida);
-			if (aux->getEmergencia() == true)
-				//retira piloto da pista e coloca-o na garagem
-				return;
 
-			if(aux->getDanificado() ==  true)
-				//
-				
-
-
-		}
+	if (finalCorrida() == true) { //se algum piloto tiver "ultrapassado" o tamanho da pista, significa que a corrida terminou
+		return true;
 	}
 
-	tempoCorrida++;
-}
+	infoLog = "Segundo n. " + (tempoCorrida + 1);
 
-void Corrida::verificaSeMudouPos() {
-	int dis = aut->returnTamPista() / repPista;
-
-	for (int i = 0; i < classificacao.size(); i++) { //percorre o vetor das classificacoes
-		int atual = classificacao[i]->returnPosAtual(); 
-		int anterior = classificacao[i]->returnPosAnterior();
-		while (anterior < atual) { //enquanto os "metros" anteriores forem menores ou iguais aos atuais
-			if ((anterior % dis) == 0) { //se a divisao der resto zero
-				classificacao[i]->MexePosEcra();	//hora de mudar a posição
-				anterior++;
+	while (pos <= maxPilotos) {
+		Piloto* aux = aut->returnPilotoPista(pos);
+		int posicao = returnPosicaoEmPista(aux->getNome());
+		aux->passaTempo(posicao, maxPilotos, tempoCorrida);
+					
+		if (aux->getDanificado() == true){
+			aut->retiraPilotoDaPista(aux->getIDCar()); //coloca o piloto na garagem
+			if((pos+1) <= maxPilotos){ // caso haja algum carro atras
+				Piloto* next = aut->returnPilotoPista(pos + 1);
+				next->danificaCarro(); //não tenho certeza que vai funcionar... Talvez, tem que se testar!!!!
+				eliminarDaClassificacao(aux->getNome(), next->getNome()); //elimina os pilotos da classificacao
+				infoLog += "Piloto " + aux->getNome() + "teve um acidente e danificou o carro ao piloto " + next->getNome();
 			}
-			else
-				anterior++; //senão incrementa
+
+			eliminarDaClassificacao(aux->getNome());
+			infoLog += "Piloto " + aux->getNome() + "teve um acidente";
 		}
+
+		if (aux->getEmergencia() == true && aux->getDanificado() == false) {
+			aut->retiraPilotoDaPista(aux->getIDCar()); //retira piloto da pista e coloca-o na garagem
+			eliminarDaClassificacao(aux->getNome());
+			infoLog += "Piloto " + aux->getNome() + " acionou o sinal de emergencia";
+		}
+		atualizarMetrosPista(aux->getNome(), aux->getVelocidadeAtual());
+
 	}
+	//organiza o vetor da classificação
+	atualizaVecClass();
+	verificaSeMudouPos();
+	tempoCorrida++;
+	pos++;
 }
 
 string Corrida::mostraPosicoes() const {
@@ -98,6 +97,63 @@ int Corrida::returnPosicaoEmPista(string nomePil) {
 	for (int i = 0; i < classificacao.size(); i++)
 		if (classificacao[i]->returnNome() == nomePil) 
 			return classificacao[i]->returnPosClassificacao();
+}
+
+//função que modifica a organização dos pilotos em pista :)
+void Corrida::atualizaVecClass(){
+	sort(classificacao.begin(), classificacao.end(), compare);
+
+	for (int i = 0; i < classificacao.size(); i++) {
+		classificacao[i]->setPosCorrida(i + 1);
+	}
+}
+
+//função que verifica se algum dos pilotos já chegou ao final da corrida
+bool Corrida::finalCorrida() {
+	int tamPista = aut->returnTamPista();
+	for (int i = 0; i < classificacao.size(); i++)
+		if (classificacao[i]->returnPosAtual() >= tamPista)
+			return true;
+
+	return false;
+}
+
+void Corrida::eliminarDaClassificacao(string n1, string n2) {
+	vector<Posicoes*>::iterator it;
+	for (it = classificacao.begin(); it != classificacao.end();) {
+		if ((*it)->returnNome() == n1)
+			it = classificacao.erase(it);
+		else if ((*it)->returnNome() == n2)
+			it = classificacao.erase(it);
+		else
+			it++;
+	}
+}
+
+//função que atualiza os metros percorridos pelo carro
+void Corrida::atualizarMetrosPista(string piloto, int m) {
+	for (int i = 0; i < classificacao.size(); i++)
+		if (classificacao[i]->returnNome() == piloto)
+			classificacao[i]->setPosicaoPista(m);
+
+}
+
+//função para atualizar a posição do carro no ecrã
+void Corrida::verificaSeMudouPos() {
+	int dis = aut->returnTamPista() / repPista;
+
+	for (int i = 0; i < classificacao.size(); i++) { //percorre o vetor das classificacoes
+		int atual = classificacao[i]->returnPosAtual();
+		int anterior = classificacao[i]->returnPosAnterior();
+		while (anterior < atual) { //enquanto os "metros" anteriores forem menores ou iguais aos atuais
+			if ((anterior % dis) == 0) { //se a divisao der resto zero
+				classificacao[i]->MexePosEcra();	//hora de mudar a posição
+				anterior++;
+			}
+			else
+				anterior++; //senão incrementa
+		}
+	}
 }
 
 //função usada para ordenar vetor classificações

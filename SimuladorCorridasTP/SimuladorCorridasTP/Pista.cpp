@@ -9,10 +9,12 @@ Pista::~Pista() {
 		delete *it;
 }
 
+//coloca um piloto no vetor da pista
 void Pista::inserePilotoNaPista(Piloto* aux) {
 	pilotosPista.push_back(aux);
 }
 
+//retira piloto da pista que contem um certo carro!!! :)
 Piloto* Pista::retiraPiloto(char id) {
 	vector<Piloto*>::iterator it;
 	for (it = pilotosPista.begin(); it != pilotosPista.end();)

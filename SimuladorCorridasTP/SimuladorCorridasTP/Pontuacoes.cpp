@@ -1,8 +1,8 @@
 #include "Pontuacoes.h"
 #include <sstream>
 
-Pontuacoes::Pontuacoes(string n) 
-	:nome(n), pontuacao(0){}
+Pontuacoes::Pontuacoes(string n, int pontos)
+	:nome(n), pontuacao(pontos){}
 
 void Pontuacoes::setPontuacao(int val) {
 	pontuacao += val;

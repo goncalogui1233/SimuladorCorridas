@@ -39,6 +39,8 @@ public:
 
 	void setPosicaoPista(int val);
 
+	void setPosCorrida(int val);
+
 	char returnCharCarro() const {
 		return idCar;
 	}

@@ -229,9 +229,16 @@ int Jogo::returnPosX(int i) const {
 	return campeonato->returnPosX(i);
 }
 
-void Jogo::iniciaCorrida(int rep) {
-	campeonato->criarCorrida(rep);
-	campeonato->aceleraCarrosInit();
+bool Jogo::existeCorrida()const {
+	return campeonato->returnSeExisteCorrida();
+}
+
+string Jogo::mostraLogCorrida()const {
+	return campeonato->returnFraseLog();
+}
+
+string Jogo::iniciaCorrida(int rep) {
+	return campeonato->criarCorrida(rep);
 }
 
 string Jogo::listaCarrosCampeonato() {
@@ -270,8 +277,8 @@ char Jogo::returnIDCarrosPista(int i) const {
 }
 
 
-void Jogo::passarTempo(int s) {
-	campeonato->avancarTempo();
+bool Jogo::passarTempo() {
+	return campeonato->avancarTempo();
 }
 
 Jogo::~Jogo() {

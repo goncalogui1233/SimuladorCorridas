@@ -13,8 +13,10 @@ class Campeonato {
 	string logRegisto;
 	vector<Autodromo*> autodromos;
 	vector<Piloto*> participantes;
-	vector<Pontuacoes> tabelaGeral;
+	vector<Pontuacoes*> tabelaGeral;
 	Corrida* c;
+
+	bool verificarSeExiste(string nome, int pontos);
 
 public:
 
@@ -53,15 +55,13 @@ public:
 
 	void adicionarAutodromos(Autodromo* aux);
 
-	void criarCorrida(int rep);
+	string criarCorrida(int rep);
 
 	void retiraPilotoCorrida(char id);
 
 	void aceleraCarrosInit();
 
-	void avancarTempo();
-
-	void adicionarFraseLog(string f);
+	bool avancarTempo();
 
 	void inserePilotosEmPista();
 

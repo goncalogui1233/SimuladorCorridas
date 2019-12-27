@@ -170,16 +170,19 @@ void Interaction::opcoesModo2() {
 		(void)getchar();
 	}
 	else if (c[0] == "corrida") {
-		j->colocaCarrosEmPista();
-
-		if (j->returnNumPilotosPista() >= 2) {
-		 	j->iniciaCorrida(representacaoPista);
-			representarPista();
-		}
+		if (j->existeCorrida() == true)
+			cout << "Já existe uma corrida a decorrer, finalize-a primeiro";
 		else {
-			cout << "A corrida tem que ter no minimo 2 carros" << endl;
-		}
+			j->colocaCarrosEmPista();
 
+			if (j->returnNumPilotosPista() >= 2) {
+				cout << j->iniciaCorrida(representacaoPista);
+				representarPista();
+			}
+			else {
+				cout << "A corrida tem que ter no minimo 2 carros" << endl;
+			}
+		}
 		cout << "Pressione uma tecla para continuar... ";
 		(void)getchar();
 	}
@@ -200,7 +203,9 @@ void Interaction::opcoesModo2() {
 
 			for (unsigned int i = 0; i < stoi(c[1]); i++) {
 				representarPista();
-				j->passarTempo(1);
+				bool term = j->passarTempo();
+				if (term == true) //caso a corrida termine, sai imediatamente do ciclo
+					break;
 				Sleep(2000); // 2 segundos
 			}
 		}
@@ -211,8 +216,11 @@ void Interaction::opcoesModo2() {
 		(void)getchar();
 	}
 
-	else if (c[0] == "log")
-		cout << "carregaP d Aco";
+	else if (c[0] == "log") {
+		cout << j->mostraLogCorrida() << endl;
+		cout << "Pressione uma tecla para continuar... ";
+		(void)getchar();
+	}
 	else if (c[0] == "exit") {
 		j->apagaCampeonato();
 		modo = 1;

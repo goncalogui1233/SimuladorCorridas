@@ -51,9 +51,13 @@ public:
 
 	string carregaBateriasCarros();
 
-	void passarTempo(int s);
+	string mostraLogCorrida()const;
 
-	void iniciaCorrida(int rep);
+	bool passarTempo();
+
+	bool existeCorrida() const;
+
+	string iniciaCorrida(int rep);
 
 	size_t returnNumPilotosPista() const;
 
