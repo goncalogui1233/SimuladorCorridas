@@ -30,12 +30,21 @@ Autodromo::Autodromo(int maxcarros, int tamPista, string n) {
 	nomesAuto.push_back(no);
 }
 
-void Autodromo::insereCarroNaPista(Carro* aux) {
-	pista->insereCarroNaPista(aux);
+void Autodromo::inserePilotoNaPista(Piloto* aux) {
+	pista->inserePilotoNaPista(aux);
 }
 
-void Autodromo::insereCarroNaGaragem(Carro* aux) {
+void Autodromo::inserePilotoNaGaragem(Piloto* aux) {
 	garagem.push_back(aux);
+}
+
+void Autodromo::retiraPilotoDaPista(char id) {
+	Piloto* aux  = pista->retiraPiloto(id);
+	garagem.push_back(aux);
+}
+
+Piloto* Autodromo::returnPilotoPista(int pos) {
+	pista->returnPilotoPista(pos);
 }
 
 string Autodromo::getNome() const {

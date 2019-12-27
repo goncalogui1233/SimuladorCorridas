@@ -158,22 +158,31 @@ void Interaction::opcoesModo2() {
 
 	}
 
-	else if (c[0] == "carregabat")
-		cout << "CarregaBateria";
-	else if (c[0] == "carregatudo")
-		cout << "CarregaTudo";
+	else if (c[0] == "carregabat") {
+		cout << j->carregaBateriaCarro(c[1], c[2]) << endl;
+		cout << "Pressione uma tecla para continuar... ";
+		(void)getchar();
+	}
 
+	else if (c[0] == "carregatudo") {
+		cout << j->carregaBateriasCarros() << endl;
+		cout << "Pressione uma tecla para continuar... ";
+		(void)getchar();
+	}
 	else if (c[0] == "corrida") {
-		j->colocaCarrosEmPista();
-
-		if (j->returnNumCarrosPista() >= 2) {
-			j->iniciaCorrida(representacaoPista);
-			representarPista();
-		}
+		if (j->existeCorrida() == true)
+			cout << "Já existe uma corrida a decorrer, finalize-a primeiro";
 		else {
-			cout << "A corrida tem que ter no minimo 2 carros" << endl;
-		}
+			j->colocaCarrosEmPista();
 
+			if (j->returnNumPilotosPista() >= 2) {
+				cout << j->iniciaCorrida(representacaoPista);
+				representarPista();
+			}
+			else {
+				cout << "A corrida tem que ter no minimo 2 carros" << endl;
+			}
+		}
 		cout << "Pressione uma tecla para continuar... ";
 		(void)getchar();
 	}
@@ -182,8 +191,11 @@ void Interaction::opcoesModo2() {
 		cout << "Acidente";
 	else if (c[0] == "stop")
 		cout << "Stop";
-	else if (c[0] == "destroi")
-		cout << "Destroi";
+	else if (c[0] == "destroi"){
+		cout << j->destroiCarro(c[1]) << endl;
+		cout << "Pressione uma tecla para continuar... ";
+		(void)getchar();
+	}
 
 	else if (c[0] == "passatempo") {
 
@@ -191,7 +203,9 @@ void Interaction::opcoesModo2() {
 
 			for (unsigned int i = 0; i < stoi(c[1]); i++) {
 				representarPista();
-				j->passarTempo(1);
+				bool term = j->passarTempo();
+				if (term == true) //caso a corrida termine, sai imediatamente do ciclo
+					break;
 				Sleep(2000); // 2 segundos
 			}
 		}
@@ -202,9 +216,13 @@ void Interaction::opcoesModo2() {
 		(void)getchar();
 	}
 
-	else if (c[0] == "log")
-		cout << "carregaP d Aco";
+	else if (c[0] == "log") {
+		cout << j->mostraLogCorrida() << endl;
+		cout << "Pressione uma tecla para continuar... ";
+		(void)getchar();
+	}
 	else if (c[0] == "exit") {
+		j->apagaCampeonato();
 		modo = 1;
 		leituraComandos();
 	}
@@ -273,7 +291,7 @@ void Interaction::representarPista() {
 	Consola::clrscr();
 	cout << "Pista de Corridas" << endl;
 
-	for (unsigned int i = 0; i < j->returnNumCarrosPista(); i++) {
+	for (unsigned int i = 0; i < j->returnNumPilotosPista(); i++) {
 
 		Consola::gotoxy(0, (2 * i) + 2);
 		for (int j = 0; j < representacaoPista; j++) { //coloca os traços entre os ID's dos carros

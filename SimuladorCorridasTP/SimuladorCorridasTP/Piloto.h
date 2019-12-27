@@ -19,9 +19,13 @@ public:
 
 	virtual Piloto* clone() const = 0;
 
+	void desacelerar();
+
 	void acelera(int val = 1);
 
 	void trava();
+
+	void danificaCarro();
 
 	Carro* returnCarro();
 
@@ -37,15 +41,54 @@ public:
 		return car->getVelocidadeAtual();
 	}
 
+	double getCapacidadeMax() const {
+		if (car != nullptr)
+			return car->getMaxCarregamento();
+	}
+
+	double getEnergiaAtual() const {
+		if (car != nullptr)
+			return car->getEnergiaAtual();
+	}
+
+	bool getEmergencia() const {
+		if (car != nullptr) {
+			return car->getEmergencia();
+		}
+	}
+
+	bool getDanificado() const {
+		if (car != nullptr)
+			return car->getDanificado();
+	}
+
+	bool manivela(int mAh);
+
+	void carregaMaxBateria();
+
 	bool temCarroAtribuido() const;
 
 	void atribuiCarro(Carro* c);
 
 	void retiraCarro();
 
+	void drenaEnergia();
+
+	void ativarBotaoEmergencia();
+
 	string getAsString() const;
 
 	string getInfoCarro() const;
+
+	/*
+	*Recebe posição piloto na pista
+	*Recebe numero de corredores
+	*Recebe o tempo de corrida
+	*/
+
+	virtual void passaTempo(int posPista, int numCorredores, int tempo) = 0; //recebe posicao
+
+	virtual string tipoPiloto() const = 0;
 
 	static Piloto* fabrica(string tipo, string nome);
 

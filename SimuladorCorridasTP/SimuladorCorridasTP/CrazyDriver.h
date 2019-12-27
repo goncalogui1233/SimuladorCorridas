@@ -4,6 +4,8 @@
 
 class CrazyDriver : public Piloto {
 	int desatento; //1 a 5 seg - aleatorio
+	int ultimaPos; //ultima posicao na pista
+	int tempoPressAcelerador = 0;
 
 public:
 
@@ -15,9 +17,15 @@ public:
 
 	void setDesatento();
 
+	string tipoPiloto() const override {
+		return "Fast";
+	}
+
 	int getDesatento() const {
 		return desatento;
 	}
+
+	void passaTempo(int posPista, int numCorredores, int tempo) override;
 
 	/*	Probabilidade de ter um acidente
 	*
@@ -25,7 +33,7 @@ public:
 	*	Se probabilidade for 5% -> True
 	*	Senão -> False
 	*/
-	//bool probAcidente();
+	bool probAcidente();
 
 	CrazyDriver(const CrazyDriver& aux);
 };

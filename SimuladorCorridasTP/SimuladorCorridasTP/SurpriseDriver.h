@@ -10,6 +10,8 @@ public:
 
 	Piloto* clone() const override;
 
+	void passaTempo();
+
 	~SurpriseDriver();
 };
 

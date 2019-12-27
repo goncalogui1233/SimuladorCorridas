@@ -45,13 +45,25 @@ public:
 
 	string adicionarAutodromoCamp(vector<string>vec);
 
-	void passarTempo(int s);
+	string carregaBateriaCarro(string id, string mAh);
 
-	void iniciaCorrida(int rep);
+	string destroiCarro(string id);
 
-	size_t returnNumCarrosPista() const;
+	string carregaBateriasCarros();
+
+	string mostraLogCorrida()const;
+
+	bool passarTempo();
+
+	bool existeCorrida() const;
+
+	string iniciaCorrida(int rep);
+
+	size_t returnNumPilotosPista() const;
 
 	char returnIDCarrosPista(int i) const;
+
+	void apagaCampeonato();
 
 	/*void mostraPista() {
 		autodromos[0]->mostraPista();
