@@ -229,6 +229,7 @@ void Interaction::helpModo1() const {
 	cout << "- savedgv <nome>" << endl;
 	cout << "- loaddgv <nome>" << endl;
 	cout << "- deldgv <nome>" << endl;
+	cout << "- sair" << endl;
 }
 
 void Interaction::listaComandosModo2() const {
@@ -243,6 +244,7 @@ void Interaction::listaComandosModo2() const {
 	cout << "- destroi <letraCarro>" << endl;
 	cout << "- passatempo <n>" << endl;
 	cout << "- log" << endl;
+	cout << "- exit" << endl;
 }
 
 void Interaction::escolhePilotos() {

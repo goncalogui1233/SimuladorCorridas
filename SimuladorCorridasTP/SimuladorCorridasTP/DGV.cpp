@@ -177,14 +177,14 @@ string DGV::retiraPilotoDeCarro(const char car) {
 	return "Piloto nao encontrado\n";
 }
 
-Piloto* DGV::retornaPiloto(string nome) {  //função que retorna ponteiro de piloto para ser usado no campeonato
+//função que retorna ponteiro de piloto para ser usado no campeonato
+Piloto* DGV::retornaPiloto(string nome) {  
 	for (unsigned int i = 0; i < pilotos.size(); i++)
 		if (pilotos[i]->getNome() == nome && pilotos[i]->returnCarro() != nullptr)
 			return pilotos[i];
 
 	return nullptr;
 }
-
 
 string DGV::listagem() const {
 	ostringstream os;
@@ -234,6 +234,7 @@ DGV::~DGV() {
 	for (auto itC = carros.begin(); itC != carros.end(); itC++)
 		delete* itC;*/
 
+ 
 	for (auto p : pilotos)
 		delete p;
 
