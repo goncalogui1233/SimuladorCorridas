@@ -9,10 +9,13 @@ class Pontuacoes {
 	int pontuacao;
 
 public:
-
-	Pontuacoes(string n);
+	Pontuacoes(string nome, int pontos);
 
 	string getAsString() const;
+
+	string getNome() const {
+		return nome;
+	}
 
 	int getPontuacao() const {
 		return pontuacao;

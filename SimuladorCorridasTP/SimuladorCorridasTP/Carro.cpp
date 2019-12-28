@@ -8,8 +8,11 @@ Carro::Carro(double initCap, double maxe, int maxv, string mar, string mod)
 // Destrutor
 Carro::~Carro(){}
 
-void Carro::setDanificado(bool estragado) {
-	this->danificado = estragado;
+void Carro::setDanificado() {
+	if (danificado == true)
+		danificado = false;
+
+	danificado = true;
 }
 Carro::Carro(const Carro& aux) 
 :id(aux.id), maxvelocidade(aux.maxvelocidade), marca(aux.marca), modelo(aux.modelo), maxenergia(aux.maxenergia), initenergia(aux.initenergia) {}
@@ -28,12 +31,16 @@ void Carro::setDisponibilidade() {
 		disponivel = true;
 }
 
-bool Carro::manivela(int quantEnergia) {
-	if (parado && (energia + quantEnergia) < maxenergia) {
-		energia += quantEnergia;
+bool Carro::manivela(double valCarregamento) {
+	if (parado && (energia + valCarregamento) < maxenergia) {
+		energia += valCarregamento;
 		return true;
 	}
 	return false;
+}
+
+void Carro::drenaEnergia() {
+	energia -= 0.1;
 }
 
 void Carro::setEmergencia() {
@@ -60,5 +67,9 @@ void Carro::acelerar(int val) {
 
 void Carro::travar() {
 	acelerar(-1);
+}
+
+void Carro::desacelerar() {
+	this->velocidadeAtual -= 1;
 }
 

@@ -12,6 +12,10 @@ void Posicoes::MexePosEcra() {
 	posx++;
 }
 
+void Posicoes::setPosCorrida(int val) {
+	posicao = val;
+}
+
 string Posicoes::getAsString() const {
 	ostringstream os;
 

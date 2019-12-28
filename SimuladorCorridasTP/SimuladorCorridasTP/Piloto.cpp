@@ -30,9 +30,43 @@ void Piloto::acelera(int val) {
 		car->acelerar(val);
 }
 
+void Piloto::desacelerar() {
+	if (car != nullptr)
+		car->desacelerar();
+}
+
 void Piloto::trava() {
 	if (car != nullptr)
 		car->travar();
+}
+
+void Piloto::danificaCarro() {
+	if (car != nullptr)
+		car->setDanificado();
+}
+
+void Piloto::ativarBotaoEmergencia() {
+	if (car != nullptr) {
+		car->setEmergencia();
+	}
+}
+
+bool Piloto::manivela(int mAh) {
+	if (car != nullptr) {
+		return car->manivela(mAh);
+	}
+}
+
+void Piloto::drenaEnergia() {
+	car->drenaEnergia();
+}
+
+void Piloto::carregaMaxBateria() {
+	if(car != nullptr){
+		double max = car->getMaxCarregamento();
+		double at = car->getEnergiaAtual();
+		car->manivela(max - at);
+	}
 }
 
 char Piloto::getIDCar() const {
