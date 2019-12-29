@@ -3,10 +3,17 @@
 int Carro::idcar = 'a';
 
 Carro::Carro(double initCap, double maxe, int maxv, string mar, string mod)
-	:marca(mar), modelo(mod), id(idcar++), maxenergia(maxe), maxvelocidade(maxv), initenergia(initCap) {}
+	:marca(mar), modelo(mod), id(setIDs(idcar)), maxenergia(maxe), maxvelocidade(maxv), initenergia(initCap) {}
 
 // Destrutor
 Carro::~Carro(){}
+
+char Carro::setIDs(int idcar) {
+	if (idcar > 'z') {
+		return '?';
+	}
+	return Carro::idcar++;
+}
 
 void Carro::setDanificado() {
 	if (danificado == true)

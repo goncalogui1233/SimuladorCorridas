@@ -44,7 +44,7 @@ void Autodromo::retiraPilotoDaPista(char id) {
 }
 
 Piloto* Autodromo::returnPilotoPista(int pos) {
-	pista->returnPilotoPista(pos);
+	return pista->returnPilotoPista(pos);
 }
 
 string Autodromo::getNome() const {

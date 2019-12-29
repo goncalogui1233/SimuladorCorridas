@@ -55,6 +55,7 @@ bool Piloto::manivela(int mAh) {
 	if (car != nullptr) {
 		return car->manivela(mAh);
 	}
+	return false;
 }
 
 void Piloto::drenaEnergia() {

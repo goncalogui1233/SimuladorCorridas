@@ -2,6 +2,7 @@
 #include <sstream>
 #include <iostream>
 
+
 //construtor por cópia
 DGV::DGV(const DGV& aux) {
 	for (unsigned int i = 0; i < aux.carros.size(); i++)
@@ -57,7 +58,9 @@ string  DGV::carregaCarrosFich(string fich) {
 	while (!f.eof()) {
 		try {
 			modelo = "";
-			f >> initCap >> maxenergia >> maxvelocidade >> marca >> modelo;
+			f >> initCap >> maxenergia >> maxvelocidade >> marca;
+
+			getline(f, modelo);
 
 			if (initCap <= 0 || maxenergia <= 0 || maxvelocidade <= 0 || marca.empty()) {
 				throw exception("Erro a ler o ficheiro, Confirme os dados\n");

@@ -8,3 +8,8 @@ Piloto* SurpriseDriver::clone() const {
 }
 
 SurpriseDriver::~SurpriseDriver(){}
+
+
+void SurpriseDriver::passaTempo(int posPista, int numCorredores, int tempo) {
+
+}

@@ -38,7 +38,7 @@ void CrazyDriver::passaTempo(int posPista, int numCorredores, int tempo) {
 	}
 	drenaEnergia(); //retira 0,1mAH a energia atual
 
-	if (getEnergiaAtual == 0) //ativa emergencia caso o carro fique sem energia
+	if (getEnergiaAtual() == 0) //ativa emergencia caso o carro fique sem energia
 		ativarBotaoEmergencia();
 
 	if (probAcidente() == true) {//caso tenha acidente

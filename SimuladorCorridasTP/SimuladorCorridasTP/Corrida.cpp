@@ -101,7 +101,7 @@ int Corrida::returnPosicaoEmPista(string nomePil) {
 
 //função que modifica a organização dos pilotos em pista :)
 void Corrida::atualizaVecClass(){
-	sort(classificacao.begin(), classificacao.end(), compare);
+	sort(classificacao.begin(), classificacao.end());
 
 	for (int i = 0; i < classificacao.size(); i++) {
 		classificacao[i]->setPosCorrida(i + 1);

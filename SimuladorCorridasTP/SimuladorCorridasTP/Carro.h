@@ -31,6 +31,8 @@ public:
 	*/
 	~Carro();
 
+	char setIDs(int idcar);
+
 	// return faz sentido fazer no header para nao ter que ir por exemplo à pilha.. 
 	// É mais rápido 
 	inline char getID() const {

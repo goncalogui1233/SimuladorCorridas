@@ -249,6 +249,7 @@ string Jogo::carregaBateriaCarro(string id, string mAh) {
 	if (verificaNumeros(mAh) == true) {
 		return campeonato->carregaCarro(id.at(0), stoi(mAh));
 	}
+	return "Impossivel carregar";
 }
 
 string Jogo::carregaBateriasCarros() {

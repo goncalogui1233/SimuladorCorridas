@@ -44,11 +44,13 @@ public:
 	double getCapacidadeMax() const {
 		if (car != nullptr)
 			return car->getMaxCarregamento();
+		return -1;
 	}
 
 	double getEnergiaAtual() const {
 		if (car != nullptr)
 			return car->getEnergiaAtual();
+		return -1;
 	}
 
 	bool getEmergencia() const {
