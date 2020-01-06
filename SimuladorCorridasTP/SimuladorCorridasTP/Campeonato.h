@@ -45,13 +45,19 @@ public:
 		return logRegisto;
 	}
 
-	string carregaCarro(char id, int mAh);
+	int getAutodromoAtual() const {
+		return autodromoAtual;
+	}
+
+	string carregaCarro(char id, double mAh);
 
 	string carregaTodosCarros();
 
 	bool returnSeExisteCorrida() const;
 
 	string adicionaParticipantes(Piloto* aux);
+
+	void removeparticipante(char id);
 
 	void adicionarAutodromos(Autodromo* aux);
 
@@ -70,5 +76,18 @@ public:
 	string listaClassificacaoCorrida() const {
 		return c->mostraPosicoes();
 	}
+
+	bool getAutodromoExists(string autodromo);
+
+	int getParticipantes_Size() const {
+		return (int) participantes.size();
+	}
+
+	int getAutodromos_Size() const {
+		return (int) autodromos.size();
+	}
+
+
+	~Campeonato();
 };
 

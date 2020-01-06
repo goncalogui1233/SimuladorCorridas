@@ -1,5 +1,13 @@
 #include "Corrida.h"
 
+
+//função usada para ordenar vetor classificações
+bool compare(const Posicoes* p1, const Posicoes* p2) {
+	return p1->returnPosAtual() > p2->returnPosAtual();
+} //sort(vector.begin(), vector.end(), compare) -> necessario #include <algorithm>
+
+
+
 //funções principais
 
 Corrida::Corrida(Autodromo* aux, int rep)
@@ -41,15 +49,14 @@ void Corrida::aceleraCarrosInit(vector<Piloto*> aux) {
 
 bool Corrida::passaTempo() { //falta atualizar as posições no vetor classificaçoes
 	int pos = 0;
-	int maxPilotos = aut->returnNumPilotosPista();
-
+	int maxPilotos;
 	if (finalCorrida() == true) { //se algum piloto tiver "ultrapassado" o tamanho da pista, significa que a corrida terminou
 		return true;
 	}
 
 	infoLog = "Segundo n. " + (tempoCorrida + 1);
 
-	while (pos <= maxPilotos) {
+ 	while (pos < (maxPilotos = aut->returnNumPilotosPista())) {
 		Piloto* aux = aut->returnPilotoPista(pos);
 		int posicao = returnPosicaoEmPista(aux->getNome());
 		aux->passaTempo(posicao, maxPilotos, tempoCorrida);
@@ -74,12 +81,14 @@ bool Corrida::passaTempo() { //falta atualizar as posições no vetor classificaço
 		}
 		atualizarMetrosPista(aux->getNome(), aux->getVelocidadeAtual());
 
+		pos++;
 	}
 	//organiza o vetor da classificação
 	atualizaVecClass();
 	verificaSeMudouPos();
 	tempoCorrida++;
-	pos++;
+
+	return false;
 }
 
 string Corrida::mostraPosicoes() const {
@@ -101,7 +110,7 @@ int Corrida::returnPosicaoEmPista(string nomePil) {
 
 //função que modifica a organização dos pilotos em pista :)
 void Corrida::atualizaVecClass(){
-	sort(classificacao.begin(), classificacao.end());
+	sort(classificacao.begin(), classificacao.end(), compare);
 
 	for (int i = 0; i < classificacao.size(); i++) {
 		classificacao[i]->setPosCorrida(i + 1);
@@ -156,7 +165,12 @@ void Corrida::verificaSeMudouPos() {
 	}
 }
 
-//função usada para ordenar vetor classificações
-bool compare(const Posicoes& p1, const Posicoes& p2) {
-	return p1.returnPosAtual() > p2.returnPosAtual();
-} //sort(vector.begin(), vector.end(), compare) -> necessario #include <algorithm>
+Corrida::~Corrida() {
+
+	aut = nullptr;
+
+	vector <Posicoes*>::iterator it;
+	for (it = classificacao.begin(); it != classificacao.end(); it++)
+		delete* it;
+
+}

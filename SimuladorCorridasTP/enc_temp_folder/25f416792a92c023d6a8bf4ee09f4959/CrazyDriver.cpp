@@ -29,8 +29,8 @@ void CrazyDriver::passaTempo(int posPista, int numCorredores, int tempo) {
 		else if (posPista > 1 && posPista < numCorredores)
 			acelera();
 		else if (posPista == numCorredores)
-			trava();
-			
+			//trava();
+			acelera();
 		ultimaPos = posPista; //guarda a ultima posição registada
 
 		if (posPista - ultimaPos >= 2) //caso tenha caido 2 ou mais lugares

@@ -40,7 +40,7 @@ void Autodromo::inserePilotoNaGaragem(Piloto* aux) {
 
 void Autodromo::retiraPilotoDaPista(char id) {
 	Piloto* aux  = pista->retiraPiloto(id);
-	garagem.push_back(aux);
+	inserePilotoNaGaragem(aux);
 }
 
 Piloto* Autodromo::returnPilotoPista(int pos) {

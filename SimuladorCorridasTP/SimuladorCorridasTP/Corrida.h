@@ -43,5 +43,7 @@ public:
 	}
 
 	string mostraPosicoes() const;
+
+	~Corrida();
 };
 

@@ -16,6 +16,7 @@ void Interaction::leituraComandos() {
 			Consola::clrscr();
 
 			if (modo == 1)
+
 				cout << "Modo 1" << endl;
 			else
 				cout << "Modo 2" << endl;
@@ -110,11 +111,28 @@ void Interaction::opcoesModo1() {
 		(void)getchar();
 	}
 
-	else if (c[0] == "campeonato") { //passa para o modo 2
-		modo = 2;
-		j->criaCampeonato(); //cria um novo campeonato
-		escolhePilotos();
-		leituraComandos();
+	else if (c[0] == "campeonato" && c.size() == 1) { //passa para o modo 2
+		if (j->getNAutodromos() < 1)
+		{
+			cout << "Impossivel inciar campeonato sem Autodromos";
+		}
+		else if (j->getNCarros() > 0 && j->getNPilotos() > 1) {
+
+			j->criaCampeonato(); //cria um novo campeonato
+			escolhePilotos();
+			if (j->getParticipantes_size() >= 2) {
+				modo = 2;
+				leituraComandos();
+			}
+			else {
+				cout << "E necessario participantes";
+			}
+		}
+		else
+		{
+			cout << "Impossivel inciar campeonato sem carros e/ou sem pilotos. (E' exigido pelo menos 2 pilotos no minimo)";
+		}
+		(void)getchar();
 	}
 
 	else if (c[0] == "savedgv")
@@ -144,7 +162,6 @@ void Interaction::opcoesModo2() {
 		cout << "Pressione uma tecla para continuar... ";
 		(void)getchar();
 	}
-
 	else if (c[0] == "campeonato") {
 		cout << j->adicionarAutodromoCamp(c) << endl;
 		cout << "Pressione uma tecla para continuar... ";
@@ -159,30 +176,21 @@ void Interaction::opcoesModo2() {
 	}
 
 	else if (c[0] == "carregabat") {
-		cout << j->carregaBateriaCarro(c[1], c[2]) << endl;
+		if (c.size() == 3)
+			cout << j->carregaBateriaCarro(c[1], c[2]) << endl;
+		else
+			cout << "Argumentos nao validos, tente novamente" << endl;
 		cout << "Pressione uma tecla para continuar... ";
 		(void)getchar();
 	}
 
-	else if (c[0] == "carregatudo") {
+	else if (c[0] == "carregatudo" && c.size() == 1) {
 		cout << j->carregaBateriasCarros() << endl;
 		cout << "Pressione uma tecla para continuar... ";
 		(void)getchar();
 	}
-	else if (c[0] == "corrida") {
-		if (j->existeCorrida() == true)
-			cout << "Já existe uma corrida a decorrer, finalize-a primeiro";
-		else {
-			j->colocaCarrosEmPista();
-
-			if (j->returnNumPilotosPista() >= 2) {
-				cout << j->iniciaCorrida(representacaoPista);
-				representarPista();
-			}
-			else {
-				cout << "A corrida tem que ter no minimo 2 carros" << endl;
-			}
-		}
+	else if (c[0] == "corrida" && c.size() == 1) {
+		corrida();
 		cout << "Pressione uma tecla para continuar... ";
 		(void)getchar();
 	}
@@ -191,7 +199,7 @@ void Interaction::opcoesModo2() {
 		cout << "Acidente";
 	else if (c[0] == "stop")
 		cout << "Stop";
-	else if (c[0] == "destroi"){
+	else if (c[0] == "destroi" && c.size() == 2) {
 		cout << j->destroiCarro(c[1]) << endl;
 		cout << "Pressione uma tecla para continuar... ";
 		(void)getchar();
@@ -199,7 +207,7 @@ void Interaction::opcoesModo2() {
 
 	else if (c[0] == "passatempo") {
 
-		if (c.size() == 2) {
+		if (c.size() == 2 && c[1].find_first_not_of("0123456789") == -1 && stoi(c[1]) > 0) {
 
 			for (unsigned int i = 0; i < stoi(c[1]); i++) {
 				representarPista();
@@ -310,4 +318,32 @@ void Interaction::representarPista() {
 		cout << (char)45;
 	cout << endl << endl;
 
+}
+
+
+void Interaction::corrida() {
+	if (j->getAutodromosCampeonato_size() == j->getAutodromoAtual()) {
+		cout << "Nao existe autodromo para realizar a corrida" << endl;
+		return;
+	}
+
+	if (j->getAutodromosCampeonato_size() > 0) {
+		if (j->existeCorrida() == true)
+			cout << "Ja existe uma corrida a decorrer, finalize-a primeiro" << endl;
+		else {
+			j->colocaCarrosEmPista();
+
+			if (j->returnNumPilotosPista() >= 2) {
+				cout << j->iniciaCorrida(representacaoPista);
+				representarPista();
+			}
+			else {
+				cout << "A corrida tem que ter no minimo 2 carros" << endl;
+			}
+		}
+	}
+	else
+	{
+		cout << "A corrida tem que ter autodromos" << endl;
+	}
 }

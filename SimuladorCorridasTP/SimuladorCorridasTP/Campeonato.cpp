@@ -10,6 +10,15 @@ string Campeonato::adicionaParticipantes(Piloto* aux) {
 	return "Piloto inserido na corrida\n";
 }
 
+
+void Campeonato::removeparticipante(char id) {
+	vector<Piloto*>::iterator it;
+	for (it = participantes.begin(); it != participantes.end(); it++)
+		if ((*it)->getIDCar() == id)
+			participantes.erase(it);
+
+}
+
 bool Campeonato::returnSeExisteCorrida() const {
 	if (c == nullptr)
 		return false;
@@ -25,7 +34,7 @@ bool Campeonato::avancarTempo() {
 	bool term = c->passaTempo();
 
 	if (term == true) { //caso a corrida tenha terminado
-		int conta = 0;
+		int conta = 1;
 		int ptMax = 10;
 		while(conta != 2){
 			if(verificarSeExiste(c->getNomePodio(conta), (ptMax / conta)) == false)
@@ -42,7 +51,7 @@ bool Campeonato::avancarTempo() {
 	return false;
 }
 
-string Campeonato::carregaCarro(char id, int mAh) {
+string Campeonato::carregaCarro(char id, double mAh) {
 	vector<Piloto*>::iterator it;
 	for (it = participantes.begin(); it != participantes.end(); it++)
 		if((*it)->getIDCar() == id){
@@ -52,6 +61,7 @@ string Campeonato::carregaCarro(char id, int mAh) {
 				return "Não foi possivel carregar a bateria";
 		}
 
+	return "Carro nao encontrado";
 }
 
 string Campeonato::carregaTodosCarros() {
@@ -116,4 +126,31 @@ bool Campeonato::verificarSeExiste(string nome, int pontos) {
 		}
 
 	return false;
+}
+
+bool Campeonato::getAutodromoExists(string autodromo) {
+	for (auto aut : autodromos) {
+		if (autodromo == aut->getNome()) {
+			return true;
+		}
+	}
+	return false;
+}
+
+
+Campeonato::~Campeonato() {
+	
+	delete c;
+
+	vector<Pontuacoes*>::iterator it;
+
+	for (it = tabelaGeral.begin(); it != tabelaGeral.end(); it++)
+		delete* it;
+
+	tabelaGeral.clear();
+	autodromos.clear();
+	participantes.clear();
+
+	
+
 }

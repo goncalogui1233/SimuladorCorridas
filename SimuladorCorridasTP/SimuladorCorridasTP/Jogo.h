@@ -69,5 +69,42 @@ public:
 		autodromos[0]->mostraPista();
 	}*/
 
+	//return campeonato exists
+	bool CampeonatoExists();
+
+	bool AutodromoExists(string autodromo);
+
+	// Get: Autodromo Atual
+	int getAutodromoAtual() const {
+		return campeonato->getAutodromoAtual();
+	}
+
+	// Get: Participantes Campeonato
+	int getParticipantes_size() const {
+		return campeonato->getParticipantes_Size();
+	}
+
+	// Get: Autodromos Campeonato
+	int getAutodromosCampeonato_size() const {
+		return campeonato->getAutodromos_Size();
+	}
+
+	// Get: carros Size DGV
+	int getNCarros() const {
+		return dgv->getCarrosTam();
+	}
+
+	// Get: carros Size DGV
+	int getNPilotos() const {
+		return dgv->getPilotosTam();
+	}
+
+	// Get: Autodromos Size Jogo
+	int getNAutodromos() const {
+		return (int)autodromos.size();
+	}
+
+
+
 	~Jogo();
 };

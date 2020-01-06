@@ -229,17 +229,17 @@ int DGV::getPilotosTam() const {
 
 DGV::~DGV() {
 	//liberta memoria vector pilotos
-	/*vector <Piloto*>::iterator it;
+	vector <Piloto*>::iterator it;
 	for (it = pilotos.begin(); it != pilotos.end(); it++)
 		delete *it;
-
+	/*
 	vector <Carro*>::iterator itC;
 	for (auto itC = carros.begin(); itC != carros.end(); itC++)
 		delete* itC;*/
 
  
-	for (auto p : pilotos)
-		delete p;
+	/*for (auto p : pilotos)
+		delete p;*/
 
 	for (auto c : carros)
 		delete c;

@@ -52,10 +52,8 @@ void Piloto::ativarBotaoEmergencia() {
 }
 
 bool Piloto::manivela(double mAh) {
-	if (isdigit(mAh)) {
-		if (car != nullptr && mAh > 0) {
-			return car->manivela(mAh);
-		}
+	if (car != nullptr && mAh > 0) {
+		return car->manivela(mAh);
 	}
 	return false;
 }

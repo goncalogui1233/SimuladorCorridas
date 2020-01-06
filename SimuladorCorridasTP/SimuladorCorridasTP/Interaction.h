@@ -32,6 +32,9 @@ class Interaction {
 
 	void escolhePilotos();
 
+	// realizar corrida
+	void corrida();
+
 public:
 
 	int end = 0;

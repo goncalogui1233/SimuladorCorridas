@@ -256,8 +256,12 @@ string Jogo::listaCarrosCampeonato() {
 }
 
 string Jogo::carregaBateriaCarro(string id, string mAh) {
-	return campeonato->carregaCarro(id.at(0), stod(mAh));
+	if (verificaNumeros(mAh) == true) {
+		return campeonato->carregaCarro(id.at(0), stod(mAh));
+	}
+	return "Impossivel carregar";
 }
+
 string Jogo::carregaBateriasCarros() {
 	return campeonato->carregaTodosCarros();
 }
@@ -266,7 +270,7 @@ string Jogo::destroiCarro(string id) {
 	if (id.size() == 1)  {
 		char idd = id.at(0);
 
-		if (getAutodromosCampeonato_size() > 0 && getAutodromosCampeonato_size() > getAutodromoAtual()) {
+		if (getAutodromosCampeonato_size() > 0) {
 			//passar piloto para a garagem caso esteja em corrida
 			campeonato->retiraPilotoCorrida(idd);
 		}

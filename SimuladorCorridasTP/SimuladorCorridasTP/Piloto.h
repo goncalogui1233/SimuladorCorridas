@@ -57,14 +57,16 @@ public:
 		if (car != nullptr) {
 			return car->getEmergencia();
 		}
+		return true;
 	}
 
 	bool getDanificado() const {
 		if (car != nullptr)
 			return car->getDanificado();
+		return true;
 	}
 
-	bool manivela(int mAh);
+	bool manivela(double mAh);
 
 	void carregaMaxBateria();
 

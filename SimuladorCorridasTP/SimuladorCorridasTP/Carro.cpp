@@ -3,7 +3,7 @@
 int Carro::idcar = 'a';
 
 Carro::Carro(double initCap, double maxe, int maxv, string mar, string mod)
-	:marca(mar), modelo(mod), id(setIDs(idcar)), maxenergia(maxe), maxvelocidade(maxv), initenergia(initCap) {}
+	:marca(mar), modelo(mod), id(setIDs(idcar)), maxenergia(maxe), maxvelocidade(maxv), energia(initCap) {}
 
 // Destrutor
 Carro::~Carro(){}
@@ -22,11 +22,11 @@ void Carro::setDanificado() {
 	danificado = true;
 }
 Carro::Carro(const Carro& aux) 
-:id(aux.id), maxvelocidade(aux.maxvelocidade), marca(aux.marca), modelo(aux.modelo), maxenergia(aux.maxenergia), initenergia(aux.initenergia) {}
+:id(aux.id), maxvelocidade(aux.maxvelocidade), marca(aux.marca), modelo(aux.modelo), maxenergia(aux.maxenergia), energia(aux.energia) {}
 
 string Carro::getAsString() const {
 	ostringstream oss;
-	oss << "Marca: " << marca <<" | ID: "<< id <<" | Modelo: " << modelo << " | Vel. Maxima: " << maxvelocidade << " | Cap. Inicial " << initenergia << " | Max. Energia: " << maxenergia << endl;
+	oss << "Marca: " << marca <<" | ID: "<< id <<" | Modelo: " << modelo << " | Vel. Maxima: " << maxvelocidade << " | Max. Energia: " << maxenergia << endl;
 	oss << "Danificado: " << danificado << " | Energia: " << energia << endl << endl;
 	return oss.str();
 }
