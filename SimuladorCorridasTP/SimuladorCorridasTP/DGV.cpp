@@ -62,7 +62,9 @@ string  DGV::carregaCarrosFich(string fich) {
 
 			getline(f, modelo);
 
-			if (initCap <= 0 || maxenergia <= 0 || maxvelocidade <= 0 || marca.empty()) {
+			f >> ws;
+
+			if (initCap <= 0 || maxenergia < initCap|| maxenergia <= 0 || maxvelocidade <= 0 || marca.empty()) {
 				throw exception("Erro a ler o ficheiro, Confirme os dados\n");
 			}
 
