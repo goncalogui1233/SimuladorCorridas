@@ -137,6 +137,45 @@ bool Campeonato::getAutodromoExists(string autodromo) {
 	return false;
 }
 
+string Campeonato::acidente(char id) {
+	vector<Piloto*>::iterator it;
+	for (it = participantes.begin(); it != participantes.end(); it++)
+		if ((*it)->getIDCar() == id) {
+			(*it)->danificaCarro();
+			return "Carro Danificado";
+		}
+
+
+	return "Carro Inexistente";
+}
+
+/* Parar o Piloto
+*
+*	Desacelerar até parar
+*	- Se estiver em corrida sai, mas nao sai do campeonato  
+*
+*/
+string Campeonato::stopPiloto(string nome)
+{
+	vector<Piloto*>::iterator it;
+	for (it = participantes.begin(); it != participantes.end(); it++)
+		if ((*it)->getNome() == nome) {
+
+			// Desacelerar o carro até 0
+			while ((*it)->getVelocidadeAtual != 0) {
+				(*it)->desacelerar();
+			}
+
+			if (this->returnSeExisteCorrida() && this->getAutodromos_Size() > getAutodromoAtual()) {
+				this->retiraPilotoCorrida((*it)->getIDCar());
+			}
+			
+			return "Piloto Parou!";
+		}
+
+	return "Piloto nao encontrado!";
+}
+
 
 Campeonato::~Campeonato() {
 	

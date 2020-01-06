@@ -74,10 +74,14 @@ public:
 
 	bool AutodromoExists(string autodromo);
 
-	// Get: Autodromo Atual
+	// Get: Autodromo Atual Campeonato
 	int getAutodromoAtual() const {
 		return campeonato->getAutodromoAtual();
 	}
+
+	string acidente(string letra);
+
+	string stop(string nome);
 
 	// Get: Participantes Campeonato
 	int getParticipantes_size() const {

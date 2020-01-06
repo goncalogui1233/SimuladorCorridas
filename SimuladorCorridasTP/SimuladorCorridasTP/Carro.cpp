@@ -18,8 +18,11 @@ char Carro::setIDs(int idcar) {
 void Carro::setDanificado() {
 	if (danificado == true)
 		danificado = false;
+	else {
+		danificado = true;
+		velocidadeAtual = 0;
+	}
 
-	danificado = true;
 }
 Carro::Carro(const Carro& aux) 
 :id(aux.id), maxvelocidade(aux.maxvelocidade), marca(aux.marca), modelo(aux.modelo), maxenergia(aux.maxenergia), energia(aux.energia) {}

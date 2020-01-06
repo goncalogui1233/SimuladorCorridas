@@ -195,10 +195,10 @@ void Interaction::opcoesModo2() {
 		(void)getchar();
 	}
 
-	else if (c[0] == "acidente")
-		cout << "Acidente";
-	else if (c[0] == "stop")
-		cout << "Stop";
+	else if (c[0] == "acidente" && c.size() == 2)
+		cout << j->acidente(c[1]) << endl;
+	else if (c[0] == "stop" && c.size() == 2)
+		cout << j->stop(c[1]) << endl;
 	else if (c[0] == "destroi" && c.size() == 2) {
 		cout << j->destroiCarro(c[1]) << endl;
 		cout << "Pressione uma tecla para continuar... ";
@@ -321,6 +321,8 @@ void Interaction::representarPista() {
 }
 
 
+
+// Interation Corrida 
 void Interaction::corrida() {
 	if (j->getAutodromosCampeonato_size() == j->getAutodromoAtual()) {
 		cout << "Nao existe autodromo para realizar a corrida" << endl;

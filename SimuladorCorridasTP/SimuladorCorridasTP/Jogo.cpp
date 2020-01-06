@@ -309,6 +309,20 @@ bool Jogo::CampeonatoExists() {
 	return false;
 }
 
+string Jogo::acidente(string letra) {
+	if (letra.size() == 1) {
+		char id = letra.at(0);
+		return campeonato->acidente(id);
+	}
+	else {
+		return "identificador nao esta correto";
+	}
+}
+
+string Jogo::stop(string nome)
+{
+	return campeonato->stopPiloto(nome);
+}
 
 
 // ####################### End Modo 2 #######################

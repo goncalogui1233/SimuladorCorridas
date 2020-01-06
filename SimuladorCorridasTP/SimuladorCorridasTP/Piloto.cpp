@@ -41,8 +41,9 @@ void Piloto::trava() {
 }
 
 void Piloto::danificaCarro() {
-	if (car != nullptr)
+	if (car != nullptr) {
 		car->setDanificado();
+	}
 }
 
 void Piloto::ativarBotaoEmergencia() {

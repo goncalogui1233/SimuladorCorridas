@@ -77,6 +77,10 @@ public:
 		return c->mostraPosicoes();
 	}
 
+	string acidente(char id);
+
+	string stopPiloto(string nome);
+
 	bool getAutodromoExists(string autodromo);
 
 	int getParticipantes_Size() const {
