@@ -74,7 +74,17 @@ public:
 	string listaCarrosCampeonato() const;
 
 	string listaClassificacaoCorrida() const {
-		return c->mostraPosicoes();
+		ostringstream os;
+
+
+
+		os << "Informacao sobre a corrida no autodromo " << autodromos[autodromoAtual]->getNome() << " (" << autodromos[autodromoAtual]->returnTamPista()
+			<< " )" << endl;
+
+
+		os << c->mostraPosicoes();
+
+		return os.str();
 	}
 
 	string acidente(char id);
@@ -84,13 +94,15 @@ public:
 	bool getAutodromoExists(string autodromo);
 
 	int getParticipantes_Size() const {
-		return (int) participantes.size();
+		return (int)participantes.size();
 	}
 
 	int getAutodromos_Size() const {
-		return (int) autodromos.size();
+		return (int)autodromos.size();
 	}
 
+	// Mostrar carros na garagem
+	void printGaragem();
 
 	~Campeonato();
 };

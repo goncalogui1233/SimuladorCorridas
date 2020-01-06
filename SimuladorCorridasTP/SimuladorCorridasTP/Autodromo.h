@@ -51,6 +51,8 @@ public:
 		pista->representarPista();
 	}*/
 
+	void printGaragem();
+
 	string getAsString() const;
 
 	~Autodromo();

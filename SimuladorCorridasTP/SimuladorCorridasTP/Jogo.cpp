@@ -325,6 +325,17 @@ string Jogo::stop(string nome)
 }
 
 
+string Jogo::classificaoCorrida() {
+	if (campeonato->returnSeExisteCorrida())
+		return campeonato->listaClassificacaoCorrida();
+	return "Corrida nao existe";
+}
+
+
+void Jogo::garagem() {
+	campeonato->printGaragem();
+}
+
 // ####################### End Modo 2 #######################
 
 

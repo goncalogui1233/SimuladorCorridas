@@ -162,7 +162,7 @@ string Campeonato::stopPiloto(string nome)
 		if ((*it)->getNome() == nome) {
 
 			// Desacelerar o carro até 0
-			while ((*it)->getVelocidadeAtual != 0) {
+			while ((*it)->getVelocidadeAtual() != 0) {
 				(*it)->desacelerar();
 			}
 
@@ -176,6 +176,17 @@ string Campeonato::stopPiloto(string nome)
 	return "Piloto nao encontrado!";
 }
 
+void Campeonato::printGaragem() {
+	
+	vector<Autodromo*>::iterator it;
+	
+	for (it = autodromos.begin(); it != autodromos.end(); it++)
+	{
+		cout << "Nome: "<< (*it)->getNome() << endl << endl;
+		cout << "Garagem: " << endl;
+		(*it)->printGaragem();
+	}
+}
 
 Campeonato::~Campeonato() {
 	

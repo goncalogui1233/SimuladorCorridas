@@ -57,6 +57,15 @@ string Autodromo::getAsString() const {
 	return os.str();
 }
 
+void Autodromo::printGaragem() {
+	vector<Piloto*>::iterator it;
+
+	for (it = garagem.begin(); it != garagem.end(); it++) {
+		(*it)->getInfoCarro();
+	}
+		
+}
+
 Autodromo::~Autodromo() {
 	delete pista;
 }

@@ -223,7 +223,16 @@ void Interaction::opcoesModo2() {
 		cout << "Pressione uma tecla para continuar... ";
 		(void)getchar();
 	}
-
+	else if (c[0] == "classificacao" && c.size() == 1){
+		cout << j->classificaoCorrida() << endl;
+		cout << "Pressione uma tecla para continuar... ";
+		(void)getchar();
+	}
+	else if (c[0] == "garagem" && c.size() == 1) {
+		j->garagem();
+		cout << "Pressione uma tecla para continuar... ";
+		(void)getchar();
+	}
 	else if (c[0] == "log") {
 		cout << j->mostraLogCorrida() << endl;
 		cout << "Pressione uma tecla para continuar... ";
@@ -270,6 +279,8 @@ void Interaction::listaComandosModo2() const {
 	cout << "- destroi <letraCarro>" << endl;
 	cout << "- passatempo <n>" << endl;
 	cout << "- log" << endl;
+	cout << "- classificacao" << endl;
+	cout << "- garagem" << endl;
 	cout << "- exit" << endl;
 }
 

@@ -100,7 +100,7 @@ string Piloto::getAsString() const {
 	if (car != nullptr)
 		os << "Nome: " << nome << " ID Carro: " << car->getID() << endl;
 	else
-		os << "Nome: " << nome << " ID Carro: " << endl;
+		os << "Nome: " << nome << " Carro nao atribuido " << endl;
 
 	return os.str();
 }

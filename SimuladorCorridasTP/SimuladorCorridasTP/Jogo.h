@@ -65,6 +65,8 @@ public:
 
 	void apagaCampeonato();
 
+	void garagem();
+
 	/*void mostraPista() {
 		autodromos[0]->mostraPista();
 	}*/
@@ -82,6 +84,10 @@ public:
 	string acidente(string letra);
 
 	string stop(string nome);
+
+	// Classificacao Corrida
+	string classificaoCorrida();
+
 
 	// Get: Participantes Campeonato
 	int getParticipantes_size() const {
