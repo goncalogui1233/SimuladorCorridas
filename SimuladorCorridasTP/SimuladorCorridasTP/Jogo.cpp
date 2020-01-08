@@ -10,7 +10,7 @@ Jogo::Jogo() {
 //Funções de apoio
 
 bool verificaNumeros(string str) { //verifica se as posições que deveriam ter numeros realmente os têm
-	
+
 	if (str.find_first_not_of("0123456789") == -1) // 0 se falhar, 1 se estiver tudo bem
 		return true;
 
@@ -59,7 +59,7 @@ string Jogo::carregaAutodromosFich(string fich) {
 	f.open(fich);
 	if (!f)
 		return "Erro na abertura do ficheiro\n";
-	
+
 	while (!f.eof()) {
 		try {
 
@@ -85,7 +85,7 @@ string Jogo::carregaAutodromosFich(string fich) {
 }
 
 string Jogo::criaItensJogo(vector <string> vec) {
-	if (vec[1] == "p"){
+	if (vec[1] == "p") {
 		string nome = juntaNome(vec, 1);
 		transform(vec[2].begin(), vec[2].end(), vec[2].begin(), ::toupper); //letra identificadora do piloto passa a maiuscula
 		return dgv->inserePiloto(vec[2], nome);
@@ -106,13 +106,14 @@ string Jogo::criaItensJogo(vector <string> vec) {
 				autodromos.push_back(new Autodromo(stoi(vec[2]), stoi(vec[3]), vec[4]));
 				return "Autodromo criado\n";
 			}
+			return "Argumentos nao validos, tente novamente\n";
 		}
 		return "Argumentos nao validos, tente novamente\n";
 	}
 
 	else
 		return "Nao foi possivel criar nenhum item, verifique a letraTipo e tente novamente\n";
-	
+
 }
 
 string Jogo::inserePilotoEmCarro(vector<string>vec) {
@@ -169,10 +170,11 @@ string Jogo::retiraPilotoDeCarro(vector<string>vec) {
 	return "Argumentos nao validos, tente novamente\n";
 }
 
+// Listagem DGV e Autodromos
 string Jogo::listagem() const {
 	string aux = "";
 	aux += dgv->listagem();
-	
+
 	if (autodromos.size() != 0) {
 		aux += "Autodromos: \n";
 		for (int i = 0; i < autodromos.size(); i++)
@@ -180,11 +182,11 @@ string Jogo::listagem() const {
 	}
 	else
 		aux += "Nao existem autodromos\n";
-	
+
 
 	return aux;
 }
-
+// Adicionar Participantes para o Campeonato
 string Jogo::escolhePilotosCampeonato(vector<string> vec) {
 	string nome = juntaNome(vec, 6);
 
@@ -192,66 +194,156 @@ string Jogo::escolhePilotosCampeonato(vector<string> vec) {
 	if (p == nullptr)
 		return "Piloto nao existe, ou nao esta em nenhum carro\n";
 
-	else{
+	else {
 		return campeonato->adicionaParticipantes(p);
 	}
 }
 
-//Modo2
+// ############### Modo2 ###########################
 
 void Jogo::criaCampeonato() {
 	campeonato = new Campeonato();
 }
 
-string Jogo::adicionarAutodromoCamp(vector<string>vec) {
+string Jogo::adicionarAutodromoCamp(vector<string> vec) {
 	if (vec.size() == 1)
 		return "Argumentos nao validos, tente novamente\n";
-	
-	if (campeonato->returnSeExisteCorrida() == false) {
-		for (unsigned int i = 0; i < autodromos.size(); i++) {
-			if (autodromos[i]->getNome() == vec[1]) {
-				campeonato->adicionarAutodromos(autodromos[i]);
-				return "Autodromos adicionados\n";
+
+	if (autodromos.size() == 0)
+		return "Nao existem autodromos para os pilotos correrem";
+
+	if (campeonato->returnSeExisteCorrida() == false) { //caso ainda não exista nenhum campeonato a decorrer
+		for(unsigned int j = 1; j < vec.size(); j++){
+			for (unsigned int i = 0; i < autodromos.size(); i++) {
+				if (!AutodromoExists(vec[j])) {
+					if (autodromos[i]->getNome() == vec[j]) {
+						campeonato->adicionarAutodromos(autodromos[i]);
+						break;
+					}
+				}
+				
 			}
 		}
-		return "Autodromo nao existe\n";
+		return "Autodromos Adicionados\n";
 	}
 	else
 		return "Ja existe uma corrida a decorrer, nao e possivel adicionar autodromos\n";
 }
 
 void Jogo::colocaCarrosEmPista() {
-	campeonato->insereCarrosEmPista();
+	campeonato->inserePilotosEmPista();
 }
 
+//posição X para representar pista
 int Jogo::returnPosX(int i) const {
 	return campeonato->returnPosX(i);
 }
 
-void Jogo::iniciaCorrida(int rep) {
-	campeonato->criarCorrida(rep);
-	campeonato->aceleraCarrosInit();
+bool Jogo::existeCorrida()const {
+	return campeonato->returnSeExisteCorrida();
+}
+
+string Jogo::mostraLogCorrida()const {
+	return campeonato->returnFraseLog();
+}
+
+string Jogo::iniciaCorrida(int rep) {
+	return campeonato->criarCorrida(rep);
 }
 
 string Jogo::listaCarrosCampeonato() {
 	return campeonato->listaCarrosCampeonato();
 }
 
-size_t Jogo::returnNumCarrosPista() const {
+string Jogo::carregaBateriaCarro(string id, string mAh) {
+	return campeonato->carregaCarro(id.at(0), stod(mAh));
+}
+string Jogo::carregaBateriasCarros() {
+	return campeonato->carregaTodosCarros();
+}
+
+string Jogo::destroiCarro(string id) {
+	if (id.size() == 1)  {
+		char idd = id.at(0);
+
+		if (getAutodromosCampeonato_size() > 0 && getAutodromosCampeonato_size() > getAutodromoAtual()) {
+			//passar piloto para a garagem caso esteja em corrida
+			campeonato->retiraPilotoCorrida(idd);
+		}
+
+		//retirar participante
+		campeonato->removeparticipante(idd);
+
+		return dgv->eliminaCarro(id);
+	}
+
+	return "O id do carro nao esta correto";
+}
+
+size_t Jogo::returnNumPilotosPista() const {
 	return campeonato->returnNumCarrosPista();
 }
 
+void Jogo::apagaCampeonato() {
+	delete campeonato;
+}
+
+//para representação pista
 char Jogo::returnIDCarrosPista(int i) const {
 	return campeonato->returnIDCarroPista(i);
 }
 
 
-void Jogo::passarTempo(int s) {
-	
-		campeonato->avancarTempo();
-
+bool Jogo::passarTempo() {
+	return campeonato->avancarTempo();
 }
 
+// Autodromo adicionado no Campeonato
+bool Jogo::AutodromoExists(string autodromo) {
+	return campeonato->getAutodromoExists(autodromo);
+}
+
+bool Jogo::CampeonatoExists() {
+	if (campeonato != nullptr)
+		return true;
+	return false;
+}
+
+string Jogo::acidente(string letra) {
+	if (letra.size() == 1) {
+		char id = letra.at(0);
+		return campeonato->acidente(id);
+	}
+	else {
+		return "identificador nao esta correto";
+	}
+}
+
+string Jogo::stop(string nome)
+{
+	return campeonato->stopPiloto(nome);
+}
+
+
+string Jogo::classificaoCorrida() {
+	if (campeonato->returnSeExisteCorrida())
+		return campeonato->listaClassificacaoCorrida();
+	return "Corrida nao existe";
+}
+
+
+void Jogo::garagem() {
+	campeonato->printGaragem();
+}
+
+// ####################### End Modo 2 #######################
+
+
 Jogo::~Jogo() {
+
+	for (auto aut : autodromos) {
+		delete aut;
+	}
+
 	delete dgv;
 }

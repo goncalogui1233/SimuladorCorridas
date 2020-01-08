@@ -15,7 +15,7 @@ class DGV {
 
 public:
 
-	DGV(){}
+	DGV() {}
 
 	DGV(const DGV& aux);
 

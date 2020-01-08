@@ -3,18 +3,21 @@
 
 using namespace std;
 
-class Pontuacoes{
+class Pontuacoes {
 
 	string nome;
 	int pontuacao;
 
 public:
-
-	Pontuacoes(string n);
+	Pontuacoes(string nome, int pontos);
 
 	string getAsString() const;
 
-	int getPontuacao() const{
+	string getNome() const {
+		return nome;
+	}
+
+	int getPontuacao() const {
 		return pontuacao;
 	}
 

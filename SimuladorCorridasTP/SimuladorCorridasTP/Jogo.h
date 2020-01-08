@@ -8,7 +8,7 @@ using namespace std;
 class Jogo {
 	DGV* dgv;
 	vector <Autodromo*> autodromos;
-	Campeonato *campeonato;
+	Campeonato* campeonato;
 
 public:
 	Jogo();
@@ -45,17 +45,76 @@ public:
 
 	string adicionarAutodromoCamp(vector<string>vec);
 
-	void passarTempo(int s);
+	string carregaBateriaCarro(string id, string mAh);
 
-	void iniciaCorrida(int rep);
+	string destroiCarro(string id);
 
-	size_t returnNumCarrosPista() const;
+	string carregaBateriasCarros();
+
+	string mostraLogCorrida()const;
+
+	bool passarTempo();
+
+	bool existeCorrida() const;
+
+	string iniciaCorrida(int rep);
+
+	size_t returnNumPilotosPista() const;
 
 	char returnIDCarrosPista(int i) const;
+
+	void apagaCampeonato();
+
+	void garagem();
 
 	/*void mostraPista() {
 		autodromos[0]->mostraPista();
 	}*/
+
+	//return campeonato exists
+	bool CampeonatoExists();
+
+	bool AutodromoExists(string autodromo);
+
+	// Get: Autodromo Atual Campeonato
+	int getAutodromoAtual() const {
+		return campeonato->getAutodromoAtual();
+	}
+
+	string acidente(string letra);
+
+	string stop(string nome);
+
+	// Classificacao Corrida
+	string classificaoCorrida();
+
+
+	// Get: Participantes Campeonato
+	int getParticipantes_size() const {
+		return campeonato->getParticipantes_Size();
+	}
+
+	// Get: Autodromos Campeonato
+	int getAutodromosCampeonato_size() const {
+		return campeonato->getAutodromos_Size();
+	}
+
+	// Get: carros Size DGV
+	int getNCarros() const {
+		return dgv->getCarrosTam();
+	}
+
+	// Get: carros Size DGV
+	int getNPilotos() const {
+		return dgv->getPilotosTam();
+	}
+
+	// Get: Autodromos Size Jogo
+	int getNAutodromos() const {
+		return (int)autodromos.size();
+	}
+
+
 
 	~Jogo();
 };

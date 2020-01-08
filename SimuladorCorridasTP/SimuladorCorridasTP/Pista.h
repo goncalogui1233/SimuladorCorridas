@@ -1,16 +1,16 @@
 #pragma once
-#include "Carro.h"
+#include "Piloto.h"
 #include "Consola.h"
 #include <vector>
 #include <iostream>
 
 using namespace std;
 
-class Pista{
-	
+class Pista {
+
 	int maxCar;
 	int metros;
-	vector <Carro*> carros;
+	vector <Piloto*> pilotosPista;
 
 public:
 	Pista(int maxCar, int metros);
@@ -25,15 +25,26 @@ public:
 		return maxCar;
 	}
 
-	size_t returnNumCarrosPista() const {
-		return carros.size();
+	size_t returnNumPilotosPista() const {
+		return pilotosPista.size();
 	}
 
-	char returnIdCar(int i) const {
-		return carros[i]->getID();
+	string returnNomePiloto(int i)const {
+		return pilotosPista[i]->getNome();
 	}
 
-	void insereCarroNaPista(Carro* aux);
+	char returnIDCarro(int i)const {
+		return pilotosPista[i]->getIDCar();
+	}
+
+	Piloto* returnPilotoPista(int pos){
+		return pilotosPista[pos];
+	}
+
+	void inserePilotoNaPista(Piloto* aux);
+
+	Piloto* retiraPiloto(char id);
+
 
 	// Se ligar sinal de emergencia, sai da pista, move to garagem
 

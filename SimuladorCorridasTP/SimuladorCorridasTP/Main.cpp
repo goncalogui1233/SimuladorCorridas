@@ -9,5 +9,5 @@ int main() {
 
 	Interaction it(&jog);
 
-	it.leituraComandos();
+	return 0;
 }

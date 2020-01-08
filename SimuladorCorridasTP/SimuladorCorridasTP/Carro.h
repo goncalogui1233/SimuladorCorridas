@@ -6,21 +6,21 @@
 using namespace std;
 
 class Carro {
-	static int idcar;
+	static int idcar; //id que é atribuido aos carros
 	const string marca;
 	string modelo;
 	const char id;
 	const int maxvelocidade;
 	const double maxenergia;
-	const double initenergia;
+	//const double initenergia;
 	int velocidadeAtual = 0;
-	double energia = 0;
+	double energia;
 	bool parado = true, emergencia = false;
 	bool danificado = false;
 	bool disponivel = true;
 
 public:
-	Carro(double initCap, double maxe, int maxv, string mar, string mod = "Modelo Base");
+	Carro(double energia, double maxe, int maxv, string mar, string mod = "Modelo Base");
 	Carro(const Carro& aux);
 
 	//Destrutor da Class
@@ -30,6 +30,8 @@ public:
 	*
 	*/
 	~Carro();
+
+	char setIDs(int idcar);
 
 	// return faz sentido fazer no header para nao ter que ir por exemplo à pilha.. 
 	// É mais rápido 
@@ -45,8 +47,12 @@ public:
 		return danificado;
 	}
 
-	bool getDisponibilidade() {
+	bool getDisponibilidade() const{
 		return disponivel;
+	}
+
+	bool getEmergencia() const {
+		return emergencia;
 	}
 
 	string getMarca() const {
@@ -59,14 +65,24 @@ public:
 
 	void setDisponibilidade();
 
-	void setDanificado(bool danificado);
+	void setDanificado();
 
 	/* Manivela de carregamento do carro (em mAh)
 	* Não pode ultrapassar a quantidade Max de energia. 
 	* Se conseguir carregar, devolve true
 	* Senão devolve False
 	*/
-	bool manivela(int valCarregamento);
+	bool manivela(double valCarregamento);
+
+	double getMaxCarregamento()const {
+		return maxenergia;
+	}
+
+	double getEnergiaAtual() const {
+		return energia;
+	}
+
+	void drenaEnergia();
 
 	string getAsString()const;
 
@@ -79,6 +95,13 @@ public:
 	 *
 	 */
 	void setEstado();
+
+	/* Descelerar
+	 *
+	 *  Perde velocidade caso nao acelere
+	 *
+	 */
+	void desacelerar();
 
 	/* Acelerar
 	 *

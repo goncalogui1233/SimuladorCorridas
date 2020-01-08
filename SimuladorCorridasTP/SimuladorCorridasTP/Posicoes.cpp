@@ -1,7 +1,7 @@
 #include "Posicoes.h"
 
 Posicoes::Posicoes(string n, char id, int p)
-	:nome(n), posicao(p), idCar(id), posAnterior(0),posPista(0), posx(0){}
+	:nome(n), posicao(p), idCar(id), posAnterior(0), posPista(0), posx(0){}
 
 void Posicoes::setPosicaoPista(int val) {
 	posAnterior = posPista;
@@ -11,6 +11,12 @@ void Posicoes::setPosicaoPista(int val) {
 void Posicoes::MexePosEcra() {
 	posx++;
 }
+
+void Posicoes::setPosCorrida(int val) {
+	posicao = val;
+}
+
+
 
 string Posicoes::getAsString() const {
 	ostringstream os;

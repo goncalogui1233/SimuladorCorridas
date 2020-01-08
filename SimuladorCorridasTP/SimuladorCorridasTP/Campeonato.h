@@ -4,20 +4,25 @@
 #include "Piloto.h"
 #include "Corrida.h"
 #include <algorithm>
+#include <string>
 
 using namespace std;
 
-class Campeonato{
-	static int autodromoAtual;
+class Campeonato {
+	int autodromoAtual;
+	string logRegisto;
 	vector<Autodromo*> autodromos;
 	vector<Piloto*> participantes;
-	vector<Pontuacoes> tabelaGeral;
+	vector<Pontuacoes*> tabelaGeral;
 	Corrida* c;
+
+	bool verificarSeExiste(string nome, int pontos);
 
 public:
 
-	Campeonato(){
+	Campeonato() {
 		c = nullptr;
+		autodromoAtual = 0;
 	}
 
 	/*void mostraPista() const {
@@ -25,35 +30,80 @@ public:
 	}*/
 
 	size_t returnNumCarrosPista() const {
-		return autodromos[autodromoAtual]->returnNumCarrosPista();
+		return autodromos[autodromoAtual]->returnNumPilotosPista();
 	}
 
 	char returnIDCarroPista(int i) const {
-		return autodromos[autodromoAtual]->returnIdCarroPista(i);
+		return autodromos[autodromoAtual]->returnIDCarro(i);
 	}
 
 	int returnPosX(int i) const {
 		return c->returnPosX(i);
 	}
 
+	string returnFraseLog() const {
+		return logRegisto;
+	}
+
+	int getAutodromoAtual() const {
+		return autodromoAtual;
+	}
+
+	string carregaCarro(char id, double mAh);
+
+	string carregaTodosCarros();
+
 	bool returnSeExisteCorrida() const;
 
 	string adicionaParticipantes(Piloto* aux);
 
-	void adicionarAutodromos(Autodromo *aux);
+	void removeparticipante(char id);
 
-	void criarCorrida(int rep);
+	void adicionarAutodromos(Autodromo* aux);
+
+	string criarCorrida(int rep);
+
+	void retiraPilotoCorrida(char id);
 
 	void aceleraCarrosInit();
 
-	void avancarTempo();
+	bool avancarTempo();
 
-	void insereCarrosEmPista();
+	void inserePilotosEmPista();
 
 	string listaCarrosCampeonato() const;
 
 	string listaClassificacaoCorrida() const {
-		return c->mostraPosicoes();
+		ostringstream os;
+
+
+
+		os << "Informacao sobre a corrida no autodromo " << autodromos[autodromoAtual]->getNome() << " (" << autodromos[autodromoAtual]->returnTamPista()
+			<< " )" << endl;
+
+
+		os << c->mostraPosicoes();
+
+		return os.str();
 	}
+
+	string acidente(char id);
+
+	string stopPiloto(string nome);
+
+	bool getAutodromoExists(string autodromo);
+
+	int getParticipantes_Size() const {
+		return (int)participantes.size();
+	}
+
+	int getAutodromos_Size() const {
+		return (int)autodromos.size();
+	}
+
+	// Mostrar carros na garagem
+	void printGaragem();
+
+	~Campeonato();
 };
 

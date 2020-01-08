@@ -3,20 +3,33 @@
 int Carro::idcar = 'a';
 
 Carro::Carro(double initCap, double maxe, int maxv, string mar, string mod)
-	:marca(mar), modelo(mod), id(idcar++), maxenergia(maxe), maxvelocidade(maxv), initenergia(initCap) {}
+	:marca(mar), modelo(mod), id(setIDs(idcar)), maxenergia(maxe), maxvelocidade(maxv), energia(initCap) {}
 
 // Destrutor
 Carro::~Carro(){}
 
-void Carro::setDanificado(bool estragado) {
-	this->danificado = estragado;
+char Carro::setIDs(int idcar) {
+	if (idcar > 'z') {
+		return '?';
+	}
+	return Carro::idcar++;
+}
+
+void Carro::setDanificado() {
+	if (danificado == true)
+		danificado = false;
+	else {
+		danificado = true;
+		velocidadeAtual = 0;
+	}
+
 }
 Carro::Carro(const Carro& aux) 
-:id(aux.id), maxvelocidade(aux.maxvelocidade), marca(aux.marca), modelo(aux.modelo), maxenergia(aux.maxenergia), initenergia(aux.initenergia) {}
+:id(aux.id), maxvelocidade(aux.maxvelocidade), marca(aux.marca), modelo(aux.modelo), maxenergia(aux.maxenergia), energia(aux.energia) {}
 
 string Carro::getAsString() const {
 	ostringstream oss;
-	oss << "Marca: " << marca <<" | ID: "<< id <<" | Modelo: " << modelo << " | Vel. Maxima: " << maxvelocidade << " | Cap. Inicial " << initenergia << " | Max. Energia: " << maxenergia << endl;
+	oss << "Marca: " << marca <<" | ID: "<< id <<" | Modelo: " << modelo << " | Vel. Maxima: " << maxvelocidade << " | Max. Energia: " << maxenergia << endl;
 	oss << "Danificado: " << danificado << " | Energia: " << energia << endl << endl;
 	return oss.str();
 }
@@ -28,12 +41,16 @@ void Carro::setDisponibilidade() {
 		disponivel = true;
 }
 
-bool Carro::manivela(int quantEnergia) {
-	if (parado && (energia + quantEnergia) < maxenergia) {
-		energia += quantEnergia;
+bool Carro::manivela(double valCarregamento) {
+	if (parado && (energia + valCarregamento) < maxenergia) {
+		energia += valCarregamento;
 		return true;
 	}
 	return false;
+}
+
+void Carro::drenaEnergia() {
+	energia -= 0.1;
 }
 
 void Carro::setEmergencia() {
@@ -60,5 +77,9 @@ void Carro::acelerar(int val) {
 
 void Carro::travar() {
 	acelerar(-1);
+}
+
+void Carro::desacelerar() {
+	this->velocidadeAtual -= 1;
 }
 
